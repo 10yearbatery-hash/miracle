@@ -498,29 +498,130 @@ footer { background: var(--white); border-top: 1px solid var(--border); padding:
   nav, .sec, .stats-band, .final-sec, footer { padding-left: 32px; padding-right: 32px; }
   .hero { padding: 100px 32px 72px; gap: 48px; }
   .tri-layout, .study-layout { grid-template-columns: 1fr; }
-  .tl-item { grid-template-columns: 52px 1fr; }
   .phone-mock { display: none; }
   .weeks-grid { grid-template-columns: repeat(2,1fr); }
   .price-layout { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: repeat(2,1fr); }
+  .tl-step-sticky { grid-template-columns: 1fr; }
+  .tls-right { display: none; }
 }
+
 @media(max-width: 768px) {
-  nav { padding: 0 20px; }
+  /* 네비 */
+  nav { padding: 0 20px; height: 60px; }
   .nav-links { display: none; }
-  .hero { grid-template-columns: 1fr; padding: 100px 20px 60px; }
+
+  /* 히어로 */
+  .hero { grid-template-columns: 1fr; padding: 80px 20px 48px; gap: 28px; }
   .hero-right { display: none; }
-  .sec { padding: 72px 20px; }
-  .stats-band { padding: 20px; }
-  .why-grid, .persona-grid, .sysdet-grid, .review-grid { grid-template-columns: 1fr; }
-  .weeks-grid { grid-template-columns: repeat(2,1fr); }
-  .tri-figure { height: 420px; }
-  .tn-circle { width: 90px; height: 90px; }
-  .tri-center { width: 100px; height: 100px; }
-  .tri-center strong { font-size: 11px; }
-  .tri-center p { font-size: 9.5px; }
-  .tn-label { font-size: 12px; }
-  .final-sec { padding: 80px 20px; }
-  .floating-wrap { bottom: 16px; left: 50%; transform: translateX(-50%); }
+  .hero-eyebrow { font-size: 13px; padding: 9px 18px; }
+  .hero h1 { font-size: clamp(26px, 7vw, 40px); letter-spacing: -1px; }
+  .hero-sub { font-size: 14px; }
+  .btn-primary { padding: 13px 24px; font-size: 14px; }
+  .hero-stats { gap: 20px; flex-wrap: wrap; }
+
+  /* 스탯 밴드 */
+  .stats-band { padding: 0; }
+  .sb-inner { flex-wrap: wrap; }
+  .sb-item { flex: 0 0 50%; padding: 16px 8px; border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .sb-item:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.1) !important; }
+  .sb-item:nth-child(3), .sb-item:nth-child(4) { border-bottom: none; }
+  .sb-num { font-size: 22px; }
+  .sb-label { font-size: 10px; }
+
+  /* 섹션 공통 */
+  .sec { padding: 60px 20px; }
+  .sec-title { font-size: clamp(22px, 6vw, 34px); letter-spacing: -0.8px; }
+  .sec-sub { font-size: 14px; }
+  .eyebrow { font-size: 10px; }
+
+  /* WHY 그리드 */
+  .why-grid { grid-template-columns: 1fr; gap: 12px; margin-top: 40px; }
+  .why-card { padding: 28px 24px; }
+
+  /* 삼각형 섹션 */
+  .tri-layout { grid-template-columns: 1fr; gap: 40px; margin-top: 48px; }
+  .tri-figure { height: 340px; }
+  .tn-circle { width: 76px; height: 76px; }
+  .tri-center { width: 86px; height: 86px; }
+  .tri-center strong { font-size: 10px; }
+  .tri-center p { font-size: 9px; }
+  .tn-label { font-size: 11px; }
+  .tn-sub { font-size: 9px; }
+  .tri-points { gap: 12px; }
+  .tri-pt { padding: 16px 16px; gap: 14px; }
+
+  /* 타임라인 */
+  .tl-header-wrap { padding: 60px 20px 40px; }
+  .tl-sticky-content { padding: 0 20px 0 60px; }
+  .tl-indicator { left: 20px; }
+  .tl-step-sticky { grid-template-columns: 1fr; }
+  .tls-right { display: none; }
+  .tls-title { font-size: 18px; }
+  .tls-desc { font-size: 13px; }
+
+  /* 4주 커리큘럼 */
+  .weeks-grid { grid-template-columns: repeat(2,1fr); margin-top: 40px; }
+  .wk { padding: 28px 20px; }
+
+  /* 지식 아티클 & 주간 운영 */
+  .weekly-grid { grid-template-columns: repeat(4,1fr); gap: 6px; }
+  .wday { padding: 12px 6px; gap: 6px; }
+  .wd-name { font-size: 11px; }
+  .wd-badge { font-size: 9px; padding: 2px 6px; }
+  .wd-desc { font-size: 10px; }
+
+  /* 페르소나 */
+  .persona-grid { grid-template-columns: 1fr; gap: 12px; margin-top: 40px; }
+  .persona-card { padding: 28px 24px; }
+
+  /* 유연한 시스템 */
+  .sysdet-grid { grid-template-columns: 1fr; gap: 12px; margin-top: 40px; }
+  .sd-card { padding: 28px; }
+
+  /* 후기 */
+  .review-grid { grid-template-columns: 1fr; gap: 12px; }
+  .review-card { padding: 28px 24px; }
+  .rc-ba { grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  /* 스터디 */
+  .study-layout { grid-template-columns: 1fr; gap: 40px; margin-top: 48px; }
+  .study-card { padding: 32px; }
+
+  /* 가격 */
+  .price-layout { grid-template-columns: 1fr; margin-top: 40px; }
+  .price-main-card { padding: 32px 24px; }
+  .pmc-amount { font-size: 48px; }
+  .prc { padding: 24px; }
+  .trial-wrap { padding: 28px 20px; flex-direction: column; align-items: flex-start; gap: 20px; }
+  .btn-kakao { width: 100%; justify-content: center; padding: 14px 24px; }
+
+  /* 최종 CTA */
+  .final-sec { padding: 72px 20px; }
+  .final-h2 { font-size: clamp(28px, 7vw, 44px); }
+  .btn-final { padding: 16px 32px; font-size: 14px; width: 100%; justify-content: center; }
+
+  /* 플로팅 */
+  .floating-wrap { bottom: 16px; width: 90%; left: 50%; transform: translateX(-50%); }
+  .floating-btn { width: 100%; justify-content: center; }
+
+  /* 푸터 */
   footer { padding: 20px; flex-direction: column; gap: 8px; text-align: center; }
+
+  /* 카드뉴스 섹션 */
+  .kn2-outer { height: auto !important; }
+}
+
+@media(max-width: 480px) {
+  .hero h1 { font-size: clamp(22px, 7vw, 32px); }
+  .sec-title { font-size: clamp(20px, 6vw, 28px); }
+  .weekly-grid { grid-template-columns: repeat(4,1fr); }
+  .wday { padding: 10px 4px; }
+  .wd-name { font-size: 10px; }
+  .tri-figure { height: 300px; }
+  .tn-circle { width: 66px; height: 66px; }
+  .tri-center { width: 76px; height: 76px; }
+  .rc-ba { grid-template-columns: 1fr; }
 }
 
 /* ===== WEEKLY ===== */

@@ -590,26 +590,51 @@ footer {
    RESPONSIVE
 ════════════════════════════ */
 @media (max-width: 1024px) {
-  .philosophy-inner { grid-template-columns: 1fr; gap: 60px; }
+  .philosophy-inner { grid-template-columns: 1fr; gap: 48px; }
   .phil-img-accent { display: none; }
-  .program-card { grid-template-columns: 1fr; }
-  .pc-img { height: 280px; }
   .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
 }
+
 @media (max-width: 768px) {
-  nav { padding: 0 24px; }
+  nav { padding: 0 20px; height: 60px; }
   .nav-links { display: none; }
-  .hero-content { padding: 0 24px; padding-top: 72px; grid-template-columns: 1fr; }
+
+  /* 히어로 */
+  .hero-content { padding: 0 24px; padding-top: 60px; grid-template-columns: 1fr; gap: 0; }
   .hero-img-wrap { display: none; }
   .hero-strip { padding: 16px 24px; }
-  .philosophy, .programs { padding: 80px 24px; }
-  .programs-header { flex-direction: column; align-items: flex-start; gap: 12px; }
-  .programs-sub { text-align: left; }
-  .pc-body { padding: 36px 32px; }
+  .hero-strip-inner { gap: 20px; flex-wrap: wrap; }
+  .hs-item { font-size: 10px; }
+  .hero-headline { font-size: clamp(52px, 15vw, 90px); letter-spacing: -2px; }
+  .hero-sub { font-size: 15px; }
+  .btn-primary { padding: 13px 24px; font-size: 13px; }
+
+  /* 철학 섹션 */
+  .philosophy { padding: 72px 24px; }
+  .philosophy-inner { grid-template-columns: 1fr; gap: 40px; }
+  .phil-img-accent { display: none; }
+  .phil-title { font-size: clamp(22px, 6vw, 32px); }
+  .phil-body { font-size: 14px; }
+
+  /* 프로그램 */
+  .programs { padding: 72px 0 72px 24px; }
+  .programs-header { padding: 0 24px 0 0; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .program-card { flex: 0 0 320px; }
+  .pc-body { padding: 32px 28px; }
+  .pc-title { font-size: 28px; }
+  .pc-desc { font-size: 13px; }
+
+  /* 푸터 */
   footer { padding: 56px 24px 32px; }
-  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+  .footer-top { grid-template-columns: 1fr; gap: 28px; }
   .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
   .footer-biz { text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .hero-headline { font-size: clamp(44px, 13vw, 72px); }
+  .program-card { flex: 0 0 280px; }
+  .pc-body { padding: 28px 24px; }
 }
 </style>
 </head>
