@@ -641,15 +641,19 @@ footer { background: var(--white); border-top: 1px solid var(--border); padding:
   .tls-desc { font-size: 14px !important; line-height: 1.8 !important; }
   .tl-sci { font-size: 10px !important; padding: 5px 12px !important; }
 
-  /* 폰 목업 모바일에서 텍스트 아래 표시 */
+  /* 폰 목업 모바일에서 텍스트 아래 표시 — scale로 내부까지 비율 유지 */
   .tls-right {
     display: flex !important;
     justify-content: center !important;
+    height: 320px !important;
+    overflow: hidden !important;
     margin-top: 8px !important;
   }
   .big-phone {
-    max-width: 200px !important;
-    transform: none !important;
+    transform: scale(0.52) !important;
+    transform-origin: top center !important;
+    max-width: 300px !important;
+    flex-shrink: 0 !important;
   }
 
   /* ── kn2 카드뉴스: JS scale 무력화 후 자연 크기 표시 ── */
@@ -666,15 +670,24 @@ footer { background: var(--white); border-top: 1px solid var(--border); padding:
     width: 12.5% !important;
   }
 
-  /* ── 지식아티클 + 주간운영방식: 2열 → 1열 ── */
+  /* ── 지식아티클 + 주간운영방식: 2열 → 1열 + 순서 재배치 ── */
   .knowledge-sec { padding: 60px 20px !important; }
   .knowledge-grid {
     grid-template-columns: 1fr !important;
     column-gap: 0 !important;
-    row-gap: 40px !important;
+    row-gap: 32px !important;
+    overflow: hidden !important;
   }
+  .kg-header-left  { order: 1; }
+  .kg-content-left { order: 2; }
+  .kg-header-right { order: 3; }
+  .kg-content-right { order: 4; }
 
-  /* ── 지식아티클 + 주간운영방식 컬럼 레이아웃 ── */
+  /* ── 의지력 카드(03/08) 모바일 패딩 조정 ── */
+  .kn2-track .kn2-card:nth-child(4) .kn2-body {
+    padding-top: 28px !important;
+    gap: 4px !important;
+  }
   .schedule-col,
   [id="scheduleCol"] {
     width: 100% !important;
@@ -688,8 +701,10 @@ footer { background: var(--white); border-top: 1px solid var(--border); padding:
 
   /* ── 4주 커리큘럼 1단 — 아래 블록에서 처리 ── */
 
-  /* ── 가로 스크롤 방지 ── */
+  /* ── 가로 스크롤 방지 + 내부 스크롤 제거 ── */
   section, .sec, .sec-inner { overflow-x: hidden !important; max-width: 100vw !important; }
+  .kn2-wrap, #cardCol, .kg-content-left { overflow: hidden !important; }
+  #scheduleCol, .kg-content-right { overflow: visible !important; }
 
   /* ── 타임라인 섹션 하단 여백 ── */
   .tl-sec { padding-bottom: 48px !important; }
@@ -1675,21 +1690,21 @@ function accToggle(n){
     <div class="knowledge-grid" style="display:grid;grid-template-columns:1fr 1fr;column-gap:80px;row-gap:12px;">
 
       <!-- 헤더 좌 -->
-      <div>
+      <div class="kg-header-left">
         <span class="eyebrow">지식 아티클 · Day 1 예시</span>
         <h3 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2vw,28px);font-weight:900;color:var(--green-deep);letter-spacing:-0.8px;line-height:1.35;margin-bottom:12px;margin-top:8px;">매일 아침, 이런 지식을<br>함께 전달합니다</h3>
         <p style="font-size:13.5px;color:var(--text-light);line-height:1.8;margin-bottom:0;">왜 해야 하는지 알면 포기하기 어려워집니다.</p>
       </div>
 
       <!-- 헤더 우 -->
-      <div>
+      <div class="kg-header-right">
         <span class="eyebrow">주간 운영 방식</span>
         <h3 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2vw,28px);font-weight:900;color:var(--green-deep);letter-spacing:-0.8px;line-height:1.35;margin-bottom:12px;margin-top:8px;">매일, 이렇게<br>함께 진행합니다</h3>
         <p style="font-size:13.5px;color:var(--text-light);line-height:1.8;margin-bottom:0;">월~금은 7단계 루틴 전체, 주말은 가볍게.</p>
       </div>
 
-      <!-- 콘텐츠 좌: 카드뉴스 (nav 아래로 이동 → 카드 상단이 스케줄 상단과 정렬) -->
-      <div style="margin-top:0;" id="cardCol">
+      <!-- 콘텐츠 좌: 카드뉴스 -->
+      <div class="kg-content-left" style="margin-top:0;" id="cardCol">
         <div class="kn2-wrap" id="kn2Wrap">
           <div class="kn2-outer" id="kn2Outer"><div class="kn2-track" id="kn2Track">
 
@@ -1922,7 +1937,7 @@ function accToggle(n){
       </div>
 
       <!-- 콘텐츠 우: 주간 운영 방식 -->
-      <div id="scheduleCol" style="margin-top:0;display:flex;flex-direction:column;gap:12px;">
+      <div class="kg-content-right" id="scheduleCol" style="margin-top:0;display:flex;flex-direction:column;gap:12px;">
         <div style="display:flex;align-items:center;gap:16px;padding:22px 20px;border-radius:4px;background:rgba(42,92,53,.05);border:1px solid rgba(42,92,53,.1);">
           <div style="display:flex;gap:5px;flex-shrink:0;">
             <span style="width:30px;height:30px;border-radius:50%;background:var(--green-deep);color:var(--cream);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;">월</span>
