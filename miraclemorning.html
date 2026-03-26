@@ -272,6 +272,33 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(30,61,36,0.07); }
 .tl-header-inner { max-width: 1200px; margin: 0 auto; }
 .tl-sticky-outer { position: relative; }
 .tl-sticky-inner { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; overflow: hidden; }
+@media(max-width: 768px) {
+  .tl-sticky-outer { position: static; }
+  .tl-sticky-inner { position: static; height: auto; overflow: visible; display: block; }
+  .tl-sticky-content { padding: 0 20px !important; }
+  .tl-panels { padding-left: 0; }
+  .tl-indicator { display: none; }
+  .tl-step-sticky {
+    display: flex !important;
+    flex-direction: column;
+    gap: 20px;
+    padding: 32px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    animation: none;
+  }
+  .tl-step-sticky:last-child { border-bottom: none; }
+  .tls-right {
+    display: flex !important;
+    justify-content: center;
+  }
+  .big-phone {
+    transform: none !important;
+    max-width: 240px;
+  }
+  .tl-num { width: 44px; height: 44px; font-size: 15px; }
+  .tls-title { font-size: 17px; }
+  .tls-desc { font-size: 13px; }
+}
 .tl-sticky-content { max-width: 1200px; margin: 0 auto; padding: 0 60px; width: 100%; position: relative; }
 
 /* 인디케이터 */
@@ -558,8 +585,12 @@ footer { background: var(--white); border-top: 1px solid var(--border); padding:
   .weeks-grid { grid-template-columns: repeat(2,1fr); margin-top: 36px; }
   .wk { padding: 22px 16px; }
   .knarticle-sec { padding: 56px 20px !important; }
-  .kn-layout { grid-template-columns: 1fr; column-gap: 0; row-gap: 40px; }
+  .kn-layout { grid-template-columns: 1fr !important; column-gap: 0 !important; row-gap: 48px !important; }
   .kn2-outer { height: auto !important; }
+  .kn2-wrap { transform: none !important; width: 100% !important; }
+  #cardCol { width: 100%; overflow: hidden; }
+  #scheduleCol { width: 100%; }
+  .schedule-col > div { overflow: hidden; }
   .weekly-grid { grid-template-columns: repeat(4,1fr); gap: 5px; }
   .wday { padding: 10px 4px; gap: 5px; }
   .wd-name { font-size: 16px; }
@@ -592,6 +623,18 @@ footer { background: var(--white); border-top: 1px solid var(--border); padding:
   .acc-topic { font-size: 14px; }
   .acc-days { padding: 0 18px 14px; }
   .acc-day-t { font-size: 13px; }
+
+  /* 지식아티클 카드뉴스 모바일 */
+  #cardCol { overflow: hidden; }
+  .kn2-nav { flex-wrap: wrap; gap: 8px; }
+
+  /* 주간 운영방식 박스 모바일 */
+  .schedule-col > div { flex-wrap: wrap; gap: 10px !important; }
+  .schedule-col > div > div:first-child { flex-shrink: 0; flex-wrap: wrap; }
+
+  /* 타임라인 모바일 전체 레이아웃 */
+  #tlOuter { height: auto !important; }
+  #tlInner { position: static !important; height: auto !important; }
 }
 
 @media(max-width: 480px) {
@@ -1926,7 +1969,7 @@ function accToggle(n){
       </div>
 
       <!-- 콘텐츠 우: 주간 운영 방식 -->
-      <div id="scheduleCol" style="margin-top:0;display:flex;flex-direction:column;gap:12px;">
+      <div id="scheduleCol" class="schedule-col" style="margin-top:0;display:flex;flex-direction:column;gap:12px;">
         <div style="display:flex;align-items:center;gap:16px;padding:22px 20px;border-radius:4px;background:rgba(42,92,53,.05);border:1px solid rgba(42,92,53,.1);">
           <div style="display:flex;gap:5px;flex-shrink:0;">
             <span style="width:30px;height:30px;border-radius:50%;background:var(--green-deep);color:var(--cream);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;">월</span>
@@ -2087,19 +2130,23 @@ function fitCardToSchedule() {
   var schedCol = document.getElementById('scheduleCol');
   if (!wrap || !outer || !schedCol) return;
 
-  /* scale 제거 후 자연 높이 측정 */
+  /* 모바일에서는 scale 적용 안 함 */
+  if (window.innerWidth <= 768) {
+    wrap.style.transform = 'none';
+    wrap.style.width     = '100%';
+    return;
+  }
+
   wrap.style.transform = 'none';
   wrap.style.width     = '100%';
 
-  var naturalH = outer.offsetHeight;  /* 카드 자연 높이 */
-  var naturalW = outer.offsetWidth;   /* 카드 자연 너비 */
-  var targetH  = schedCol.offsetHeight; /* 우측 컬럼 전체 높이 */
+  var naturalH = outer.offsetHeight;
+  var targetH  = schedCol.offsetHeight;
 
   if (!naturalH || !targetH) return;
 
   var scale = targetH / naturalH;
 
-  /* scale 적용: 너비는 scale로 줄어든 만큼 보정해서 레이아웃 공간 유지 */
   wrap.style.width          = (100 / scale) + '%';
   wrap.style.transform      = 'scale(' + scale + ')';
   wrap.style.transformOrigin = 'top left';
@@ -2547,6 +2594,16 @@ function initScrollStep() {
   const panels = document.querySelectorAll('.tl-step-sticky');
   const dots   = document.querySelectorAll('.tl-ind-dot');
   if (!outer || !panels.length) return;
+
+  /* 모바일에서는 sticky 비활성화, 모든 패널 표시 */
+  if (window.innerWidth <= 768) {
+    panels.forEach(p => {
+      p.style.display = 'flex';
+      p.style.flexDirection = 'column';
+    });
+    outer.style.height = 'auto';
+    return;
+  }
 
   const STEP_COUNT = panels.length;
   // 각 스텝당 스크롤 거리: 화면 높이 * 1.8 → 충분히 읽을 수 있는 시간
