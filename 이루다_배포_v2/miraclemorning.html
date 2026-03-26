@@ -1,0 +1,2544 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이루다 미라클모닝 — 4주 아침 루틴 프로그램</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&family=Noto+Serif+KR:wght@600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+:root {
+  --cream: #F7F3EC;
+  --cream-dark: #EDE6D6;
+  --green-deep: #1e3d24;
+  --green-mid: #3a6644;
+  --green-light: #7aad85;
+  --gold: #B8904A;
+  --gold-light: #d4aa72;
+  --text-dark: #1a2e1a;
+  --text-mid: #4a5e4a;
+  --text-light: #8a9e8a;
+  --white: #ffffff;
+  --border: rgba(30,61,36,0.1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+body {
+  background: var(--white);
+  font-family: 'DM Sans', 'Pretendard', 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+  color: var(--text-dark);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── 전역 border-radius 리셋 ── */
+*:not(.dot-pulse):not(.tl-ind-dot):not(.tl-num):not(.bp-av):not(.sm-av):not(.bp-send-btn):not(.rc-av):not(.tn-circle):not(.tri-center):not(.wday) {
+  border-radius: 0 !important;
+}
+/* 버튼/배지만 2px 유지 */
+.btn-primary, .nav-cta, .floating-btn, .floating-notice,
+.li-badge, .sd-tag, .beta-badge, .sm-badge, .t-tag,
+.final-badge, .final-deposit, .btn-kakao, .btn-final,
+.tl-sci, .acc-week, .wd-badge, .pc-tag, .pmc-check,
+[style*="border-radius"] {
+  border-radius: 2px !important;
+}
+/* 폰 목업 — 살짝 둥글게 */
+.big-phone { border-radius: 20px !important; }
+/* 채팅 버블 */
+.bp-b { border-radius: 4px 14px 14px 14px !important; }
+.bp-b.s { border-radius: 14px 4px 14px 14px !important; }
+/* 원형 유지 — 기본 */
+.dot-pulse, .tl-ind-dot, .tl-num, .bp-av, .sm-av, .bp-send-btn, .rc-av { border-radius: 50% !important; }
+/* 과학적 설계 — 세 꼭짓점 원형 유지 */
+.tn-circle { border-radius: 50% !important; }
+/* 가운데 뱃지 원형 */
+.tri-center { border-radius: 50% !important; }
+/* 주간 운영방식 요일 — 살짝 둥글게 */
+.wday { border-radius: 12px !important; width: auto !important; height: auto !important; padding: 18px 12px !important; }
+.noise {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 999;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--green-light); border-radius: 3px; }
+::selection { background: var(--green-deep); color: var(--gold-light); }
+
+/* ============ NAV ============ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  height: 72px; padding: 0 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(247,243,236,0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(30,61,36,0.08);
+  transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: 0 2px 24px rgba(30,61,36,0.07); }
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; color: inherit;
+}
+.nav-logo-mark { width: 28px; height: 28px; color: var(--green-deep); transition: color 0.3s; }
+.nav-logo:hover .nav-logo-mark { color: var(--gold); }
+.nav-logo-text { font-family: 'Noto Serif KR', serif; font-weight: 700; font-size: 18px; color: var(--green-deep); letter-spacing: -0.3px; }
+.nav-logo-text sup { font-size: 9px; color: var(--gold); vertical-align: super; font-weight: 400; }
+.nav-links { display: flex; gap: 36px; align-items: center; }
+.nav-links a { font-size: 13px; color: var(--text-mid); text-decoration: none; font-weight: 400; transition: color 0.2s; }
+.nav-links a:hover { color: var(--green-deep); }
+.nav-cta { background: var(--green-deep) !important; color: var(--cream) !important; padding: 10px 24px !important; border-radius: 2px !important; font-weight: 500 !important; letter-spacing: 0.03em; transition: background 0.2s, box-shadow 0.2s !important; }
+.nav-cta:hover { background: var(--green-mid) !important; box-shadow: 0 6px 20px rgba(30,61,36,0.2) !important; }
+
+/* ============ FLOATING ============ */
+.floating-wrap { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%); z-index: 400; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.floating-notice { background: var(--green-deep); color: rgba(245,240,232,0.9); padding: 4px 12px; border-radius: 2px; font-size: 10px; font-weight: 500; animation: fadeUp 0.5s 0.5s both; }
+.floating-btn { background: #FEE500; color: #191919; padding: 10px 20px; border-radius: 2px; font-size: 13px; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 7px; box-shadow: 0 6px 20px rgba(254,229,0,0.35); transition: all 0.2s; animation: fadeUp 0.5s 0.6s both; }
+.floating-btn:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(254,229,0,0.5); }
+@keyframes fadeUp { from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);} }
+
+/* ============ HERO ============ */
+.hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center; gap: 72px;
+  max-width: 1200px; margin: 0 auto;
+  padding: 112px 60px 80px;
+  perspective: 1000px;
+}
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; background: var(--green-deep); border: none; border-radius: 2px; padding: 12px 28px; font-size: 17px; color: var(--cream); font-weight: 700; margin-bottom: 32px; animation: fadeUp 0.6s both; letter-spacing: -0.3px; box-shadow: 0 4px 20px rgba(42,92,53,0.25); }
+.dot-pulse { width: 6px; height: 6px; background: var(--green-mid); border-radius: 50%; animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1;}50%{opacity:0.3;} }
+.hero h1 { font-family: 'Playfair Display', 'Noto Serif KR', serif; font-size: clamp(34px, 4vw, 54px); font-weight: 700; line-height: 1.2; letter-spacing: -1.5px; color: var(--green-deep); margin-bottom: 24px; animation: fadeUp 0.6s 0.08s both; }
+.hero h1 em { color: var(--gold); font-style: normal; display: block; }
+.hero-sub { font-size: 16px; color: var(--text-mid); font-weight: 400; line-height: 1.9; margin-bottom: 44px; animation: fadeUp 0.6s 0.16s both; }
+.hero-btns { display: flex; align-items: center; gap: 16px; animation: fadeUp 0.6s 0.24s both; }
+.btn-primary { background: var(--green-deep); color: var(--cream); padding: 15px 34px; border-radius: 2px; font-size: 15px; font-weight: 500; text-decoration: none; transition: all 0.2s; letter-spacing: 0.03em; }
+.btn-primary:hover { background: var(--green-mid); transform: translateY(-2px); box-shadow: 0 10px 32px rgba(30,61,36,0.22); }
+.btn-link { color: var(--text-mid); font-size: 14px; font-weight: 400; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+.btn-link:hover { color: var(--green-deep); }
+.hero-stats { display: flex; gap: 36px; margin-top: 48px; padding-top: 36px; border-top: 1px solid var(--border); animation: fadeUp 0.6s 0.32s both; }
+.hs-num { font-family: 'Noto Serif KR', serif; font-size: 26px; font-weight: 900; color: var(--green-deep); }
+.hs-label { font-size: 12px; color: var(--text-light); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+/* Hero Right Card */
+.hero-card { background: var(--cream); border: 1px solid rgba(30,61,36,0.1); border-radius: 4px; padding: 32px; box-shadow: 0 4px 16px rgba(30,61,36,0.08), 0 24px 64px rgba(30,61,36,0.13); animation: fadeUp 0.6s 0.2s both; transform-style: preserve-3d; will-change: transform; }
+.hc-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--green-mid); text-transform: uppercase; margin-bottom: 16px; }
+.loop-item { display: flex; align-items: center; gap: 14px; padding: 13px 0; border-bottom: 1px solid rgba(42,92,53,0.07); }
+.loop-item:last-of-type { border-bottom: none; }
+.li-circle { width: 32px; height: 32px; border-radius: 50%; background: var(--white); border: 1.5px solid rgba(42,92,53,0.15); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--green-deep); flex-shrink: 0; }
+.li-circle.gold { background: rgba(201,169,110,0.1); border-color: rgba(201,169,110,0.4); color: var(--gold); }
+.li-text { flex: 1; font-size: 13px; color: var(--text-mid); font-weight: 400; }
+.li-badge { font-size: 10.5px; font-weight: 500; padding: 3px 10px; border-radius: 2px; }
+.li-badge.green { background: rgba(42,92,53,0.07); color: var(--green-mid); }
+.li-badge.gold { background: rgba(201,169,110,0.12); color: #7a5a20; }
+.hc-footer { margin-top: 20px; padding-top: 18px; border-top: 1px solid rgba(42,92,53,0.07); display: flex; justify-content: space-between; align-items: center; }
+.hcf-price { font-family: 'Noto Serif KR', serif; font-size: 22px; font-weight: 900; color: var(--green-deep); }
+.hcf-price span { font-size: 13px; color: var(--text-light); font-weight: 400; }
+.hcf-note { font-size: 11px; color: var(--text-light); text-align: right; line-height: 1.5; }
+
+/* ============ STATS BAND ============ */
+.stats-band { background: var(--green-deep); padding: 24px 60px; display: flex; justify-content: center; }
+.sb-inner { max-width: 1200px; width: 100%; display: flex; }
+.sb-item { flex: 1; text-align: center; padding: 0 24px; border-right: 1px solid rgba(255,255,255,0.1); }
+.sb-item:last-child { border-right: none; }
+.sb-num { font-family: 'Noto Serif KR', serif; font-size: 26px; font-weight: 900; color: var(--gold); margin-bottom: 4px; }
+.sb-label { font-size: 11px; color: rgba(245,240,232,0.5); font-weight: 400; }
+
+/* ============ SECTION BASE ============ */
+.sec { padding: 120px 60px; }
+.sec-inner { max-width: 1200px; margin: 0 auto; }
+.eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 2.5px; color: var(--green-mid); text-transform: uppercase; margin-bottom: 16px; display: block; }
+.sec-title { font-family: 'Playfair Display', 'Noto Serif KR', serif; font-size: clamp(28px, 3.5vw, 46px); font-weight: 900; line-height: 1.25; letter-spacing: -1.2px; color: var(--green-deep); margin-bottom: 16px; }
+.sec-sub { font-size: 16px; color: var(--text-mid); font-weight: 400; line-height: 1.9; max-width: 540px; }
+
+/* ============ WHY ============ */
+.why-sec { background: var(--cream); }
+.why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 64px; }
+.why-card { background: var(--white); border: 1px solid rgba(42,92,53,0.1); border-radius: 4px; padding: 36px 32px; transition: all 0.3s; position: relative; overflow: hidden; box-shadow: 0 2px 8px rgba(42,92,53,0.06), 0 8px 32px rgba(42,92,53,0.07); }
+.why-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; border-radius:3px 3px 0 0; }
+.why-card.c1::before { background: var(--green-light); }
+.why-card.c2::before { background: var(--gold); }
+.why-card.c3::before { background: var(--green-deep); }
+.why-card:hover { transform: translateY(-8px); box-shadow: 0 4px 12px rgba(42,92,53,0.08), 0 24px 64px rgba(42,92,53,0.14); border-color: rgba(42,92,53,0.2); }
+.wc-icon { width: 52px; height: 52px; border-radius: 4px; display: flex; align-items: center; justify-content: center; margin-bottom: 22px; }
+.wc-icon.g { background: rgba(141,191,154,0.18); }
+.wc-icon.o { background: rgba(201,169,110,0.15); }
+.wc-icon.d { background: rgba(42,92,53,0.08); }
+.wc-title { font-family: 'Playfair Display', 'Noto Serif KR', serif; font-size: 19px; font-weight: 600; color: var(--green-deep); margin-bottom: 12px; line-height: 1.45; }
+.wc-body { font-size: 14px; color: var(--text-mid); font-weight: 400; line-height: 1.85; }
+.wc-tag { display: inline-flex; align-items: center; gap: 6px; margin-top: 18px; font-size: 12px; color: var(--green-mid); font-weight: 500; }
+
+/* ============ TRIANGLE SECTION ============ */
+.tri-sec { background: var(--white); }
+.tri-layout { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 80px; align-items: center; margin-top: 72px; }
+
+/* Triangle Visual */
+.tri-figure { position: relative; height: 520px; }
+.tri-svg-container { position: absolute; inset: 0; }
+.tri-svg-container svg { width: 100%; height: 100%; }
+
+/* Triangle Nodes */
+.tri-node {
+  position: absolute;
+  display: flex; flex-direction: column; align-items: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  z-index: 10;
+}
+.tri-node:hover { transform: scale(1.05); }
+.tn-circle {
+  width: 120px; height: 120px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+  transition: all 0.3s;
+  flex-direction: column; gap: 6px;
+  position: relative;
+}
+.tn-circle svg { transition: transform 0.3s; }
+.tri-node:hover .tn-circle { box-shadow: 0 20px 56px rgba(0,0,0,0.18); }
+.tn-circle.social { background: var(--green-deep); }
+.tn-circle.brain { background: #C9A96E; }
+.tn-circle.habit { background: var(--cream-dark); border: 2px solid rgba(42,92,53,0.15); }
+.tn-label { font-family: 'Noto Serif KR', serif; font-size: 14px; font-weight: 700; color: var(--green-deep); margin-top: 12px; text-align: center; white-space: nowrap; }
+.tn-sub { font-size: 11px; color: var(--text-light); margin-top: 3px; text-align: center; }
+
+/* Node positions */
+.tri-node.top { top: 0; left: 50%; transform: translateX(-50%); }
+.tri-node.top:hover { transform: translateX(-50%) scale(1.05); }
+.tri-node.bl { bottom: 40px; left: 0; }
+.tri-node.br { bottom: 40px; right: 0; }
+
+/* Expand popup */
+.tn-popup {
+  position: absolute; bottom: calc(100% + 16px); left: 50%; transform: translateX(-50%);
+  background: var(--white); border: 1px solid var(--border); border-radius: 4px;
+  padding: 18px 20px; width: 220px;
+  box-shadow: 0 12px 40px rgba(42,92,53,0.15);
+  opacity: 0; pointer-events: none;
+  transition: all 0.25s;
+  font-size: 12.5px; color: var(--text-mid); font-weight: 400; line-height: 1.7;
+  z-index: 20;
+}
+.tn-popup h6 { font-family: 'Noto Serif KR', serif; font-size: 13px; font-weight: 700; color: var(--green-deep); margin-bottom: 6px; }
+.tn-popup.pos-left { left: auto; right: calc(100% + 12px); bottom: 50%; transform: translateY(50%); }
+.tn-popup.pos-right { left: calc(100% + 12px); right: auto; bottom: 50%; transform: translateY(50%); }
+.tri-node:hover .tn-popup { opacity: 1; pointer-events: auto; }
+
+/* Center badge */
+.tri-center {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  background: var(--cream); border: 2px solid rgba(42,92,53,0.12);
+  border-radius: 50%; width: 130px; height: 130px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; z-index: 5;
+  box-shadow: 0 8px 32px rgba(42,92,53,0.1);
+}
+.tri-center p { font-size: 11px; color: var(--text-light); line-height: 1.5; font-weight: 400; }
+.tri-center strong { font-family: 'Noto Serif KR', serif; font-size: 13px; font-weight: 700; color: var(--green-deep); display: block; margin-bottom: 4px; }
+
+/* Right side cards */
+.tri-right h2 { font-family: 'Noto Serif KR', serif; font-size: clamp(22px,2.5vw,32px); font-weight: 900; color: var(--green-deep); margin-bottom: 12px; line-height: 1.3; }
+.tri-right p { font-size: 15px; color: var(--text-mid); font-weight: 400; line-height: 1.85; margin-bottom: 32px; }
+.tri-points { display: flex; flex-direction: column; gap: 20px; }
+.tri-pt { display: flex; gap: 18px; align-items: flex-start; padding: 20px 22px; background: var(--cream); border-radius: 4px; border: 1px solid var(--border); transition: all 0.2s; }
+.tri-pt:hover { border-color: rgba(42,92,53,0.2); transform: translateX(4px); }
+.tp-icon { width: 44px; height: 44px; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.tp-icon.s { background: rgba(42,92,53,0.1); }
+.tp-icon.b { background: rgba(201,169,110,0.15); }
+.tp-icon.h { background: rgba(141,191,154,0.2); }
+.tp-body h5 { font-size: 14px; font-weight: 600; color: var(--green-deep); margin-bottom: 4px; }
+.tp-body p { font-size: 12.5px; color: var(--text-mid); font-weight: 400; line-height: 1.7; }
+.tp-ref { display: inline-block; font-size: 11px; color: var(--text-mid); font-weight: 500; margin-top: 4px; }
+
+/* ============ TIMELINE ============ */
+.tl-sec { background: var(--green-deep); }
+.tl-sec .eyebrow { color: var(--green-light); }
+.tl-sec .sec-title { color: var(--cream); }
+.tl-sec .sec-sub { color: rgba(245,240,232,0.6); }
+/* ===== TIMELINE STICKY ===== */
+.tl-header-wrap { padding: 100px 60px 60px; }
+.tl-header-inner { max-width: 1200px; margin: 0 auto; }
+.tl-sticky-outer { position: relative; }
+.tl-sticky-inner { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; overflow: hidden; }
+.tl-sticky-content { max-width: 1200px; margin: 0 auto; padding: 0 60px; width: 100%; position: relative; }
+
+/* 인디케이터 */
+.tl-indicator { position: absolute; left: 60px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 10px; z-index: 10; }
+.tl-ind-dot { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.07); border: 1.5px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; }
+.tl-ind-dot span { font-family: 'Noto Serif KR', serif; font-size: 12px; font-weight: 700; color: rgba(245,240,232,0.35); transition: all 0.3s; }
+.tl-ind-dot.active { background: var(--cream); border-color: var(--cream); transform: scale(1.15); }
+.tl-ind-dot.active span { color: var(--green-deep); }
+.tl-ind-dot.gold-dot.active { background: var(--gold); border-color: var(--gold); }
+
+/* 스텝 패널 */
+.tl-panels { padding-left: 64px; }
+.tl-step-sticky { display: none; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; animation: tlFadeIn 0.45s ease both; }
+.tl-step-sticky.active { display: grid; }
+@keyframes tlFadeIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+.tls-left { display: flex; flex-direction: column; gap: 20px; }
+.tls-top { display: flex; align-items: flex-start; gap: 20px; }
+.tl-num { width: 60px; height: 60px; border-radius: 50%; flex-shrink: 0; background: rgba(255,255,255,0.08); border: 1.5px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-family: 'Noto Serif KR', serif; font-size: 18px; font-weight: 900; color: var(--cream); }
+.tl-num.gold-n { background: rgba(201,169,110,0.15); border-color: rgba(201,169,110,0.4); color: var(--gold); }
+.tls-info { padding-top: 6px; }
+.tl-trigger-label { font-size: 10px; font-weight: 600; letter-spacing: 2px; color: var(--green-light); text-transform: uppercase; margin-bottom: 6px; }
+.tls-title { font-family: 'Noto Serif KR', serif; font-size: 22px; font-weight: 700; color: var(--cream); line-height: 1.35; }
+.tls-desc { font-size: 15px; color: rgba(245,240,232,0.62); font-weight: 400; line-height: 1.9; }
+.tl-sci { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: rgba(245,240,232,0.8); padding: 6px 16px; border-radius: 2px; font-size: 11px; font-weight: 500; }
+.tls-right { display: flex; align-items: center; justify-content: center; }
+
+@media(max-width: 1024px) {
+  .tl-header-wrap { padding: 80px 32px 48px; }
+  .tl-sticky-content { padding: 0 32px 0 80px; }
+  .tl-step-sticky { grid-template-columns: 1fr; }
+  .tls-right { display: none; }
+}
+@media(max-width: 768px) {
+  .tl-header-wrap { padding: 60px 20px 36px; }
+  .tl-sticky-content { padding: 0 20px 0 68px; }
+  .tl-indicator { left: 20px; }
+}
+/* Big Phone */
+.big-phone { width: 100%; max-width: 300px; background: #111; border-radius: 40px; border: 8px solid #1e1e1e; box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 40px 100px rgba(0,0,0,0.7), 0 8px 24px rgba(0,0,0,0.5); overflow: hidden; transform: perspective(900px) rotateY(-10deg) rotateX(3deg); transition: transform 0.5s ease; }
+.tl-step.active .big-phone { transform: perspective(900px) rotateY(-5deg) rotateX(1deg); }
+.big-phone:hover { transform: perspective(900px) rotateY(0deg) rotateX(0deg) !important; box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 48px 120px rgba(0,0,0,0.7) !important; }
+.bp-status { background: #0a0a0a; padding: 14px 20px 6px; display: flex; justify-content: space-between; align-items: center; }
+.bp-st-time { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.9); }
+.bp-st-icons { display: flex; gap: 4px; align-items: center; font-size: 11px; color: rgba(255,255,255,0.6); }
+.bp-head { background: #0f0f0f; padding: 10px 18px 14px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.bp-app-ic { width: 38px; height: 38px; border-radius: 4px; background: #FEE500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 20px; }
+.bp-app-name { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.9); }
+.bp-app-sub { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 1px; }
+.bp-chat { padding: 16px 14px; display: flex; flex-direction: column; gap: 10px; min-height: 230px; background: #0d0d0d; }
+.bp-row { display: flex; gap: 8px; align-items: flex-end; }
+.bp-row.r { flex-direction: row-reverse; }
+.bp-av { width: 28px; height: 28px; border-radius: 50%; background: var(--green-deep); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--cream); flex-shrink: 0; }
+.bp-b { background: #232323; border-radius: 4px 14px 14px 14px; padding: 10px 13px; font-size: 13px; color: rgba(255,255,255,0.82); line-height: 1.6; max-width: 195px; }
+.bp-b.s { background: #FEE500; border-radius: 4px 4px 14px 14px; color: #191919; font-weight: 500; }
+.bp-b small { display: block; font-size: 10px; margin-top: 3px; opacity: 0.4; }
+.bp-img { background: #1a1a1a; border-radius: 4px; height: 72px; display: flex; align-items: center; justify-content: center; margin-top: 4px; border: 1px solid rgba(255,255,255,0.06); }
+.bp-bottom { background: #0f0f0f; padding: 10px 14px 18px; display: flex; align-items: center; gap: 8px; }
+.bp-input-bar { flex: 1; background: #1a1a1a; border-radius: 4px; padding: 9px 16px; font-size: 12px; color: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.07); }
+.bp-send-btn { width: 34px; height: 34px; border-radius: 50%; background: var(--green-deep); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+/* ============ 4 WEEKS ============ */
+.weeks-sec { background: var(--cream); }
+.weeks-grid { display: grid; grid-template-columns: repeat(4,1fr); margin-top: 64px; border-radius: 4px; overflow: hidden; box-shadow: 0 16px 60px rgba(42,92,53,0.12); border: 1px solid var(--border); }
+.wk { padding: 40px 32px; position: relative; }
+.wk.w1 { background: var(--white); }
+.wk.w2 { background: #f4f9f5; }
+.wk.w3 { background: #e8f3ea; }
+.wk.w4 { background: var(--green-deep); }
+.wk-n { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 16px; }
+.wk.w4 .wk-n { color: var(--green-light); }
+.wk-time { font-family: 'Noto Serif KR', serif; font-size: 52px; font-weight: 900; color: var(--green-deep); line-height: 1; }
+.wk.w4 .wk-time { color: var(--gold); }
+.wk-unit { font-size: 13px; color: var(--text-light); margin-bottom: 24px; margin-top: 2px; }
+.wk.w4 .wk-unit { color: rgba(245,240,232,0.4); }
+.wk-book { font-size: 14px; font-weight: 600; color: var(--text-dark); margin-bottom: 6px; }
+.wk.w4 .wk-book { color: var(--cream); }
+.wk-theme { font-size: 12.5px; color: var(--text-light); font-weight: 400; line-height: 1.55; }
+.wk.w4 .wk-theme { color: rgba(245,240,232,0.45); }
+.wk.w4 .wk-topic-label { color: var(--gold); opacity: 1; }
+.wk.w4 .wk-topic { color: var(--cream); }
+.wk-bar { position: absolute; bottom: 0; left: 0; height: 4px; }
+.w1 .wk-bar { background: var(--green-light); width: 25%; }
+.w2 .wk-bar { background: var(--green-mid); width: 50%; }
+.w3 .wk-bar { background: var(--green-deep); width: 75%; }
+.w4 .wk-bar { background: var(--gold); width: 100%; }
+
+/* ============ PERSONA ============ */
+.persona-sec { background: var(--cream); }
+.persona-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 64px; }
+.persona-card { background: var(--white); border: 1px solid rgba(42,92,53,0.08); border-radius: 4px; padding: 36px 32px; transition: all 0.3s; box-shadow: 0 2px 8px rgba(42,92,53,0.06), 0 12px 40px rgba(42,92,53,0.09); }
+.persona-card:hover { transform: translateY(-8px); box-shadow: 0 4px 12px rgba(42,92,53,0.08), 0 28px 64px rgba(42,92,53,0.16); border-color: rgba(42,92,53,0.18); }
+.pc-top { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.pc-av { width: 50px; height: 50px; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.pc-av.a1 { background: rgba(141,191,154,0.3); border: 1.5px solid rgba(74,140,92,0.2); }
+.pc-av.a2 { background: rgba(201,169,110,0.25); border: 1.5px solid rgba(201,169,110,0.3); }
+.pc-av.a3 { background: rgba(42,92,53,0.12); border: 1.5px solid rgba(42,92,53,0.2); }
+.pc-name { font-family: 'Noto Serif KR', serif; font-size: 16px; font-weight: 700; color: var(--green-deep); }
+.pc-job { font-size: 12px; color: var(--text-light); font-weight: 400; margin-top: 2px; }
+.pc-quote { font-size: 13.5px; color: var(--text-mid); font-weight: 400; line-height: 1.85; padding: 14px 16px; background: var(--cream); border-radius: 4px; border-left: 3px solid var(--green-light); margin-bottom: 20px; font-style: italic; }
+.pc-missions { display: flex; flex-direction: column; gap: 7px; margin-bottom: 20px; }
+.pc-m { font-size: 13px; color: var(--text-mid); display: flex; align-items: center; gap: 8px; }
+.pc-m::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--green-mid); flex-shrink: 0; }
+.pc-result { background: rgba(42,92,53,0.07); border-radius: 4px; padding: 12px 14px; font-size: 12.5px; color: var(--green-deep); font-weight: 500; line-height: 1.6; }
+
+/* ============ SYS DETAILS ============ */
+.sysdet-sec { background: var(--white); }
+.sysdet-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; margin-top: 64px; }
+.sd-card { background: var(--white); border: 1px solid rgba(42,92,53,0.08); border-radius: 4px; padding: 36px; transition: all 0.3s; box-shadow: 0 2px 8px rgba(42,92,53,0.05), 0 8px 32px rgba(42,92,53,0.07); }
+.sd-card:hover { transform: translateY(-6px); box-shadow: 0 4px 12px rgba(42,92,53,0.07), 0 20px 56px rgba(42,92,53,0.13); border-color: rgba(42,92,53,0.18); }
+.sd-top { display: flex; gap: 18px; align-items: flex-start; margin-bottom: 16px; }
+.sd-icon { width: 50px; height: 50px; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.sd-icon.i1 { background: rgba(42,92,53,0.08); }
+.sd-icon.i2 { background: rgba(201,169,110,0.12); }
+.sd-icon.i3 { background: rgba(141,191,154,0.2); }
+.sd-icon.i4 { background: rgba(42,92,53,0.05); }
+.sd-head h4 { font-family: 'Noto Serif KR', serif; font-size: 18px; font-weight: 700; color: var(--green-deep); margin-bottom: 4px; }
+.sd-head .theory { font-size: 11px; color: var(--text-light); }
+.sd-body { font-size: 13.5px; color: var(--text-mid); font-weight: 400; line-height: 1.85; }
+.sd-tag { display: inline-block; background: rgba(42,92,53,0.07); color: var(--green-mid); padding: 4px 12px; border-radius: 2px; font-size: 11px; font-weight: 500; margin-top: 12px; }
+.sd-tag.gold { background: rgba(201,169,110,0.1); color: #7a5a20; }
+
+/* ============ REVIEWS ============ */
+.review-sec { background: var(--white); }
+.review-top { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 64px; }
+.beta-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(42,92,53,0.07); border: 1px solid rgba(42,92,53,0.15); color: var(--green-deep); padding: 7px 16px; border-radius: 2px; font-size: 12px; font-weight: 500; }
+.review-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+.review-card { background: var(--cream); border: 1px solid rgba(42,92,53,0.09); border-radius: 4px; padding: 32px; transition: all 0.3s; box-shadow: 0 2px 8px rgba(42,92,53,0.05), 0 8px 32px rgba(42,92,53,0.07); }
+.review-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(42,92,53,0.1); }
+.rc-top { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; }
+.rc-av { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.rc-av.r1 { background: rgba(141,191,154,0.25); }
+.rc-av.r2 { background: rgba(201,169,110,0.2); }
+.rc-av.r3 { background: rgba(42,92,53,0.12); }
+.rc-av.r4 { background: rgba(232,212,168,0.35); }
+.rc-name { font-family: 'Noto Serif KR', serif; font-size: 15px; font-weight: 700; color: var(--green-deep); }
+.rc-job { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+.rc-stars { color: var(--gold); font-size: 13px; letter-spacing: 2px; margin-bottom: 14px; }
+.rc-text { font-size: 14px; color: var(--text-mid); font-weight: 400; line-height: 1.9; font-style: italic; margin-bottom: 22px; }
+.rc-ba { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.rc-ba-item { padding: 12px 14px; border-radius: 4px; }
+.rc-ba-item.bef { background: rgba(200,60,60,0.05); border: 1px solid rgba(200,60,60,0.12); }
+.rc-ba-item.aft { background: rgba(42,92,53,0.07); border: 1px solid rgba(42,92,53,0.14); }
+.rc-ba-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; }
+.rc-ba-item.bef .rc-ba-label { color: rgba(180,60,60,0.6); }
+.rc-ba-item.aft .rc-ba-label { color: var(--green-mid); }
+.rc-ba-text { font-size: 12px; color: var(--text-mid); line-height: 1.6; }
+.rc-ba-item.aft .rc-ba-text { color: var(--green-deep); font-weight: 500; }
+
+/* ============ STUDY ============ */
+.study-sec { background: var(--cream-dark); }
+.study-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; margin-top: 72px; }
+.study-card { background: var(--green-deep); border-radius: 4px; padding: 44px; box-shadow: 0 20px 60px rgba(42,92,53,0.2); position: relative; overflow: hidden; }
+.study-card::before { content:''; position:absolute; top:-80px; right:-80px; width:240px; height:240px; background:radial-gradient(circle,rgba(201,169,110,0.14) 0%,transparent 70%); border-radius:50%; }
+.sc-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; color: var(--green-light); text-transform: uppercase; margin-bottom: 8px; position: relative; z-index: 1; }
+.sc-title { font-family: 'Noto Serif KR', serif; font-size: 22px; font-weight: 900; color: var(--cream); margin-bottom: 6px; line-height: 1.3; position: relative; z-index: 1; }
+.sc-sub { font-size: 12.5px; color: rgba(245,240,232,0.45); margin-bottom: 28px; position: relative; z-index: 1; }
+.study-members { display: flex; flex-direction: column; gap: 10px; position: relative; z-index: 1; }
+.sm-row { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 12px 16px; }
+.sm-av { width: 36px; height: 36px; border-radius: 50%; background: rgba(141,191,154,0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.sm-info { flex: 1; }
+.sm-name { font-size: 13.5px; font-weight: 500; color: var(--cream); }
+.sm-status { font-size: 11px; color: rgba(245,240,232,0.4); }
+.sm-badge { background: var(--gold); color: var(--green-deep); padding: 3px 10px; border-radius: 2px; font-size: 10px; font-weight: 700; }
+.sm-row.empty { opacity: 0.3; border-style: dashed; }
+.study-text .sec-title { color: var(--green-deep); }
+.study-text .sec-sub { color: var(--text-mid); }
+.study-pts { margin-top: 32px; display: flex; flex-direction: column; gap: 18px; }
+.spt { display: flex; gap: 16px; align-items: flex-start; }
+.spt-ic { width: 44px; height: 44px; border-radius: 4px; background: rgba(42,92,53,0.08); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.spt-body h5 { font-size: 14px; font-weight: 600; color: var(--green-deep); margin-bottom: 4px; }
+.spt-body p { font-size: 13px; color: var(--text-mid); font-weight: 400; line-height: 1.7; }
+
+/* ============ PRICING ============ */
+.pricing-sec { background: var(--white); }
+.price-layout { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 16px; margin-top: 64px; }
+.price-main-card { background: var(--green-deep); border-radius: 4px; padding: 48px; position: relative; overflow: hidden; }
+.price-main-card::before { content:''; position:absolute; top:-80px; right:-80px; width:260px; height:260px; background:radial-gradient(circle,rgba(201,169,110,0.12) 0%,transparent 70%); border-radius:50%; }
+.pmc-inner { position: relative; z-index: 1; }
+.pmc-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--green-light); text-transform: uppercase; margin-bottom: 16px; }
+.pmc-amount { font-family: 'Noto Serif KR', serif; font-size: 60px; font-weight: 900; color: var(--gold); line-height: 1; margin-bottom: 4px; }
+.pmc-amount span { font-size: 18px; color: rgba(245,240,232,0.45); font-weight: 400; }
+.pmc-day { font-size: 13px; color: rgba(245,240,232,0.4); margin-bottom: 36px; }
+.pmc-items { display: flex; flex-direction: column; gap: 12px; }
+.pmc-item { display: flex; align-items: center; gap: 10px; font-size: 14px; color: rgba(245,240,232,0.7); }
+.pmc-check { width: 20px; height: 20px; border-radius: 50%; background: rgba(141,191,154,0.2); border: 1px solid rgba(141,191,154,0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.price-right { display: flex; flex-direction: column; gap: 16px; }
+.prc { background: var(--cream); border: 1px solid var(--border); border-radius: 4px; padding: 32px; flex: 1; transition: all 0.2s; }
+.prc:hover { border-color: rgba(42,92,53,0.18); }
+.prc-title { font-family: 'Noto Serif KR', serif; font-size: 16px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; }
+.prc-num { font-family: 'Noto Serif KR', serif; font-size: 32px; font-weight: 900; color: var(--gold); margin-bottom: 6px; }
+.prc-body { font-size: 13px; color: var(--text-mid); font-weight: 400; line-height: 1.75; }
+.trial-wrap { background: var(--cream-dark); border: 1px solid var(--border); border-radius: 4px; padding: 40px; margin-top: 16px; display: flex; justify-content: space-between; align-items: center; gap: 28px; flex-wrap: wrap; }
+.trial-left h3 { font-family: 'Noto Serif KR', serif; font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; }
+.trial-left p { font-size: 14px; color: var(--text-mid); font-weight: 400; line-height: 1.75; margin-bottom: 16px; }
+.trial-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.t-tag { background: var(--white); border: 1px solid var(--border); color: var(--text-mid); padding: 6px 14px; border-radius: 2px; font-size: 12px; }
+.btn-kakao { display: inline-flex; align-items: center; gap: 10px; background: #FEE500; color: #191919; padding: 16px 32px; border-radius: 4px; font-size: 15px; font-weight: 700; text-decoration: none; white-space: nowrap; box-shadow: 0 6px 24px rgba(254,229,0,0.3); transition: all 0.2s; }
+.btn-kakao:hover { opacity: 0.9; transform: translateY(-2px); }
+
+/* ============ FINAL CTA ============ */
+.final-sec { background: var(--green-deep); padding: 140px 60px; text-align: center; position: relative; overflow: hidden; }
+.final-sec::before { content:''; position:absolute; top:-120px; right:-120px; width:480px; height:480px; background:radial-gradient(circle,rgba(201,169,110,0.1) 0%,transparent 70%); border-radius:50%; }
+.final-sec::after { content:''; position:absolute; bottom:-100px; left:-100px; width:380px; height:380px; background:radial-gradient(circle,rgba(141,191,154,0.07) 0%,transparent 70%); border-radius:50%; }
+.fi { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
+.final-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(201,169,110,0.15); border: 1px solid rgba(201,169,110,0.25); color: var(--gold-light); padding: 7px 18px; border-radius: 2px; font-size: 12px; font-weight: 500; margin-bottom: 28px; }
+.dot-red { width: 7px; height: 7px; border-radius: 50%; background: #ff6b6b; animation: blink 1.5s infinite; }
+.final-h2 { font-family: 'Noto Serif KR', serif; font-size: clamp(32px, 5vw, 58px); font-weight: 900; color: var(--cream); line-height: 1.25; letter-spacing: -1.5px; margin-bottom: 18px; }
+.final-h2 em { color: var(--gold); font-style: normal; }
+.final-p { font-size: 16px; color: rgba(245,240,232,0.55); font-weight: 400; line-height: 1.9; margin-bottom: 44px; }
+.final-deposit { display: inline-block; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: rgba(245,240,232,0.6); padding: 10px 24px; border-radius: 2px; font-size: 13px; margin-bottom: 36px; }
+.btn-final { display: inline-flex; align-items: center; gap: 10px; background: #FEE500; color: #191919; padding: 19px 52px; border-radius: 4px; font-size: 16px; font-weight: 700; text-decoration: none; box-shadow: 0 8px 36px rgba(254,229,0,0.35); transition: all 0.25s; }
+.btn-final:hover { transform: translateY(-3px); box-shadow: 0 14px 48px rgba(254,229,0,0.45); }
+.final-note { margin-top: 20px; font-size: 12px; color: rgba(245,240,232,0.25); }
+
+/* ============ FOOTER ============ */
+footer { background: var(--white); border-top: 1px solid var(--border); padding: 28px 60px; display: flex; justify-content: space-between; align-items: center; }
+.fl { font-family: 'Noto Serif KR', serif; font-size: 16px; font-weight: 900; color: var(--green-deep); }
+.fl em { color: var(--gold); font-style: normal; font-size: 11px; vertical-align: super; }
+.fc { font-size: 12px; color: var(--text-light); }
+
+/* ============ RESPONSIVE ============ */
+@media(max-width: 1024px) {
+  nav, .sec, .stats-band, .final-sec, footer { padding-left: 32px; padding-right: 32px; }
+  .hero { padding: 100px 32px 72px; gap: 48px; }
+  .tri-layout, .study-layout { grid-template-columns: 1fr; }
+  .tl-item { grid-template-columns: 52px 1fr; }
+  .phone-mock { display: none; }
+  .weeks-grid { grid-template-columns: repeat(2,1fr); }
+  .price-layout { grid-template-columns: 1fr; }
+}
+@media(max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 100px 20px 60px; }
+  .hero-right { display: none; }
+  .sec { padding: 72px 20px; }
+  .stats-band { padding: 20px; }
+  .why-grid, .persona-grid, .sysdet-grid, .review-grid { grid-template-columns: 1fr; }
+  .weeks-grid { grid-template-columns: repeat(2,1fr); }
+  .tri-figure { height: 420px; }
+  .tn-circle { width: 90px; height: 90px; }
+  .tri-center { width: 100px; height: 100px; }
+  .tri-center strong { font-size: 11px; }
+  .tri-center p { font-size: 9.5px; }
+  .tn-label { font-size: 12px; }
+  .final-sec { padding: 80px 20px; }
+  .floating-wrap { bottom: 16px; left: 50%; transform: translateX(-50%); }
+  footer { padding: 20px; flex-direction: column; gap: 8px; text-align: center; }
+}
+
+/* ===== WEEKLY ===== */
+.weekly-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+.wday { border-radius: 4px; padding: 18px 12px; border: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; transition: transform 0.2s, box-shadow 0.2s; }
+.wday:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(42,92,53,0.1); }
+.wday-full { background: var(--green-deep); border-color: var(--green-deep); }
+.wday-light { background: rgba(141,191,154,0.12); border-color: rgba(141,191,154,0.3); }
+.wday-rest { background: var(--cream); border-color: var(--border); }
+.wd-name { font-family: 'Noto Serif KR', serif; font-size: 24px; font-weight: 900; color: var(--cream); }
+.wday-light .wd-name { color: var(--green-deep); }
+.wd-badge { display: inline-block; padding: 3px 10px; border-radius: 2px; font-size: 10px; font-weight: 700; }
+.wd-badge.full { background: rgba(255,255,255,0.15); color: rgba(245,240,232,0.8); }
+.wd-badge.light { background: rgba(42,92,53,0.1); color: var(--green-mid); }
+.wd-badge.rest { background: var(--cream-dark); color: var(--text-light); }
+.wd-desc { font-size: 11px; color: rgba(245,240,232,0.5); font-weight: 400; line-height: 1.5; }
+.wday-light .wd-desc { color: var(--text-mid); }
+@media(max-width: 900px) { .weekly-grid { grid-template-columns: repeat(4, 1fr); } }
+@media(max-width: 600px) { .weekly-grid { grid-template-columns: repeat(4, 1fr); } }
+</style>
+</head>
+<body>
+
+<!-- Noise -->
+<div class="noise"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <svg class="nav-logo-mark" viewBox="0 0 40 48" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 46C20 46 36 34 36 18C36 9 29 2 20 2C11 2 4 9 4 18C4 34 20 46 20 46Z"/>
+      <line x1="20" y1="2" x2="20" y2="46"/>
+      <path d="M20 10L11 17"/><path d="M20 20L7 27"/><path d="M20 30L13 35"/>
+      <path d="M20 10L29 17"/><path d="M20 20L33 27"/><path d="M20 30L27 35"/>
+    </svg>
+    <span class="nav-logo-text">이루다<sup>®</sup></span>
+  </a>
+  <div class="nav-links">
+    <a href="#why">왜 못 하는가</a>
+    <a href="#curriculum">커리큘럼</a>
+    <a href="#reviews">후기</a>
+    <a href="#pricing">요금</a>
+    <a href="#apply" class="nav-cta">1주 체험 신청</a>
+  </div>
+</nav>
+
+<!-- FLOATING -->
+<div class="floating-wrap">
+  <div class="floating-notice">🔴 1기 선착순 50명 모집 중</div>
+  <a href="https://open.kakao.com/o/sA498fli" class="floating-btn" target="_blank">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#191919" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+    카카오톡 신청
+  </a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section style="background: var(--white); padding-top: 64px;">
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span class="dot-pulse"></span>
+        1:1 밀착 미라클모닝 프로그램 · 이루다
+      </div>
+      <h1>
+        꾸준히 자기계발<br>하고 싶은데,
+        <em>오늘도 미루셨나요?</em>
+      </h1>
+      <p class="hero-sub">일, 갑작스러운 약속, 피곤함. 핑계는 늘 생깁니다.<br>꾸준한 자기계발을 위한 답은 하나입니다.<br><strong>아무도 뺏어갈 수 없는 아침 시간.</strong></p>
+      <div class="hero-btns">
+        <a href="#apply" class="btn-primary">1주 체험 신청하기</a>
+        <a href="#curriculum" class="btn-link">커리큘럼 보기 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hs-num">4명</div>
+          <div class="hs-label">베타 테스터<br>전원 완주 성공</div>
+        </div>
+        <div>
+          <div class="hs-num">4주</div>
+          <div class="hs-label">아침 1시간<br>공부 달성</div>
+        </div>
+        <div>
+          <div class="hs-num">49,000</div>
+          <div class="hs-label">월 요금<br>(하루 1,600원)</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-card">
+        <div class="hc-label">하루 커리큘럼</div>
+        <div class="loop-item"><div class="li-circle">01</div><div class="li-text">취침 1시간 전 수면 리마인드</div><span class="li-badge green">밤</span></div>
+        <div class="loop-item"><div class="li-circle">02</div><div class="li-text">내일 공부 환경 세팅 인증</div><span class="li-badge green">환경</span></div>
+        <div class="loop-item"><div class="li-circle gold">03</div><div class="li-text">기상 후 Sleep Cycle 인증</div><span class="li-badge gold">수면</span></div>
+        <div class="loop-item"><div class="li-circle">04</div><div class="li-text">"공부 시작하겠습니다" 문자</div><span class="li-badge green">시작</span></div>
+        <div class="loop-item"><div class="li-circle">05</div><div class="li-text">타임랩스 공부 인증</div><span class="li-badge green">공부</span></div>
+        <div class="loop-item"><div class="li-circle gold">06</div><div class="li-text">공부 기록 제출</div><span class="li-badge gold">기록</span></div>
+        <div class="loop-item"><div class="li-circle">07</div><div class="li-text">자기계발 콘텐츠 발송</div><span class="li-badge green">콘텐츠</span></div>
+        <div class="hc-footer">
+          <div style="width:100%;">
+            <!-- 가격 플로우: 정가 → 적립 → 실질 -->
+            <div style="display:flex;align-items:stretch;gap:8px;margin-bottom:12px;">
+
+              <!-- 정가 -->
+              <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 6px;border-radius:4px;border:1px solid rgba(42,92,53,.1);background:rgba(42,92,53,.03);">
+                <div style="font-size:9px;font-weight:600;color:var(--text-light);letter-spacing:.5px;margin-bottom:5px;">정가</div>
+                <div style="font-family:'Noto Serif KR',serif;font-size:17px;font-weight:900;color:var(--text-light);text-decoration:line-through;text-decoration-color:rgba(42,92,53,.25);line-height:1;">49,000</div>
+                <div style="font-size:9px;color:var(--text-light);margin-top:3px;">원/월</div>
+              </div>
+
+              <!-- 화살표 -->
+              <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;flex-shrink:0;padding:0 2px;">
+                <div style="font-size:8.5px;font-weight:700;color:var(--gold);white-space:nowrap;">−12,000원</div>
+                <svg width="28" height="10" viewBox="0 0 28 10"><path d="M0 5 L22 5" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round"/><path d="M18 1.5 L25 5 L18 8.5" fill="none" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <div style="font-size:7.5px;color:var(--text-light);white-space:nowrap;">개근 시 적립</div>
+              </div>
+
+              <!-- 실질 금액 -->
+              <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 6px;border-radius:4px;background:rgba(42,92,53,.07);border:1.5px solid rgba(42,92,53,.18);">
+                <div style="font-size:9px;font-weight:700;color:var(--green-mid);letter-spacing:.5px;margin-bottom:5px;">실질 금액</div>
+                <div style="font-family:'Noto Serif KR',serif;font-size:21px;font-weight:900;color:var(--green-deep);line-height:1;">37,000</div>
+                <div style="font-size:9px;color:var(--text-mid);margin-top:3px;">원/월</div>
+              </div>
+
+            </div>
+            <!-- 부연 설명 -->
+            <div style="text-align:center;font-size:9.5px;color:var(--text-light);line-height:1.7;">
+              하루 500원 적립 × 20일 + 주말 2,000원 = 최대 12,000원 환급<br>
+              1주 체험 후 안 맞으면 전액 환불
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAND -->
+<div class="stats-band">
+  <div class="sb-inner">
+    <div class="sb-item"><div class="sb-num">4/4</div><div class="sb-label">베타 테스터 습관 형성 성공률</div></div>
+    <div class="sb-item"><div class="sb-num">20분</div><div class="sb-label">1주차 시작 공부 시간</div></div>
+    <div class="sb-item"><div class="sb-num">1시간</div><div class="sb-label">4주차 달성 공부 시간</div></div>
+    <div class="sb-item"><div class="sb-num">+500원</div><div class="sb-label">하루 완수마다 적립</div></div>
+  </div>
+</div>
+
+<!-- ===== WHY ===== -->
+<section class="sec why-sec" id="why">
+  <div class="sec-inner">
+    <h2 class="sec-title">매번 일찍 일어나기로 다짐하고<br>실패하지 않으셨나요?</h2>
+    <div style="display:flex; align-items:center; gap:16px; margin-top:20px; flex-wrap:wrap;">
+      <p style="font-family:'Noto Serif KR',serif; font-size:clamp(17px,2vw,22px); font-weight:700; color:var(--green-deep); line-height:1.4;">의지가 약해서가 아닙니다.</p>
+      <span style="color:var(--green-light); font-size:20px;">→</span>
+      <p style="font-family:'Noto Serif KR',serif; font-size:clamp(17px,2vw,22px); font-weight:700; color:var(--green-deep); line-height:1.4;">시스템이 없어서입니다.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card c1">
+        <div class="wc-icon g">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4A8C5C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </div>
+        <div class="wc-title">SNS, 숏폼 보다가<br>또 새벽 2시</div>
+        <div class="wc-body">일찍 자려고 누웠는데 SNS, 숏폼 보다가 어느새 새벽 1시, 2시가 되지는 않으셨나요?</div>
+        
+      </div>
+      <div class="why-card c2">
+        <div class="wc-icon o">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        </div>
+        <div class="wc-title">알람을 10개 맞춰도,<br>결국 다 끈다</div>
+        <div class="wc-body">알람을 맞추고 눈은 떴는데 아무도 보는 사람이 없으니 그냥 끄고 다시 눕게 되지는 않으셨나요?</div>
+        
+      </div>
+      <div class="why-card c3">
+        <div class="wc-icon d">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2A5C35" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+        </div>
+        <div class="wc-title">하루 이틀은 되는데<br>며칠 못 간다</div>
+        <div class="wc-body">하루 이틀은 성공해도 며칠 못 가 흐지부지되지는 않으셨나요?</div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRIANGLE ===== -->
+<section class="sec tri-sec" id="system">
+  <div class="sec-inner">
+    <span class="eyebrow">과학적 설계</span>
+    <h2 class="sec-title">이루다 미라클모닝은<br>과학적으로 설계됐습니다.</h2>
+    <p class="sec-sub">세 가지 원리가 연결되어 할 수 밖에 없는 시스템을 만듭니다.<br>각 원리에 마우스를 올려보세요.</p>
+
+    <div class="tri-layout">
+      <!-- Triangle Figure -->
+      <div class="tri-figure">
+        <!-- SVG connecting lines -->
+        <div class="tri-svg-container">
+          <svg viewBox="0 0 460 520" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;">
+            <!-- Triangle lines -->
+            <line x1="230" y1="60" x2="60" y2="420" stroke="rgba(42,92,53,0.12)" stroke-width="1.5" stroke-dasharray="6,4"/>
+            <line x1="230" y1="60" x2="400" y2="420" stroke="rgba(42,92,53,0.12)" stroke-width="1.5" stroke-dasharray="6,4"/>
+            <line x1="60" y1="420" x2="400" y2="420" stroke="rgba(42,92,53,0.12)" stroke-width="1.5" stroke-dasharray="6,4"/>
+            <!-- Center dot -->
+            <circle cx="230" cy="280" r="5" fill="rgba(42,92,53,0.15)"/>
+            <!-- Connecting lines to center -->
+            <line x1="230" y1="60" x2="230" y2="275" stroke="rgba(201,169,110,0.2)" stroke-width="1"/>
+            <line x1="60" y1="420" x2="225" y2="285" stroke="rgba(201,169,110,0.2)" stroke-width="1"/>
+            <line x1="400" y1="420" x2="235" y2="285" stroke="rgba(201,169,110,0.2)" stroke-width="1"/>
+          </svg>
+        </div>
+
+        <!-- Top Node: 사회적 약속 -->
+        <div class="tri-node top">
+          <div class="tn-circle social">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(245,240,232,0.9)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </div>
+          <div class="tn-label">사회적 약속 효과</div>
+          <div class="tn-sub">1:1 밀착 매니저</div>
+          <div class="tn-popup">
+            <h6>사회적 약속 효과</h6>
+            혼자만의 결심은 혼자만 아는 약속입니다. 누군가와 함께 하고 있다는 사실만으로 실행률이 달라집니다.<br><br>
+            → <strong>1:1 밀착 매니저 관리</strong>
+          </div>
+        </div>
+
+        <!-- Bottom Left: 뇌과학 -->
+        <div class="tri-node bl">
+          <div class="tn-circle brain">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"></path><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"></path></svg>
+          </div>
+          <div class="tn-label">뇌과학</div>
+          <div class="tn-sub">보상 + 손실 회피</div>
+          <div class="tn-popup pos-right">
+            <h6>뇌과학 — 도파민 & 손실 회피</h6>
+            사람은 얻는 기쁨보다 잃는 고통에 2배 민감합니다.<br><br>
+            → <strong>매일 500원 적립 (보상)</strong><br>
+            → <strong>선택적 벌금 시스템 (손실 회피)</strong><br><br>
+            <em style="font-size:10.5px;color:var(--text-light);">Kahneman & Tversky, Prospect Theory</em>
+          </div>
+        </div>
+
+        <!-- Bottom Right: 습관 형성 -->
+        <div class="tri-node br">
+          <div class="tn-circle habit">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#2A5C35" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"></path><path d="M12 6v6l4 2"></path><path d="M18 2l4 4-4 4"></path><path d="M22 6h-6"></path></svg>
+          </div>
+          <div class="tn-label">습관 형성 원리</div>
+          <div class="tn-sub">환경설계 + 단계적 성장</div>
+          <div class="tn-popup pos-left">
+            <h6>습관 형성 원리</h6>
+            환경을 설계하고 마찰을 줄이면 의지 없이도 행동합니다. 작게 시작해 단계적으로 성장합니다.<br><br>
+            → <strong>취침 전 공부 환경 세팅</strong><br>
+            → <strong>20분 → 35분 → 50분 → 1시간 단계 성장</strong><br><br>
+            <em style="font-size:10.5px;color:var(--text-light);">BJ Fogg — Tiny Habits</em>
+          </div>
+        </div>
+
+        <!-- Center -->
+        <div class="tri-center">
+          <strong>할 수밖에 없는</strong>
+          <p>시스템</p>
+        </div>
+      </div>
+
+      <!-- Right Points -->
+      <div class="tri-right">
+        <h2>이 세 가지가 함께<br>작동할 때 달라집니다.</h2>
+        <p>의지에 기대지 않습니다. 과학적·심리학적 근거로 설계된 시스템이 여러분을 도와드립니다.</p>
+        <div class="tri-points">
+          <div class="tri-pt">
+            <div class="tp-icon s">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2A5C35" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
+            <div class="tp-body">
+              <h5>누군가와 함께 하고 있다는 것</h5>
+              <p>매니저가 매일 기상 성공여부를 확인합니다. 누군가 보고 있다는 사실 하나가 행동을 바꿉니다.</p>
+              <span class="tp-ref">→ 사회적 약속 효과</span>
+            </div>
+          </div>
+          <div class="tri-pt">
+            <div class="tp-icon b">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            </div>
+            <div class="tp-body">
+              <h5>뇌과학 — 보상과 손실 회피</h5>
+              <p>하루 완수 시 500원이 적립됩니다. 성공의 보상이 도파민을 분비시켜 습관을 만들고, 손실 회피 심리가 하기 싫은 날에도 몸을 움직이게 합니다.</p>
+              <span class="tp-ref">→ Kahneman & Tversky, Prospect Theory</span>
+            </div>
+          </div>
+          <div class="tri-pt">
+            <div class="tp-icon h">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4A8C5C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+            </div>
+            <div class="tp-body">
+              <h5>습관 설계</h5>
+              <p>전날 밤 미리 세팅해 아침 마찰을 없애고, 20분부터 시작해 1시간까지 단계적으로 성장합니다.</p>
+              <span class="tp-ref">→ BJ Fogg — Tiny Habits</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TIMELINE ===== -->
+<section class="tl-sec" id="curriculum">
+
+  <!-- 섹션 헤더 (sticky 밖에 위치) -->
+  <div class="tl-header-wrap">
+    <div class="tl-header-inner">
+      <span class="eyebrow">하루 커리큘럼</span>
+      <h2 class="sec-title">취침부터 기상까지,<br>모든 순간을 함께합니다.</h2>
+      <p class="sec-sub">각 단계를 스크롤하며 확인하세요.<br>미라클모닝은 전날 밤부터 시작됩니다.</p>
+    </div>
+  </div>
+
+  <!-- Sticky 스크롤 영역 -->
+  <div class="tl-sticky-outer" id="tlOuter">
+    <div class="tl-sticky-inner" id="tlInner">
+      <div class="tl-sticky-content">
+
+        <!-- 스텝 인디케이터 (좌측 번호 목록) -->
+        <div class="tl-indicator">
+          <div class="tl-ind-dot" data-idx="0"><span>01</span></div><div class="tl-ind-dot" data-idx="1"><span>02</span></div><div class="tl-ind-dot" data-idx="2"><span>03</span></div><div class="tl-ind-dot" data-idx="3"><span>04</span></div><div class="tl-ind-dot" data-idx="4"><span>05</span></div><div class="tl-ind-dot" data-idx="5"><span>06</span></div><div class="tl-ind-dot" data-idx="6"><span>07</span></div>
+        </div>
+
+        <!-- 스텝 패널들 (JS로 active 전환) -->
+        <div class="tl-panels">
+
+      <div class="tl-step-sticky" data-index="0">
+        <!-- 왼쪽: 번호 + 텍스트 -->
+        <div class="tls-left">
+          <div class="tls-top">
+            <div class="tl-num">01</div>
+            <div class="tls-info">
+              <div class="tl-trigger-label">Step 01</div>
+              <h3 class="tls-title">취침 1시간 전 — 수면 리마인드</h3>
+            </div>
+          </div>
+          <p class="tls-desc">목표는 자주 상기할수록 달성 확률이 높아집니다. 취침 1시간 전, 이루다 매니저가 먼저 카카오톡을 보내드립니다. "지금 자야 내일 아침이 됩니다."</p>
+          <span class="tl-sci">Implementation Intention Theory (Gollwitzer, 1999)</span>
+        </div>
+        <!-- 오른쪽: 폰 목업 -->
+        <div class="tls-right">
+          <div class="big-phone">
+            <div class="bp-status"><span class="bp-st-time">11:00 PM</span><span class="bp-st-icons">●●● ▲ 🔋</span></div>
+            <div class="bp-head"><div class="bp-app-ic">💬</div><div><div class="bp-app-name">이루다 매니저</div><div class="bp-app-sub">온라인</div></div></div>
+            <div class="bp-chat"><div class="bp-row"><div class="bp-av">이</div><div class="bp-b">🌙 취침 1시간 전입니다.<br>내일 아침을 위해<br>지금 주무세요!<small>오후 11:00</small></div></div>
+                <div class="bp-row"><div class="bp-av">이</div><div class="bp-b">오늘도 하루 수고 많으셨어요. 내일 아침이 기다리고 있어요 🌿<small>오후 11:00</small></div></div></div>
+            <div class="bp-bottom"><div class="bp-input-bar">메시지 입력...</div><div class="bp-send-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-step-sticky" data-index="1">
+        <!-- 왼쪽: 번호 + 텍스트 -->
+        <div class="tls-left">
+          <div class="tls-top">
+            <div class="tl-num">02</div>
+            <div class="tls-info">
+              <div class="tl-trigger-label">Step 02</div>
+              <h3 class="tls-title">취침 전 — 내일 공부 환경 세팅 인증</h3>
+            </div>
+          </div>
+          <p class="tls-desc">행동 직전 마찰을 줄이면 실행률이 2배 높아집니다. 내일 할 공부를 오늘 밤 미리 세팅하고 사진으로 인증합니다. 아침에 눈 뜨면 바로 시작할 수 있는 환경이 만들어집니다.</p>
+          <span class="tl-sci">마찰 제거 이론 (BJ Fogg — Tiny Habits)</span>
+        </div>
+        <!-- 오른쪽: 폰 목업 -->
+        <div class="tls-right">
+          <div class="big-phone">
+            <div class="bp-status"><span class="bp-st-time">11:38 PM</span><span class="bp-st-icons">●●● ▲ 🔋</span></div>
+            <div class="bp-head"><div class="bp-app-ic">💬</div><div><div class="bp-app-name">이루다 매니저</div><div class="bp-app-sub">온라인</div></div></div>
+            <div class="bp-chat">
+                <div class="bp-row r">
+                  <div class="bp-b s">
+                    <!-- 사진처럼 보이는 책상 세팅 SVG -->
+                    <div style="width:180px;height:120px;border-radius:4px;overflow:hidden;margin-bottom:6px;position:relative;">
+                      <svg viewBox="0 0 180 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+                        <!-- 배경 (방 벽) -->
+                        <rect width="180" height="120" fill="#2a2a2a"/>
+                        <!-- 벽 -->
+                        <rect width="180" height="72" fill="#1e1e1e"/>
+                        <!-- 책상 표면 -->
+                        <rect x="0" y="72" width="180" height="6" fill="#5a3e28" rx="1"/>
+                        <rect x="0" y="78" width="180" height="42" fill="#4a3020"/>
+                        <!-- 노트북 -->
+                        <rect x="60" y="42" width="70" height="38" fill="#1a1a1a" rx="3"/>
+                        <rect x="62" y="44" width="66" height="30" fill="#0a84ff" opacity="0.15" rx="2"/>
+                        <rect x="62" y="44" width="66" height="30" fill="none" stroke="#333" stroke-width="0.5" rx="2"/>
+                        <!-- 노트북 화면 내용 -->
+                        <rect x="66" y="48" width="40" height="3" fill="rgba(255,255,255,0.15)" rx="1"/>
+                        <rect x="66" y="54" width="55" height="2" fill="rgba(255,255,255,0.08)" rx="1"/>
+                        <rect x="66" y="59" width="48" height="2" fill="rgba(255,255,255,0.08)" rx="1"/>
+                        <rect x="66" y="64" width="52" height="2" fill="rgba(255,255,255,0.08)" rx="1"/>
+                        <!-- 노트북 하단 -->
+                        <rect x="55" y="80" width="80" height="3" fill="#222" rx="1"/>
+                        <!-- 책 1 (세로) -->
+                        <rect x="18" y="50" width="10" height="30" fill="#c0392b" rx="1"/>
+                        <rect x="19" y="51" width="8" height="28" fill="#e74c3c" rx="1"/>
+                        <text x="23" y="68" font-size="4" fill="white" text-anchor="middle" transform="rotate(-90 23 65)">TOEIC</text>
+                        <!-- 책 2 (세로) -->
+                        <rect x="29" y="53" width="9" height="27" fill="#2980b9" rx="1"/>
+                        <rect x="30" y="54" width="7" height="25" fill="#3498db" rx="1"/>
+                        <!-- 책 3 (세로) -->
+                        <rect x="39" y="55" width="8" height="25" fill="#27ae60" rx="1"/>
+                        <!-- 텀블러/컵 -->
+                        <rect x="148" y="60" width="14" height="20" fill="#555" rx="3"/>
+                        <rect x="149" y="58" width="12" height="4" fill="#666" rx="2"/>
+                        <rect x="150" y="62" width="10" height="2" fill="rgba(255,255,255,0.1)" rx="1"/>
+                        <!-- 스탠드 조명 -->
+                        <line x1="155" y1="78" x2="155" y2="30" stroke="#444" stroke-width="2"/>
+                        <ellipse cx="155" cy="30" rx="12" ry="5" fill="#555"/>
+                        <ellipse cx="155" cy="30" rx="10" ry="4" fill="#FEE500" opacity="0.3"/>
+                        <!-- 조명 효과 -->
+                        <ellipse cx="140" cy="65" rx="30" ry="15" fill="rgba(254,229,0,0.04)"/>
+                        <!-- 시계 -->
+                        <circle cx="22" cy="22" r="10" fill="#222" stroke="#444" stroke-width="1"/>
+                        <circle cx="22" cy="22" r="8" fill="#1a1a1a"/>
+                        <text x="22" y="25" font-size="5" fill="rgba(255,255,255,0.7)" text-anchor="middle">11:38</text>
+                        <!-- 날짜 워터마크 -->
+                        <text x="170" y="115" font-size="6" fill="rgba(255,255,255,0.5)" text-anchor="end">2026.03.20</text>
+                      </svg>
+                    </div>
+                    내일 공부 세팅 완료!<br>토익 RC 유닛4 준비했어요<small>오후 11:38</small>
+                  </div>
+                </div>
+                <div class="bp-row"><div class="bp-av">이</div><div class="bp-b">✅ 확인했습니다!<br>내일 아침도 화이팅 🌟<small>오후 11:39</small></div></div>
+            </div>
+            <div class="bp-bottom"><div class="bp-input-bar">메시지 입력...</div><div class="bp-send-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-step-sticky" data-index="2">
+        <!-- 왼쪽: 번호 + 텍스트 -->
+        <div class="tls-left">
+          <div class="tls-top">
+            <div class="tl-num gold-n">03</div>
+            <div class="tls-info">
+              <div class="tl-trigger-label">Step 03</div>
+              <h3 class="tls-title">기상 후 — Sleep Cycle 인증</h3>
+            </div>
+          </div>
+          <p class="tls-desc">기상 후 Sleep Cycle 결과 화면을 캡처해서 보내드립니다. 수면 시간과 기상 시간이 기록된 화면 하나면 됩니다. 수면 7시간 미만 시 의사결정 능력이 40% 저하됩니다.</p>
+          <span class="tl-sci">Matthew Walker, Why We Sleep (2017)</span>
+        </div>
+        <!-- 오른쪽: 폰 목업 -->
+        <div class="tls-right">
+          <div class="big-phone">
+            <div class="bp-status"><span class="bp-st-time">6:05 AM</span><span class="bp-st-icons">●●● ▲ 🔋</span></div>
+            <div class="bp-head"><div class="bp-app-ic">💬</div><div><div class="bp-app-name">이루다 매니저</div><div class="bp-app-sub">온라인</div></div></div>
+            <div class="bp-chat">
+              <div class="bp-row r">
+                <div class="bp-b s">
+                  <!-- 수면앱 캡처 사진 느낌 SVG -->
+                  <div style="width:175px;height:115px;border-radius:4px;overflow:hidden;margin-bottom:6px;">
+                    <svg viewBox="0 0 175 115" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+                      <!-- 배경 -->
+                      <rect width="175" height="115" fill="#0d0d1a"/>
+                      <!-- 앱 상단바 -->
+                      <rect width="175" height="20" fill="#111122"/>
+                      <text x="87" y="13" font-size="7" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-family="sans-serif">수면 리포트</text>
+                      <!-- 수면 호 그래프 -->
+                      <path d="M20 80 Q87 20 155 80" fill="none" stroke="rgba(100,149,237,0.25)" stroke-width="18"/>
+                      <path d="M20 80 Q87 20 155 80" fill="none" stroke="#6495ED" stroke-width="2.5" stroke-dasharray="none"/>
+                      <!-- 수면 단계 표시 -->
+                      <rect x="20" y="85" width="135" height="4" fill="#1a1a3a" rx="2"/>
+                      <rect x="20" y="85" width="55" height="4" fill="#2244aa" rx="2"/>
+                      <rect x="75" y="85" width="45" height="4" fill="#4466cc" rx="2"/>
+                      <rect x="120" y="85" width="35" height="4" fill="#6688ee" rx="2"/>
+                      <!-- 수면 시간 -->
+                      <text x="87" y="58" font-size="18" font-weight="bold" fill="white" text-anchor="middle" font-family="sans-serif">6h 12m</text>
+                      <text x="87" y="70" font-size="7" fill="rgba(255,255,255,0.45)" text-anchor="middle" font-family="sans-serif">수면 시간</text>
+                      <!-- 취침/기상 -->
+                      <text x="22" y="100" font-size="6" fill="rgba(255,255,255,0.4)" font-family="sans-serif">취침 11:48</text>
+                      <text x="153" y="100" font-size="6" fill="rgba(255,255,255,0.4)" text-anchor="end" font-family="sans-serif">기상 6:00</text>
+                      <!-- 날짜 -->
+                      <text x="87" y="111" font-size="5.5" fill="rgba(255,255,255,0.3)" text-anchor="middle" font-family="sans-serif">2026.03.20</text>
+                    </svg>
+                  </div>
+                  기상 완료! 수면 인증합니다 😊<small>오전 6:05</small>
+                </div>
+              </div>
+              <div class="bp-row"><div class="bp-av">이</div><div class="bp-b">✅ 확인! 6시간 12분 잘 주무셨네요 🌿<small>오전 6:06</small></div></div>
+            </div>
+            <div class="bp-bottom"><div class="bp-input-bar">메시지 입력...</div><div class="bp-send-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-step-sticky" data-index="3">
+        <!-- 왼쪽: 번호 + 텍스트 -->
+        <div class="tls-left">
+          <div class="tls-top">
+            <div class="tl-num">04</div>
+            <div class="tls-info">
+              <div class="tl-trigger-label">Step 04</div>
+              <h3 class="tls-title">공부 시작 — 카톡 한 줄</h3>
+            </div>
+          </div>
+          <p class="tls-desc">사진 인증 없이 "공부 시작하겠습니다" 한 줄이면 됩니다. 누군가에게 선언하는 것만으로도 실행률이 높아집니다. 작은 약속이 하루를 만듭니다.</p>
+          <span class="tl-sci">사회적 약속 효과 (Implementation Intention Theory)</span>
+        </div>
+        <!-- 오른쪽: 폰 목업 -->
+        <div class="tls-right">
+          <div class="big-phone">
+            <div class="bp-status"><span class="bp-st-time">6:07 AM</span><span class="bp-st-icons">●●● ▲ 🔋</span></div>
+            <div class="bp-head"><div class="bp-app-ic">💬</div><div><div class="bp-app-name">이루다 매니저</div><div class="bp-app-sub">온라인</div></div></div>
+            <div class="bp-chat">
+              <div class="bp-row"><div class="bp-av">이</div><div class="bp-b">Sleep Cycle 확인했어요! 🌿<br>이제 공부 시작할 준비 됐나요?<small>오전 6:06</small></div></div>
+              <div class="bp-row r">
+                <div class="bp-b s">공부 시작하겠습니다! 💪<small>오전 6:08</small></div>
+              </div>
+              <div class="bp-row"><div class="bp-av">이</div><div class="bp-b">👏 좋아요! 오늘도 화이팅!<br>타임랩스 남겨주세요 🎬<small>오전 6:08</small></div></div>
+            </div>
+            <div class="bp-bottom"><div class="bp-input-bar">메시지 입력...</div><div class="bp-send-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-step-sticky" data-index="4">
+        <!-- 왼쪽: 번호 + 텍스트 -->
+        <div class="tls-left">
+          <div class="tls-top">
+            <div class="tl-num">05</div>
+            <div class="tls-info">
+              <div class="tl-trigger-label">Step 05</div>
+              <h3 class="tls-title">공부 — 타임랩스 인증</h3>
+            </div>
+          </div>
+          <p class="tls-desc">얼굴이 나오지 않아도 됩니다. 각도를 조정해 공부하는 모습과 공부 시간 타이머가 보이도록 촬영해주세요. 실제로 집중한 시간만 인정됩니다.</p>
+          <span class="tl-sci">타이머 + 날짜 동시 노출 필수 — 주작 불가 설계</span>
+        </div>
+        <!-- 오른쪽: 폰 목업 -->
+        <div class="tls-right">
+          <div class="big-phone">
+            <div class="bp-status"><span class="bp-st-time">7:10 AM</span><span class="bp-st-icons">●●● ▲ 🔋</span></div>
+            <div class="bp-head"><div class="bp-app-ic">💬</div><div><div class="bp-app-name">이루다 매니저</div><div class="bp-app-sub">온라인</div></div></div>
+            <div class="bp-chat">
+              <div class="bp-row r">
+                <div class="bp-b s">
+                  <!-- 영상 썸네일 느낌 -->
+                  <div style="width:175px;height:115px;border-radius:4px;overflow:hidden;margin-bottom:6px;position:relative;">
+                    <svg viewBox="0 0 175 115" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+                      <!-- 배경 -->
+                      <rect width="175" height="115" fill="#111"/>
+                      <!-- 책상 위 공부 장면 (위에서 살짝 비스듬한 각도) -->
+                      <!-- 책상 표면 -->
+                      <rect x="0" y="50" width="175" height="65" fill="#2a1e0e"/>
+                      <!-- 노트 -->
+                      <rect x="15" y="48" width="85" height="60" fill="#f5f0e8" rx="2" transform="rotate(-3 57 78)"/>
+                      <rect x="17" y="52" width="79" height="2" fill="rgba(42,92,53,0.15)" rx="1" transform="rotate(-3 57 78)"/>
+                      <rect x="17" y="58" width="79" height="2" fill="rgba(42,92,53,0.15)" rx="1" transform="rotate(-3 57 78)"/>
+                      <rect x="17" y="64" width="60" height="2" fill="rgba(42,92,53,0.15)" rx="1" transform="rotate(-3 57 78)"/>
+                      <rect x="17" y="70" width="70" height="2" fill="rgba(42,92,53,0.15)" rx="1" transform="rotate(-3 57 78)"/>
+                      <rect x="17" y="76" width="55" height="2" fill="rgba(42,92,53,0.15)" rx="1" transform="rotate(-3 57 78)"/>
+                      <!-- 펜 -->
+                      <rect x="95" y="72" width="3" height="28" fill="#2A5C35" rx="1" transform="rotate(20 97 86)"/>
+                      <!-- 손 (손목만) -->
+                      <ellipse cx="78" cy="98" rx="12" ry="7" fill="#c8a882" opacity="0.7"/>
+                      <!-- 타이머 앱 (우측 상단) -->
+                      <rect x="115" y="48" width="52" height="38" fill="#1a1a2e" rx="6"/>
+                      <rect x="117" y="50" width="48" height="34" fill="#0d0d1f" rx="5"/>
+                      <!-- 타이머 숫자 -->
+                      <text x="141" y="68" font-size="14" font-weight="bold" fill="#C9A96E" text-anchor="middle" font-family="monospace">40:00</text>
+                      <text x="141" y="77" font-size="5" fill="rgba(255,255,255,0.4)" text-anchor="middle" font-family="sans-serif">FOCUS TIMER</text>
+                      <!-- 타이머 원형 테두리 -->
+                      <circle cx="141" cy="64" r="15" fill="none" stroke="rgba(201,169,110,0.3)" stroke-width="1.5"/>
+                      <!-- 재생 아이콘 (영상 느낌) -->
+                      <circle cx="87" cy="30" r="14" fill="rgba(0,0,0,0.6)"/>
+                      <polygon points="83,24 83,36 97,30" fill="white" opacity="0.9"/>
+                      <!-- 날짜/시간 타임스탬프 -->
+                      <rect x="0" y="98" width="175" height="17" fill="rgba(0,0,0,0.6)"/>
+                      <text x="8" y="110" font-size="7.5" fill="rgba(255,255,255,0.9)" font-family="monospace" font-weight="bold">2026.03.20  06:07–07:10</text>
+                    </svg>
+                  </div>
+                  타임랩스 제출 · 40분<small>오전 7:10</small>
+                </div>
+              </div>
+              <div class="bp-row"><div class="bp-av">이</div><div class="bp-b">완료 확인! 집중 잘 하셨네요 🔥<small>오전 7:11</small></div></div>
+            </div>
+            <div class="bp-bottom"><div class="bp-input-bar">메시지 입력...</div><div class="bp-send-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-step-sticky" data-index="5">
+        <!-- 왼쪽: 번호 + 텍스트 -->
+        <div class="tls-left">
+          <div class="tls-top">
+            <div class="tl-num gold-n">06</div>
+            <div class="tls-info">
+              <div class="tl-trigger-label">Step 06</div>
+              <h3 class="tls-title">마감 — 공부 기록 제출</h3>
+            </div>
+          </div>
+          <p class="tls-desc">매니저가 먼저 물어봅니다. 출근길에 가볍게 답장하면 됩니다. 길게 쓰지 않아도 돼요. 기록이 쌓일수록 내가 달라지고 있다는 게 보입니다.</p>
+          <span class="tl-sci">완수 시 +500원 적립 — 보상 도파민 활성화</span>
+        </div>
+        <!-- 오른쪽: 폰 목업 -->
+        <div class="tls-right">
+          <div class="big-phone">
+            <div class="bp-status"><span class="bp-st-time">8:10 AM</span><span class="bp-st-icons">●●● ▲ 🔋</span></div>
+            <div class="bp-head"><div class="bp-app-ic">💬</div><div><div class="bp-app-name">이루다 매니저</div><div class="bp-app-sub">온라인</div></div></div>
+            <div class="bp-chat">
+              <div class="bp-row">
+                <div class="bp-av">이</div>
+                <div class="bp-b">오늘은 무슨 공부를 하셨나요? 😊<small>오전 8:10</small></div>
+              </div>
+              <div class="bp-row">
+                <div class="bp-av">이</div>
+                <div class="bp-b">그리고 내일은 어떤 공부를 할 예정인가요?<small>오전 8:10</small></div>
+              </div>
+              <div class="bp-row r">
+                <div class="bp-b s">오늘: 토익 RC 유닛3 완료<br>내일: RC 유닛4 + 단어 50개<small>오전 8:22</small></div>
+              </div>
+              <div class="bp-row">
+                <div class="bp-av">이</div>
+                <div class="bp-b">🌟 수고하셨어요!<br>+500원 적립 💰 누적 3,500원<small>오전 8:23</small></div>
+              </div>
+            </div>
+            <div class="bp-bottom"><div class="bp-input-bar">메시지 입력...</div><div class="bp-send-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-step-sticky" data-index="6">
+        <!-- 왼쪽: 번호 + 텍스트 -->
+        <div class="tls-left">
+          <div class="tls-top">
+            <div class="tl-num">07</div>
+            <div class="tls-info">
+              <div class="tl-trigger-label">Step 07</div>
+              <h3 class="tls-title">지식 아티클 발송</h3>
+            </div>
+          </div>
+          <p class="tls-desc">매일 그날의 지식 아티클을 발송합니다. 왜 미라클모닝을 해야 하는지, 습관은 어떻게 만들어지는지 — 배경 지식이 쌓이면 포기하기 어려워집니다. 아는 만큼 지속됩니다.</p>
+          <span class="tl-sci">자기결정이론 — 이유를 아는 사람은 흔들리지 않습니다</span>
+        </div>
+        <!-- 오른쪽: 폰 목업 -->
+        <div class="tls-right">
+          <div class="big-phone">
+            <div class="bp-status"><span class="bp-st-time">9:30 PM</span><span class="bp-st-icons">●●● ▲ 🔋</span></div>
+            <div class="bp-head"><div class="bp-app-ic">💬</div><div><div class="bp-app-name">이루다 매니저</div><div class="bp-app-sub">온라인</div></div></div>
+            <div class="bp-chat">
+              <div class="bp-row">
+                <div class="bp-av">이</div>
+                <div class="bp-b">오늘도 수고 많으셨어요 🌿<br>오늘의 지식 아티클 보내드릴게요!<small>오후 9:30</small></div>
+              </div>
+              <div class="bp-row">
+                <div class="bp-av">이</div>
+                <div class="bp-b" style="padding:0;overflow:hidden;background:transparent;border:none;">
+                  <div style="width:175px;border-radius:4px;overflow:hidden;">
+                    <svg viewBox="0 0 175 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+                      <!-- 배경: 크림 -->
+                      <rect width="175" height="240" fill="#F5F0E8"/>
+                      <!-- 시리즈 태그 -->
+                      <text x="14" y="20" font-size="6.5" fill="#4A8C5C" font-family="sans-serif" font-weight="700" letter-spacing="1">DAY 1 · 03 / 08</text>
+                      <!-- 제목 -->
+                      <text x="14" y="38" font-size="11.5" fill="#1A3320" font-family="sans-serif" font-weight="900">의지력은</text>
+                      <text x="14" y="52" font-size="11.5" fill="#2A5C35" font-family="sans-serif" font-weight="900">소모되는 자원</text>
+                      <text x="116" y="52" font-size="11.5" fill="#1A3320" font-family="sans-serif" font-weight="900">입니다</text>
+                      <!-- 설명 -->
+                      <text x="14" y="65" font-size="6.5" fill="#4a5a4e" font-family="sans-serif">아침이 가장 높고, 시간이 지날수록 낮아집니다.</text>
+                      <!-- 그래프 영역 -->
+                      <line x1="22" y1="72" x2="22" y2="118" stroke="#d4ccc0" stroke-width="0.8"/>
+                      <line x1="22" y1="118" x2="161" y2="118" stroke="#d4ccc0" stroke-width="0.8"/>
+                      <line x1="22" y1="84" x2="161" y2="84" stroke="#d4ccc0" stroke-width="0.4" stroke-dasharray="2,2"/>
+                      <line x1="22" y1="101" x2="161" y2="101" stroke="#d4ccc0" stroke-width="0.4" stroke-dasharray="2,2"/>
+                      <!-- 그린 채움 -->
+                      <path d="M22,75 C42,76 58,83 74,94 L74,118 L22,118 Z" fill="rgba(42,92,53,.1)"/>
+                      <!-- 곡선 -->
+                      <path d="M22,75 C42,76 58,84 74,94 C90,104 108,110 126,113 C140,115 152,116 161,117" fill="none" stroke="#2A5C35" stroke-width="1.8" stroke-linecap="round"/>
+                      <!-- 시작점 -->
+                      <circle cx="22" cy="75" r="2.5" fill="#2A5C35"/>
+                      <text x="26" y="73" font-size="5.5" fill="#2A5C35" font-family="sans-serif" font-weight="700">지금 이 시간 ↑</text>
+                      <!-- X축 레이블 -->
+                      <text x="40" y="127" font-size="5.5" fill="#9aa89e" font-family="sans-serif" text-anchor="middle">아침</text>
+                      <text x="91" y="127" font-size="5.5" fill="#9aa89e" font-family="sans-serif" text-anchor="middle">점심</text>
+                      <text x="148" y="127" font-size="5.5" fill="#9aa89e" font-family="sans-serif" text-anchor="middle">저녁</text>
+                      <!-- 키워드 뱃지 3개 -->
+                      <rect x="14" y="132" width="40" height="12" rx="3" fill="rgba(42,92,53,.09)"/>
+                      <text x="34" y="141" font-size="5.5" fill="#2A5C35" font-family="sans-serif" font-weight="700" text-anchor="middle">결정 피로</text>
+                      <rect x="58" y="132" width="40" height="12" rx="3" fill="rgba(42,92,53,.09)"/>
+                      <text x="78" y="141" font-size="5.5" fill="#2A5C35" font-family="sans-serif" font-weight="700" text-anchor="middle">에너지 고갈</text>
+                      <rect x="102" y="132" width="40" height="12" rx="3" fill="rgba(42,92,53,.09)"/>
+                      <text x="122" y="141" font-size="5.5" fill="#2A5C35" font-family="sans-serif" font-weight="700" text-anchor="middle">감정 소모</text>
+                      <!-- 출처 1 -->
+                      <rect x="14" y="149" width="147" height="19" rx="3" fill="#fff"/>
+                      <rect x="14" y="149" width="2.5" height="19" rx="1" fill="#2A5C35"/>
+                      <text x="20" y="158" font-size="5.5" fill="#2A5C35" font-family="sans-serif" font-weight="700">Baumeister et al. (1998)</text>
+                      <text x="20" y="165" font-size="5" fill="#4a5a4e" font-family="sans-serif">의지력은 쓸수록 고갈된다 — JPSP</text>
+                      <!-- 출처 2 -->
+                      <rect x="14" y="172" width="147" height="19" rx="3" fill="#fff"/>
+                      <rect x="14" y="172" width="2.5" height="19" rx="1" fill="#2A5C35"/>
+                      <text x="20" y="181" font-size="5.5" fill="#2A5C35" font-family="sans-serif" font-weight="700">Danziger et al. (2011)</text>
+                      <text x="20" y="188" font-size="5" fill="#4a5a4e" font-family="sans-serif">판사 1,100건: 오전 65% → 오후 5% — PNAS</text>
+                      <!-- 브랜드 -->
+                      <text x="161" y="234" font-size="5" fill="rgba(26,51,32,.2)" text-anchor="end" font-family="sans-serif">이루다 미라클모닝</text>
+                    </svg>
+                  </div>
+                  <small style="display:block;padding:6px 12px;background:#232323;font-size:10px;color:rgba(255,255,255,0.4);">오후 9:30</small>
+                </div>
+              </div>
+            </div>
+            <div class="bp-bottom"><div class="bp-input-bar">메시지 입력...</div><div class="bp-send-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></div></div>
+          </div>
+        </div>
+      </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ===== 4 WEEKS + WEEKLY (통합) ===== -->
+<section class="sec weeks-sec">
+  <div class="sec-inner">
+
+    <!-- 헤더 -->
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;">
+      <div>
+        <span class="eyebrow">4주 커리큘럼</span>
+        <h2 class="sec-title">4주 후, 매일 아침 1시간<br>공부하는 사람이 됩니다.</h2>
+      </div>
+      <div style="font-size:13px;color:var(--text-light);text-align:right;line-height:1.7;">처음부터 1시간은 어렵습니다.<br>뇌가 부담을 느끼지 않는 속도로<br>자연스럽게 1시간에 도달합니다.</div>
+    </div>
+
+    <!-- 4주 그리드 (텍스트 교체) -->
+    <div class="weeks-grid">
+      <div class="wk w1">
+        <div class="wk-n">1주차</div>
+        <div class="wk-time">20</div>
+        <div class="wk-unit">분 · 공부 시간</div>
+        <div class="wk-topic-label">아티클 주제</div>
+        <div class="wk-topic">인식 전환</div>
+        <div class="wk-theme">왜 미라클모닝을<br>해야 하는가</div>
+        <div class="wk-bar"></div>
+      </div>
+      <div class="wk w2">
+        <div class="wk-n">2주차</div>
+        <div class="wk-time">35</div>
+        <div class="wk-unit">분 · 공부 시간</div>
+        <div class="wk-topic-label">아티클 주제</div>
+        <div class="wk-topic">습관 설계</div>
+        <div class="wk-theme">어떻게 습관을<br>만드는가</div>
+        <div class="wk-bar"></div>
+      </div>
+      <div class="wk w3">
+        <div class="wk-n">3주차</div>
+        <div class="wk-time">50</div>
+        <div class="wk-unit">분 · 공부 시간</div>
+        <div class="wk-topic-label">아티클 주제</div>
+        <div class="wk-topic">실행 시스템</div>
+        <div class="wk-theme">어떻게<br>유지하는가</div>
+        <div class="wk-bar"></div>
+      </div>
+      <div class="wk w4">
+        <div class="wk-n">4주차</div>
+        <div class="wk-time">1hr</div>
+        <div class="wk-unit">목표 달성!</div>
+        <div class="wk-topic-label">아티클 주제</div>
+        <div class="wk-topic">루틴 완성</div>
+        <div class="wk-theme">내 것으로<br>만드는 법</div>
+        <div class="wk-bar"></div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:18px;">
+      <span style="font-size:11.5px;color:var(--text-light);background:rgba(42,92,53,.06);padding:6px 18px;border-radius:2px;">※ 커리큘럼은 추후 변동이 있을 수 있습니다</span>
+    </div>
+
+    <!-- 상세 커리큘럼 아코디언 -->
+    <div style="margin-top:64px;">
+      <div style="text-align:center;margin-bottom:36px;">
+        <span class="eyebrow">상세 커리큘럼</span>
+        <h3 style="font-family:'Noto Serif KR',serif;font-size:clamp(22px,2.5vw,32px);font-weight:900;color:var(--green-deep);letter-spacing:-1px;margin-top:8px;margin-bottom:6px;">20일 동안 매일 이걸 배웁니다</h3>
+        <p style="font-size:13px;color:var(--text-light);">주차를 클릭하면 세부 내용을 볼 수 있어요</p>
+      </div>
+
+      <div class="acc-wrap">
+
+        <!-- 1주차 -->
+        <div class="acc-item" id="acc1">
+          <button class="acc-head" onclick="accToggle(1)">
+            <div class="acc-head-left">
+              <span class="acc-week w1">1주차</span>
+              <div>
+                <div class="acc-topic">인식 전환</div>
+                <div class="acc-sub">왜 미라클모닝을 해야 하는가 · 20분</div>
+              </div>
+            </div>
+            <svg class="acc-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="acc-body">
+            <div class="acc-days">
+              <div class="acc-day"><span class="acc-day-n">Day 1</span><span class="acc-day-t">의지 vs 시스템</span><span class="acc-day-d">아침이 바뀌지 않는 진짜 이유</span></div>
+              <div class="acc-day"><span class="acc-day-n">Day 2</span><span class="acc-day-t">왜 아침이어야 하는가</span><span class="acc-day-d">의지력이 가장 높은 시간</span></div>
+              <div class="acc-day"><span class="acc-day-n">Day 3</span><span class="acc-day-t">성공한 사람들의 공통점</span><span class="acc-day-d">아침 루틴의 과학</span></div>
+              <div class="acc-day"><span class="acc-day-n">Day 4</span><span class="acc-day-t">아침을 망치는 행동들</span><span class="acc-day-d">전날 밤이 아침을 결정한다</span></div>
+              <div class="acc-day"><span class="acc-day-n">Day 5</span><span class="acc-day-t">단 5분의 힘</span><span class="acc-day-d">작게 시작하는 것이 전부다</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2주차 -->
+        <div class="acc-item" id="acc2">
+          <button class="acc-head" onclick="accToggle(2)">
+            <div class="acc-head-left">
+              <span class="acc-week w2">2주차</span>
+              <div>
+                <div class="acc-topic">습관 설계</div>
+                <div class="acc-sub">어떻게 습관을 만드는가 · 35분</div>
+              </div>
+            </div>
+            <svg class="acc-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="acc-body">
+            <div class="acc-days">
+              <div class="acc-day"><span class="acc-day-n">Day 6</span><span class="acc-day-t">습관 루프의 원리</span><span class="acc-day-d">습관은 어떻게 만들어지는가</span></div>
+              <div class="acc-day"><span class="acc-day-n">Day 7</span><span class="acc-day-t">시작을 쉽게 만드는 법</span><span class="acc-day-d">트리거 설계</span></div>
+              <div class="acc-day"><span class="acc-day-n">Day 8</span><span class="acc-day-t">마찰을 줄여라</span><span class="acc-day-d">환경이 행동을 만든다</span></div>
+              <div class="acc-day"><span class="acc-day-n">Day 9</span><span class="acc-day-t">보상이 반복을 만든다</span><span class="acc-day-d">도파민과 습관</span></div>
+              <div class="acc-day"><span class="acc-day-n">Day 10</span><span class="acc-day-t">2분 법칙</span><span class="acc-day-d">어떤 습관도 시작할 수 있는 방법</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3주차 -->
+        <div class="acc-item" id="acc3">
+          <button class="acc-head" onclick="accToggle(3)">
+            <div class="acc-head-left">
+              <span class="acc-week w3">3주차</span>
+              <div>
+                <div class="acc-topic">실행 시스템</div>
+                <div class="acc-sub">어떻게 유지하는가 · 50분</div>
+              </div>
+            </div>
+            <svg class="acc-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="acc-body">
+            <div class="acc-days">
+              <div class="acc-day"><span class="acc-day-n">Day 11</span><span class="acc-day-t">목표가 아니라 시스템</span><span class="acc-day-d">결과보다 과정을 설계하라</span></div>
+              <div class="acc-day"><span class="acc-day-n">Day 12</span><span class="acc-day-t">시간 블로킹</span><span class="acc-day-d">아침 1시간을 지배하는 방법</span></div>
+              <div class="acc-day"><span class="acc-day-n">Day 13</span><span class="acc-day-t">무너지지 않는 구조</span><span class="acc-day-d">대체 루틴 설계</span></div>
+              <div class="acc-day"><span class="acc-day-n">Day 14</span><span class="acc-day-t">기록이 루틴을 만든다</span><span class="acc-day-d">추적의 힘</span></div>
+              <div class="acc-day"><span class="acc-day-n">Day 15</span><span class="acc-day-t">나쁜 날을 활용하는 법</span><span class="acc-day-d">실패를 데이터로 쓰는 방법</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4주차 -->
+        <div class="acc-item" id="acc4">
+          <button class="acc-head" onclick="accToggle(4)">
+            <div class="acc-head-left">
+              <span class="acc-week w4g">4주차</span>
+              <div>
+                <div class="acc-topic">루틴 완성</div>
+                <div class="acc-sub">내 것으로 만드는 법 · 1시간</div>
+              </div>
+            </div>
+            <svg class="acc-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="acc-body">
+            <div class="acc-days">
+              <div class="acc-day"><span class="acc-day-n">Day 16</span><span class="acc-day-t">나만의 아침 루틴 설계</span><span class="acc-day-d">4주를 통합하는 방법</span></div>
+              <div class="acc-day"><span class="acc-day-n">Day 17</span><span class="acc-day-t">꾸준함의 원리</span><span class="acc-day-d">일관성이 실력이 된다</span></div>
+              <div class="acc-day"><span class="acc-day-n">Day 18</span><span class="acc-day-t">루틴이 정체성이 된다</span><span class="acc-day-d">나는 아침형 인간이다</span></div>
+              <div class="acc-day"><span class="acc-day-n">Day 19</span><span class="acc-day-t">4주 이후를 설계하라</span><span class="acc-day-d">혼자서도 지속하는 구조</span></div>
+              <div class="acc-day acc-day-last"><span class="acc-day-n">Day 20</span><span class="acc-day-t">🏆 완주</span><span class="acc-day-d">당신이 증명한 것들</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+/* ACCORDION */
+.acc-wrap { display:flex; flex-direction:column; gap:10px; max-width:900px; margin:0 auto; }
+.acc-item { border:1px solid var(--border); border-radius:4px; overflow:hidden; background:var(--white); transition:box-shadow .2s; }
+.acc-item.open { box-shadow:0 4px 20px rgba(42,92,53,.1); }
+.acc-head {
+  width:100%; background:none; border:none; cursor:pointer;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:22px 28px; text-align:left; transition:background .2s;
+}
+.acc-head:hover { background:rgba(42,92,53,.03); }
+.acc-item.open .acc-head { background:rgba(42,92,53,.04); }
+.acc-head-left { display:flex; align-items:center; gap:20px; }
+.acc-week {
+  font-family:'Noto Serif KR',serif; font-size:13px; font-weight:900;
+  padding:6px 14px; border-radius:2px; flex-shrink:0; letter-spacing:.3px;
+}
+.acc-week.w1 { background:rgba(42,92,53,.1); color:var(--green-deep); }
+.acc-week.w2 { background:rgba(74,140,92,.12); color:var(--green-mid); }
+.acc-week.w3 { background:rgba(201,169,110,.15); color:#8a6830; }
+.acc-week.w4g { background:var(--green-deep); color:var(--cream); }
+.acc-topic { font-family:'Noto Serif KR',serif; font-size:17px; font-weight:900; color:var(--text-dark); letter-spacing:-.3px; margin-bottom:3px; }
+.acc-sub { font-size:12px; color:var(--text-light); font-weight:400; }
+.acc-arrow { color:var(--text-light); transition:transform .3s; flex-shrink:0; }
+.acc-item.open .acc-arrow { transform:rotate(180deg); color:var(--green-deep); }
+.acc-body { max-height:0; overflow:hidden; transition:max-height .35s cubic-bezier(.4,0,.2,1); }
+.acc-item.open .acc-body { max-height:400px; }
+.acc-days { padding:0 28px 20px; display:flex; flex-direction:column; gap:0; }
+.acc-day {
+  display:flex; align-items:baseline; gap:16px;
+  padding:12px 0; border-bottom:1px solid rgba(42,92,53,.06);
+}
+.acc-day-last { border-bottom:none; }
+.acc-day-n { font-size:11px; font-weight:700; color:var(--text-light); letter-spacing:.5px; flex-shrink:0; width:44px; }
+.acc-day-t { font-size:14px; font-weight:600; color:var(--text-dark); flex:1; letter-spacing:-.2px; }
+.acc-day-d { font-size:12px; color:var(--text-light); flex-shrink:0; }
+/* wk-topic CSS */
+.wk-topic-label { font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-top:14px;margin-bottom:3px;opacity:.8; }
+.wk-topic { font-family:'Noto Serif KR',serif;font-size:18px;font-weight:900;color:var(--green-deep);letter-spacing:-.3px;margin-bottom:6px; }
+</style>
+
+<script>
+function accToggle(n){
+  var el=document.getElementById('acc'+n);
+  var isOpen=el.classList.contains('open');
+  document.querySelectorAll('.acc-item').forEach(function(i){i.classList.remove('open');});
+  if(!isOpen) el.classList.add('open');
+}
+</script>
+
+
+<!-- ===== 지식 아티클 + 주간 운영 방식 (2단, 높이 맞춤) ===== -->
+<section class="sec" style="background:var(--white);padding:120px 60px;">
+  <div class="sec-inner">
+
+    <!-- 2x2 그리드: 헤더행 / 콘텐츠행 분리 → 카드와 스케줄 상하단 정렬 -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;column-gap:80px;row-gap:12px;">
+
+      <!-- 헤더 좌 -->
+      <div>
+        <span class="eyebrow">지식 아티클 · Day 1 예시</span>
+        <h3 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2vw,28px);font-weight:900;color:var(--green-deep);letter-spacing:-0.8px;line-height:1.35;margin-bottom:12px;margin-top:8px;">매일 아침, 이런 지식을<br>함께 전달합니다</h3>
+        <p style="font-size:13.5px;color:var(--text-light);line-height:1.8;margin-bottom:0;">왜 해야 하는지 알면 포기하기 어려워집니다.</p>
+      </div>
+
+      <!-- 헤더 우 -->
+      <div>
+        <span class="eyebrow">주간 운영 방식</span>
+        <h3 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2vw,28px);font-weight:900;color:var(--green-deep);letter-spacing:-0.8px;line-height:1.35;margin-bottom:12px;margin-top:8px;">매일, 이렇게<br>함께 진행합니다</h3>
+        <p style="font-size:13.5px;color:var(--text-light);line-height:1.8;margin-bottom:0;">월~금은 7단계 루틴 전체, 주말은 가볍게.</p>
+      </div>
+
+      <!-- 콘텐츠 좌: 카드뉴스 (nav 아래로 이동 → 카드 상단이 스케줄 상단과 정렬) -->
+      <div style="margin-top:0;" id="cardCol">
+        <div class="kn2-wrap" id="kn2Wrap">
+          <div class="kn2-outer" id="kn2Outer"><div class="kn2-track" id="kn2Track">
+
+            <!-- Card 1 표지 — 0.75×원본 -->
+            <div class="kn2-card" style="background:var(--cream);">
+              <div class="kn2-body" style="justify-content:center;align-items:center;text-align:center;">
+                <!-- series: 0.75×10px=7.5px, mb 0.75×36px=27px -->
+                <div style="font-size:7.5px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:var(--green-deep);opacity:.65;margin-bottom:27px;">이루다 미라클모닝 · DAY 1</div>
+                <div style="display:flex;flex-direction:column;align-items:center;width:270px;">
+                  <!-- word: 0.75×100px=75px -->
+                  <div style="font-family:'Noto Serif KR',serif;font-size:75px;font-weight:900;color:var(--text-dark);letter-spacing:-3px;line-height:1;width:100%;text-align:center;">의지</div>
+                  <!-- vs: padding 0.75×(5px 20px)=4px 15px, margin 0.75×16px=12px -->
+                  <div style="font-size:8px;font-weight:700;letter-spacing:4px;color:var(--green-deep);border:1.5px solid var(--green-deep);border-radius:3px;padding:4px 15px;margin:12px 0;display:inline-block;">VS</div>
+                  <div style="font-family:'Noto Serif KR',serif;font-size:75px;font-weight:900;color:var(--green-deep);letter-spacing:-3px;line-height:1;width:100%;text-align:center;">시스템</div>
+                </div>
+                <!-- divider: 0.75×(30px auto 14px)=22px auto 10px -->
+                <div style="width:27px;height:2px;background:var(--gold);margin:22px auto 10px;"></div>
+                <!-- sub: 0.75×16px=12px -->
+                <div style="font-size:12px;color:var(--text-mid);font-weight:400;letter-spacing:-.3px;margin-bottom:4px;">아침이 바뀌지 않는 진짜 이유</div>
+                <!-- desc: 0.75×12.5px=9.5px -->
+                <div style="font-size:9.5px;color:var(--text-light);line-height:1.7;">왜 다짐은 항상 실패하는가, 그 답이 여기 있습니다</div>
+              </div>
+              <div class="kn2-brand">이루다 미라클모닝</div>
+            </div>
+
+            <!-- Card 2 훅 — padding 0.75×(80 52 60)=60 39 45 -->
+            <div class="kn2-card" style="background:#EDE6D6;">
+              <div class="kn2-tag">01 / 08</div>
+              <div class="kn2-body" style="justify-content:space-between;">
+                <div>
+                  <!-- title: 0.75×40px=30px, mb 0.75×20px=15px -->
+                  <div style="font-family:'Noto Serif KR',serif;font-size:30px;font-weight:900;color:var(--text-dark);line-height:1.3;letter-spacing:-1px;margin-bottom:15px;">당신은 이미<br>여러 번 실패했습니다</div>
+                  <!-- desc: 0.75×16px=12px -->
+                  <div style="font-size:12px;color:var(--text-mid);line-height:2.0;letter-spacing:-.2px;">의지가 부족해서가 아닙니다.<br>준비했고, 다짐했고, 알람도 맞췄습니다.<br>그런데 결과는 매번 같았습니다.</div>
+                </div>
+                <div>
+                  <!-- rule: mb 0.75×22px=16px -->
+                  <div style="width:100%;height:1px;background:rgba(42,92,53,.18);margin-bottom:16px;"></div>
+                  <!-- list gap: 0.75×20px=15px -->
+                  <div style="display:flex;flex-direction:column;gap:15px;">
+                    <!-- it: 0.75×15.5px=11.5px, dot: 0.75×6px=4.5px -->
+                    <div style="display:flex;gap:10px;align-items:flex-start;font-size:11.5px;color:var(--text-mid);line-height:1.85;"><span style="width:4.5px;height:4.5px;border-radius:50%;background:var(--green-deep);flex-shrink:0;margin-top:7px;display:block;"></span><span>알람을 맞춰도 결국 출근 직전에 일어나<br><strong style="color:var(--text-dark);">허겁지겁 하루를 시작하지 않으셨나요?</strong></span></div>
+                    <div style="display:flex;gap:10px;align-items:flex-start;font-size:11.5px;color:var(--text-mid);line-height:1.85;"><span style="width:4.5px;height:4.5px;border-radius:50%;background:var(--green-deep);flex-shrink:0;margin-top:7px;display:block;"></span><span>오늘도, 어제도, 그제도.<br><strong style="color:var(--text-dark);">다짐만 하고 또 실패하지 않으셨나요?</strong></span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="kn2-brand">이루다 미라클모닝</div>
+            </div>
+
+            <!-- Card 3 믿음 깨기 — padding 0.75×(80 52 72)=60 39 54 -->
+            <div class="kn2-card" style="background:#fff;">
+              <div class="kn2-tag">02 / 08</div>
+              <div class="kn2-body" style="padding:60px 39px 54px;justify-content:center;">
+                <!-- small: 0.75×10.5px=8px, mb 0.75×28px=21px -->
+                <div style="font-size:8px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--text-light);margin-bottom:21px;">02 / 08</div>
+                <!-- pre: 0.75×36px=27px -->
+                <div style="font-family:'Noto Serif KR',serif;font-size:27px;font-weight:900;color:var(--text-dark);letter-spacing:-1px;line-height:1.1;margin-bottom:1px;">문제는</div>
+                <!-- main: 0.75×46px=34px, mb 0.75×24px=18px -->
+                <div style="font-family:'Noto Serif KR',serif;font-size:34px;font-weight:900;color:var(--green-deep);letter-spacing:-1.5px;line-height:1.1;margin-bottom:18px;">의지가 아닙니다</div>
+                <!-- divider: 0.75×36px=27px, mb 0.75×24px=18px -->
+                <div style="width:27px;height:2px;background:var(--gold);margin-bottom:18px;"></div>
+                <!-- desc: 0.75×15px=11px, mb 0.75×28px=21px -->
+                <div style="font-size:11px;color:var(--text-mid);line-height:1.9;letter-spacing:-.2px;margin-bottom:21px;">문제는 당신의 의지가 아니라<br>의지에만 기댄 선택이 문제입니다.<br><br>아무리 강한 의지도 하루가 지나면<br>결국 흔들리게 되어 있습니다.</div>
+                <!-- point: 0.75×(10px 13.5px) = 7px br, 10px -->
+                <div style="background:var(--green-deep);color:var(--cream);border-radius:2px;padding:10px 13px;font-size:10px;font-weight:600;letter-spacing:-.2px;line-height:1.5;">의지력은 감정입니다. 결국 사라집니다.</div>
+              </div>
+              <div class="kn2-brand">이루다 미라클모닝</div>
+            </div>
+
+            <!-- Card 4 과학 — padding 0.75×(80 52 60)+gap 0.75×11=8px -->
+            <div class="kn2-card" style="background:var(--cream);">
+              <div class="kn2-tag">03 / 08</div>
+              <div class="kn2-body" style="gap:8px;padding-top:60px;">
+                <!-- title: 0.75×30px=22px -->
+                <div style="font-family:'Noto Serif KR',serif;font-size:22px;font-weight:900;color:var(--text-dark);letter-spacing:-.5px;line-height:1.35;">의지력은 <em style="color:var(--green-deep);font-style:normal;">소모되는 자원</em>입니다</div>
+                <!-- gdesc: 0.75×13.5px=10px -->
+                <div style="font-size:10px;color:var(--text-mid);line-height:1.8;letter-spacing:-.1px;">아래 그래프는 하루 동안 의지력이 어떻게 변하는지 보여줍니다. 아침이 가장 높고, 시간이 지날수록 판단력과 자기통제력은 낮아집니다.</div>
+                <svg viewBox="0 0 436 168" style="width:100%;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="46" y1="14" x2="46" y2="142" stroke="#d4ccc0" stroke-width="1"/><line x1="46" y1="142" x2="426" y2="142" stroke="#d4ccc0" stroke-width="1"/>
+                  <line x1="46" y1="48" x2="426" y2="48" stroke="#d4ccc0" stroke-width=".5" stroke-dasharray="3,4"/><line x1="46" y1="95" x2="426" y2="95" stroke="#d4ccc0" stroke-width=".5" stroke-dasharray="3,4"/>
+                  <text x="8" y="80" fill="#9aa89e" font-size="9" font-family="Pretendard,sans-serif" text-anchor="middle" transform="rotate(-90,8,80)">의지력</text>
+                  <path d="M46,18 C88,20 130,34 172,64 L172,142 L46,142 Z" fill="rgba(42,92,53,.09)"/>
+                  <path d="M46,18 C90,20 134,36 174,64 C214,92 270,112 326,126 C362,134 400,138 426,140" fill="none" stroke="#2A5C35" stroke-width="2.6" stroke-linecap="round"/>
+                  <circle cx="46" cy="18" r="4.5" fill="#2A5C35"/>
+                  <text x="54" y="14" fill="#2A5C35" font-size="9.5" font-family="Pretendard,sans-serif" font-weight="700">지금 이 시간 ↑</text>
+                  <circle cx="426" cy="140" r="3.5" fill="#b0b8b4"/>
+                  <text x="88" y="158" fill="#9aa89e" font-size="9" font-family="Pretendard,sans-serif" text-anchor="middle">아침</text>
+                  <text x="236" y="158" fill="#9aa89e" font-size="9" font-family="Pretendard,sans-serif" text-anchor="middle">점심</text>
+                  <text x="390" y="158" fill="#9aa89e" font-size="9" font-family="Pretendard,sans-serif" text-anchor="middle">저녁</text>
+                </svg>
+                <!-- kw: 0.75×11px=8px, padding 0.75×(7px 4px)=5px 3px -->
+                <div style="display:flex;gap:5px;flex-shrink:0;">
+                  <div style="flex:1;text-align:center;font-size:8px;font-weight:600;color:var(--green-deep);background:rgba(42,92,53,.08);border-radius:4px;padding:5px 3px;">결정 피로</div>
+                  <div style="flex:1;text-align:center;font-size:8px;font-weight:600;color:var(--green-deep);background:rgba(42,92,53,.08);border-radius:4px;padding:5px 3px;">에너지 고갈</div>
+                  <div style="flex:1;text-align:center;font-size:8px;font-weight:600;color:var(--green-deep);background:rgba(42,92,53,.08);border-radius:4px;padding:5px 3px;">감정 소모</div>
+                </div>
+                <!-- ref: 0.75×(10px 12px) = 7.5px 9px, padding 0.75×(10px 12px)=7px 9px -->
+                <div style="display:flex;flex-direction:column;gap:5px;flex-shrink:0;">
+                  <div style="background:#fff;border-left:2px solid var(--green-deep);border-radius:0 2px 2px 0;padding:7px 9px;">
+                    <div style="font-size:8px;font-weight:700;color:var(--green-deep);margin-bottom:2px;">Baumeister et al. (1998)</div>
+                    <div style="font-size:9px;color:var(--text-mid);line-height:1.5;">의지력은 근육처럼 쓸수록 고갈된다</div>
+                    <div style="font-size:7.5px;color:var(--text-light);margin-top:1px;font-style:italic;">Journal of Personality and Social Psychology</div>
+                  </div>
+                  <div style="background:#fff;border-left:2px solid var(--green-deep);border-radius:0 2px 2px 0;padding:7px 9px;">
+                    <div style="font-size:8px;font-weight:700;color:var(--green-deep);margin-bottom:2px;">Danziger et al. (2011)</div>
+                    <div style="font-size:9px;color:var(--text-mid);line-height:1.5;">판사 1,100건: 오전 허가율 65% → 오후 5%대로 급감</div>
+                    <div style="font-size:7.5px;color:var(--text-light);margin-top:1px;font-style:italic;">PNAS — 미국 국립과학원 학술지</div>
+                  </div>
+                </div>
+              </div>
+              <div class="kn2-brand">이루다 미라클모닝</div>
+            </div>
+
+            <!-- Card 5 전환 — padding 0.75×(88 52 68)=66 39 51 -->
+            <div class="kn2-card" style="background:var(--cream);">
+              <div class="kn2-tag">04 / 08</div>
+              <div class="kn2-body" style="padding:66px 39px 51px;justify-content:space-between;">
+                <div>
+                  <!-- title: 0.75×30px=22px, mb 0.75×24px=18px -->
+                  <div style="font-family:'Noto Serif KR',serif;font-size:22px;font-weight:900;color:var(--text-dark);line-height:1.45;letter-spacing:-.8px;margin-bottom:18px;">그렇다면 왜<br>어떤 사람들은<br><em style="color:var(--green-deep);font-style:normal;">매일 아침에 일어날 수 있을까요?</em></div>
+                  <!-- desc: 0.75×15px=11px, mb 0.75×24px=18px -->
+                  <div style="font-size:11px;color:var(--text-mid);line-height:1.9;letter-spacing:-.2px;margin-bottom:18px;">의지가 강해서가 아닙니다.<br>그들에게는 공통점이 있습니다.</div>
+                  <!-- list gap: 0.75×11px=8px, it: 0.75×15px=11px -->
+                  <div style="display:flex;flex-direction:column;gap:8px;">
+                    <div style="display:flex;gap:9px;align-items:center;"><span style="width:4px;height:4px;border-radius:50%;background:var(--green-deep);flex-shrink:0;display:block;"></span><span style="font-size:11px;font-weight:600;color:var(--text-dark);letter-spacing:-.3px;">시스템을 만듭니다</span></div>
+                    <div style="display:flex;gap:9px;align-items:center;"><span style="width:4px;height:4px;border-radius:50%;background:var(--green-deep);flex-shrink:0;display:block;"></span><span style="font-size:11px;font-weight:600;color:var(--text-dark);letter-spacing:-.3px;">루틴을 만듭니다</span></div>
+                    <div style="display:flex;gap:9px;align-items:center;"><span style="width:4px;height:4px;border-radius:50%;background:var(--green-deep);flex-shrink:0;display:block;"></span><span style="font-size:11px;font-weight:600;color:var(--text-dark);letter-spacing:-.3px;">환경을 설계합니다</span></div>
+                    <div style="display:flex;gap:9px;align-items:center;"><span style="width:4px;height:4px;border-radius:50%;background:var(--green-deep);flex-shrink:0;display:block;"></span><span style="font-size:11px;font-weight:600;color:var(--text-dark);letter-spacing:-.3px;">할 수밖에 없도록 만듭니다</span></div>
+                  </div>
+                </div>
+                <!-- arrow: 0.75×38px=28px -->
+                <div style="width:28px;height:28px;border:1.5px solid rgba(42,92,53,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#2A5C35" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19,12 12,19 5,12"/></svg>
+                </div>
+              </div>
+              <div class="kn2-brand">이루다 미라클모닝</div>
+            </div>
+
+            <!-- Card 6 반전 — padding 0.75×(80 52 60)=60 39 45 -->
+            <div class="kn2-card" style="background:#fff;">
+              <div class="kn2-tag">05 / 08</div>
+              <div class="kn2-body" style="justify-content:space-between;">
+                <div>
+                  <!-- title: 0.75×30px=22px, mb 0.75×14px=10px -->
+                  <div style="font-family:'Noto Serif KR',serif;font-size:22px;font-weight:900;color:var(--text-dark);line-height:1.38;letter-spacing:-.6px;margin-bottom:10px;">여러분은 생각보다<br>게으르지 않습니다</div>
+                  <!-- desc: 0.75×15.5px=11.5px -->
+                  <div style="font-size:11.5px;color:var(--text-mid);line-height:1.95;letter-spacing:-.2px;">매일 출근하고, 회의에 나가고,<br>타인과의 약속들을 지켜냅니다.<br>의지가 넘쳐서가 아닙니다.</div>
+                </div>
+                <div>
+                  <!-- num: 0.75×34px=25px, w 0.75×44px=33px, item padding 0.75×18px=13px, gap 0.75×20px=15px -->
+                  <div style="display:flex;flex-direction:column;">
+                    <div style="display:flex;align-items:center;gap:15px;padding:13px 0;border-bottom:1px solid rgba(42,92,53,.1);">
+                      <span style="font-family:'Noto Serif KR',serif;font-size:25px;font-weight:900;color:rgba(42,92,53,.45);flex-shrink:0;width:33px;line-height:1;">01</span>
+                      <!-- it: 0.75×18px=13px -->
+                      <span style="font-size:13px;color:var(--text-dark);font-weight:500;letter-spacing:-.4px;">매일 출근합니다</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:15px;padding:13px 0;border-bottom:1px solid rgba(42,92,53,.1);">
+                      <span style="font-family:'Noto Serif KR',serif;font-size:25px;font-weight:900;color:rgba(42,92,53,.45);flex-shrink:0;width:33px;line-height:1;">02</span>
+                      <span style="font-size:13px;color:var(--text-dark);font-weight:500;letter-spacing:-.4px;">회의에 빠지지 않습니다</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:15px;padding:13px 0;">
+                      <span style="font-family:'Noto Serif KR',serif;font-size:25px;font-weight:900;color:rgba(42,92,53,.45);flex-shrink:0;width:33px;line-height:1;">03</span>
+                      <span style="font-size:13px;color:var(--text-dark);font-weight:500;letter-spacing:-.4px;">약속을 지킵니다</span>
+                    </div>
+                  </div>
+                  <!-- punch-wrap: pt 0.75×20px=15px, mt 0.75×6px=4px, punch: 0.75×19px=14px -->
+                  <div style="padding-top:15px;margin-top:4px;border-top:2px solid var(--green-deep);">
+                    <div style="font-family:'Noto Serif KR',serif;font-size:14px;font-weight:900;color:var(--green-deep);letter-spacing:-.3px;">이 모든 것이 시스템입니다</div>
+                  </div>
+                </div>
+              </div>
+              <div class="kn2-brand">이루다 미라클모닝</div>
+            </div>
+
+            <!-- Card 7 핵심 — padding 0.75×(80 52 60)=60 39 45 -->
+            <div class="kn2-card" style="background:#fff;">
+              <div class="kn2-tag">06 / 08</div>
+              <div class="kn2-body" style="justify-content:space-between;">
+                <div>
+                  <!-- title: 0.75×40px=30px, mb 0.75×26px=19px -->
+                  <div style="font-family:'Noto Serif KR',serif;font-size:30px;font-weight:900;color:var(--text-dark);line-height:1.35;letter-spacing:-1.2px;margin-bottom:19px;">해야만 하는 시스템이<br><em style="color:var(--green-deep);font-style:normal;display:block;">있기 때문입니다</em></div>
+                  <!-- desc: 0.75×16px=12px, lh 2.05 -->
+                  <div style="font-size:12px;color:var(--text-mid);line-height:2.05;letter-spacing:-.2px;">행동을 만드는 건 의지가 아니라 환경입니다.<br>결심을 한다고 해서 변하는 것이 아니라<br>일어날 수밖에 없는 시스템을 설계하고<br>그것을 반복하다 보면 반복이 습관이 됩니다.<br><br>결국 의지가 없어도 몸이 먼저 움직이게 됩니다.</div>
+                </div>
+                <!-- gold: 0.75×17px=12.5px, mb 0.75×16px=12px -->
+                <div style="font-size:12.5px;font-weight:700;color:var(--gold);letter-spacing:.3px;margin-bottom:12px;">환경이 행동을 만듭니다</div>
+              </div>
+              <!-- bar: 0.75×5px=4px -->
+              <div style="position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--green-deep),var(--gold));border-radius:0;"></div>
+              <div class="kn2-brand">이루다 미라클모닝</div>
+            </div>
+
+            <!-- Card 8 마무리 — padding 0.75×(88 52 72)=66 39 54 -->
+            <div class="kn2-card" style="background:var(--green-deep);">
+              <!-- d1: 0.75×(-70px, 210px) = -52px, 157px -->
+              <div style="position:absolute;top:-52px;right:-52px;width:157px;height:157px;border-radius:50%;background:rgba(255,255,255,.04);"></div>
+              <!-- d2: 0.75×(-50px, 160px) = -37px, 120px -->
+              <div style="position:absolute;bottom:-37px;left:-37px;width:120px;height:120px;border-radius:50%;background:rgba(201,169,110,.07);"></div>
+              <div class="kn2-tag" style="color:rgba(245,240,232,.35);">07 / 08</div>
+              <div class="kn2-body" style="padding:66px 39px 54px;justify-content:space-between;">
+                <div>
+                  <!-- title: 0.75×34px=25px, mb 0.75×22px=16px -->
+                  <div style="font-family:'Noto Serif KR',serif;font-size:25px;font-weight:900;color:var(--cream);line-height:1.42;letter-spacing:-.8px;margin-bottom:16px;">아침 기상도<br>같은 방식이어야 합니다</div>
+                  <!-- desc: 0.75×14.5px=10.5px -->
+                  <div style="font-size:10.5px;color:rgba(245,240,232,.72);line-height:1.9;letter-spacing:-.2px;">의지만으로 버티는 아침 기상은 언젠가 무너집니다.<br>중요한 건 '오늘 일어나겠다'는 다짐이 아니라<br>일어날 수밖에 없는 환경을 설계하는 것입니다.<br>시스템이 있는 사람은 작심삼일이 없습니다.</div>
+                </div>
+                <div>
+                  <!-- rule: mb 0.75×18px=13px -->
+                  <div style="width:100%;height:1px;background:rgba(245,240,232,.15);margin-bottom:13px;"></div>
+                  <!-- brand text: 0.75×13px=9.5px, mb 0.75×10px=7px -->
+                  <div style="font-size:9.5px;color:rgba(245,240,232,.5);line-height:1.75;letter-spacing:-.2px;margin-bottom:7px;">이루다는 여러분이 일어날 수밖에 없는<br>시스템을 함께 만들어 드립니다.</div>
+                  <!-- next: 0.75×13px=9.5px -->
+                  <div style="font-size:9.5px;font-weight:600;color:var(--gold);letter-spacing:-.1px;">DAY 2에서 계속됩니다 — 왜 아침이어야 하는가 →</div>
+                </div>
+              </div>
+              <div class="kn2-brand" style="color:rgba(245,240,232,.3);">이루다 미라클모닝</div>
+            </div>
+
+          </div></div>
+          <!-- nav 카드 아래 -->
+          <div class="kn2-nav">
+            <div class="kn2-dots" id="kn2Dots"></div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <button class="kn2-btn" id="kn2Prev" onclick="kn2Go(-1)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 5 5 12 12 19"/></svg></button>
+              <span class="kn2-counter" id="kn2Counter">1 / 8</span>
+              <button class="kn2-btn" id="kn2Next" onclick="kn2Go(1)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 19 19 12 12 5"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 콘텐츠 우: 주간 운영 방식 -->
+      <div id="scheduleCol" style="margin-top:0;display:flex;flex-direction:column;gap:12px;">
+        <div style="display:flex;align-items:center;gap:16px;padding:22px 20px;border-radius:4px;background:rgba(42,92,53,.05);border:1px solid rgba(42,92,53,.1);">
+          <div style="display:flex;gap:5px;flex-shrink:0;">
+            <span style="width:30px;height:30px;border-radius:50%;background:var(--green-deep);color:var(--cream);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;">월</span>
+            <span style="width:30px;height:30px;border-radius:50%;background:var(--green-deep);color:var(--cream);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;">화</span>
+            <span style="width:30px;height:30px;border-radius:50%;background:var(--green-deep);color:var(--cream);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;">수</span>
+            <span style="width:30px;height:30px;border-radius:50%;background:var(--green-deep);color:var(--cream);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;">목</span>
+            <span style="width:30px;height:30px;border-radius:50%;background:var(--green-deep);color:var(--cream);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;">금</span>
+          </div>
+          <div style="flex:1;"><div style="font-size:14px;font-weight:600;color:var(--text-dark);margin-bottom:4px;">하루 루틴 전체</div><div style="font-size:12.5px;color:var(--text-light);">7단계 인증 + 매니저 확인</div></div>
+          <span style="font-size:10px;font-weight:700;letter-spacing:1px;padding:5px 12px;border-radius:2px;background:rgba(42,92,53,.1);color:var(--green-deep);flex-shrink:0;">Full</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;padding:22px 20px;border-radius:4px;background:rgba(74,140,92,.05);border:1px solid rgba(74,140,92,.12);">
+          <div style="display:flex;gap:5px;flex-shrink:0;"><span style="width:30px;height:30px;border-radius:50%;background:var(--green-mid);color:var(--cream);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;">토</span></div>
+          <div style="flex:1;"><div style="font-size:14px;font-weight:600;color:var(--text-dark);margin-bottom:4px;">가볍게</div><div style="font-size:12.5px;color:var(--text-light);">기상 인증만</div></div>
+          <span style="font-size:10px;font-weight:700;letter-spacing:1px;padding:5px 12px;border-radius:2px;background:rgba(74,140,92,.1);color:var(--green-mid);flex-shrink:0;">Light</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;padding:22px 20px;border-radius:4px;background:rgba(42,92,53,.02);border:1px solid var(--border);">
+          <div style="display:flex;gap:5px;flex-shrink:0;"><span style="width:30px;height:30px;border-radius:50%;background:rgba(42,92,53,.15);color:var(--text-mid);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;">일</span></div>
+          <div style="flex:1;"><div style="font-size:14px;font-weight:600;color:var(--text-dark);margin-bottom:4px;">휴식</div><div style="font-size:12.5px;color:var(--text-light);">자유 · 매니저 월요일 확인</div></div>
+          <span style="font-size:10px;font-weight:700;letter-spacing:1px;padding:5px 12px;border-radius:2px;background:rgba(42,92,53,.05);color:var(--text-light);flex-shrink:0;">Rest</span>
+        </div>
+        <div style="padding:24px;background:var(--cream);border-radius:4px;border:1px solid var(--border);">
+          <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green-mid);margin-bottom:10px;">기상 시간</div>
+          <div style="font-family:'Noto Serif KR',serif;font-size:22px;font-weight:900;color:var(--green-deep);margin-bottom:6px;">오전 5시 ~ 8시</div>
+          <div style="font-size:13px;color:var(--text-mid);line-height:1.7;">온보딩 시 매니저와 협의해서<br>나에게 맞는 시간으로 설정합니다.</div>
+        </div>
+      </div><!-- /콘텐츠 우 -->
+
+    </div><!-- /grid -->
+  </div><!-- /sec-inner -->
+</section>
+
+<style>
+/* PATH */
+.path-wrap { position:relative; width:100%; max-width:1080px; margin:0 auto; }
+.path-svg { width:100%; height:auto; display:block; }
+.pn { cursor:pointer; }
+.pn circle { transition:opacity .2s; }
+.pn:hover circle { opacity:.75; }
+.wk-topic-label { font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-top:14px;margin-bottom:3px;opacity:.8; }
+.wk-topic { font-family:'Noto Serif KR',serif;font-size:18px;font-weight:900;color:var(--green-deep);letter-spacing:-.3px;margin-bottom:6px; }
+.path-tooltip {
+  position:fixed;z-index:9999;
+  background:var(--green-deep);color:var(--cream);
+  padding:10px 14px;border-radius:4px;
+  font-size:13px;line-height:1.55;pointer-events:none;
+  box-shadow:0 8px 24px rgba(0,0,0,.25);
+  white-space:nowrap;opacity:0;transition:opacity .15s;
+}
+.path-tooltip.vis { opacity:1; }
+.path-tooltip strong { display:block;font-size:10px;letter-spacing:1.5px;color:var(--gold);margin-bottom:3px;text-transform:uppercase; }
+.path-tooltip span { font-size:11px;opacity:.65;display:block;margin-top:2px; }
+/* CARD SLIDER — scale은 JS로 제어 */
+.kn2-wrap {
+  width: 100%;
+  transform-origin: top left;
+}
+.kn2-nav { display:flex;justify-content:space-between;align-items:center;margin-top:12px; }
+.kn2-dots { display:flex;gap:5px;align-items:center; }
+.kn2-dot-i { width:6px;height:6px;border-radius:50%;background:rgba(42,92,53,.2);cursor:pointer;transition:all .2s; }
+.kn2-dot-i.on { background:var(--green-deep);width:18px;border-radius:3px; }
+.kn2-btn { width:28px;height:28px;border-radius:50%;border:1.5px solid rgba(42,92,53,.2);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--green-deep);transition:all .2s; }
+.kn2-btn:hover { background:var(--green-deep);color:var(--cream); }
+.kn2-btn:disabled { opacity:.3;cursor:default; }
+.kn2-counter { font-size:11px;font-weight:600;color:var(--text-light);min-width:30px;text-align:center; }
+.kn2-outer { overflow:hidden;border-radius:12px;box-shadow:0 4px 16px rgba(42,92,53,.1),0 20px 56px rgba(42,92,53,.14); }
+.kn2-track { display:flex;width:800%;transition:transform .4s cubic-bezier(.4,0,.2,1); }
+.kn2-card { flex-shrink:0;width:12.5%;aspect-ratio:3/4;position:relative;overflow:hidden; }
+/* base body: 0.75×원본(80px 52px 60px) = 60px 39px 45px */
+.kn2-body { position:absolute;inset:0;padding:60px 39px 45px;display:flex;flex-direction:column; }
+/* tag: 0.75×(44px,52px) = 33px,39px */
+.kn2-tag { position:absolute;top:33px;left:39px;font-size:7.5px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--text-light); }
+/* brand: 0.75×(40px,52px) = 30px,39px */
+.kn2-brand { position:absolute;bottom:30px;right:39px;font-size:7px;font-weight:600;letter-spacing:.8px;color:var(--text-light);opacity:.6; }
+/* title: 0.75×30px = 22px */
+.kn2-title { font-family:'Noto Serif KR',serif;font-size:22px;font-weight:900;color:var(--text-dark);line-height:1.38;letter-spacing:-.8px; }
+/* desc: 0.75×15px = 11px */
+.kn2-desc { font-size:11px;color:var(--text-mid);line-height:1.9;letter-spacing:-.1px; }
+</style>
+
+<script>
+(function(){
+  /* PATH 툴팁 */
+  var days=[
+    {n:1,t:"의지 vs 시스템",d:"아침이 바뀌지 않는 진짜 이유"},
+    {n:2,t:"왜 아침이어야 하는가",d:"의지력이 가장 높은 시간"},
+    {n:3,t:"성공한 사람들의 공통점",d:"아침 루틴의 과학"},
+    {n:4,t:"아침을 망치는 행동들",d:"전날 밤이 아침을 결정한다"},
+    {n:5,t:"단 5분의 힘",d:"작게 시작하는 것이 전부다"},
+    {n:6,t:"습관 루프의 원리",d:"습관은 어떻게 만들어지는가"},
+    {n:7,t:"시작을 쉽게 만드는 법",d:"트리거 설계"},
+    {n:8,t:"마찰을 줄여라",d:"환경이 행동을 만든다"},
+    {n:9,t:"보상이 반복을 만든다",d:"도파민과 습관"},
+    {n:10,t:"2분 법칙",d:"어떤 습관도 시작할 수 있는 방법"},
+    {n:11,t:"목표가 아니라 시스템",d:"결과보다 과정을 설계하라"},
+    {n:12,t:"시간 블로킹",d:"아침 1시간을 지배하는 방법"},
+    {n:13,t:"무너지지 않는 구조",d:"대체 루틴 설계"},
+    {n:14,t:"기록이 루틴을 만든다",d:"추적의 힘"},
+    {n:15,t:"나쁜 날을 활용하는 법",d:"실패를 데이터로 쓰는 방법"},
+    {n:16,t:"나만의 아침 루틴 설계",d:"4주를 통합하는 방법"},
+    {n:17,t:"꾸준함의 원리",d:"일관성이 실력이 된다"},
+    {n:18,t:"루틴이 정체성이 된다",d:"나는 아침형 인간이다"},
+    {n:19,t:"4주 이후를 설계하라",d:"혼자서도 지속하는 구조"},
+    {n:20,t:"완주",d:"당신이 증명한 것들"}
+  ];
+  var tt=document.getElementById('pathTooltip');
+  document.querySelectorAll('.pn').forEach(function(node){
+    var i=parseInt(node.getAttribute('data-i'));
+    var d=days[i]; if(!d) return;
+    node.addEventListener('mouseenter',function(){
+      tt.innerHTML='<strong>Day '+d.n+'</strong>'+d.t+'<span>'+d.d+'</span>';
+      var r=node.getBoundingClientRect();
+      tt.style.left=(r.left+r.width/2)+'px';
+      tt.style.top=(r.top-14)+'px';
+      tt.style.transform='translate(-50%,-100%)';
+      tt.classList.add('vis');
+    });
+    node.addEventListener('mouseleave',function(){ tt.classList.remove('vis'); });
+  });
+
+  /* 카드 슬라이더 — percentage based */
+  var c2=0,t2=8;
+  var tr=document.getElementById('kn2Track');
+  var ct=document.getElementById('kn2Counter');
+  var dt=document.getElementById('kn2Dots');
+  var pb=document.getElementById('kn2Prev');
+  var nb=document.getElementById('kn2Next');
+  for(var i=0;i<t2;i++){
+    var dot=document.createElement('div');
+    dot.className='kn2-dot-i'+(i===0?' on':'');
+    (function(x){dot.addEventListener('click',function(){g2(x);});})(i);
+    dt.appendChild(dot);
+  }
+  function g2(n){
+    c2=Math.max(0,Math.min(t2-1,n));
+    /* 각 카드가 track의 1/8(12.5%)이므로 카드 단위 이동 = c2/8 * 100% */
+    tr.style.transform='translateX(-'+(c2*(100/t2))+'%)';
+    ct.textContent=(c2+1)+' / '+t2;
+    document.querySelectorAll('.kn2-dot-i').forEach(function(d,i){d.classList.toggle('on',i===c2);});
+    pb.disabled=c2===0; nb.disabled=c2===t2-1;
+  }
+  window.kn2Go=function(d){g2(c2+d);};
+  g2(0);
+  var sx=0;
+  tr.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
+  tr.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)g2(c2+(dx<0?1:-1));});
+})();
+</script>
+
+<script>
+/* 카드 높이를 우측 스케줄 컬럼에 딱 맞추는 함수
+   - 카드 상단 = 월화수목금 행 상단
+   - 카드 하단 = 기상시간 박스 하단
+   - 내부 비율 유지: kn2-outer의 자연 높이 기준으로 scale 계산 */
+function fitCardToSchedule() {
+  var wrap     = document.getElementById('kn2Wrap');
+  var outer    = document.getElementById('kn2Outer');
+  var schedCol = document.getElementById('scheduleCol');
+  if (!wrap || !outer || !schedCol) return;
+
+  /* scale 제거 후 자연 높이 측정 */
+  wrap.style.transform = 'none';
+  wrap.style.width     = '100%';
+
+  var naturalH = outer.offsetHeight;  /* 카드 자연 높이 */
+  var naturalW = outer.offsetWidth;   /* 카드 자연 너비 */
+  var targetH  = schedCol.offsetHeight; /* 우측 컬럼 전체 높이 */
+
+  if (!naturalH || !targetH) return;
+
+  var scale = targetH / naturalH;
+
+  /* scale 적용: 너비는 scale로 줄어든 만큼 보정해서 레이아웃 공간 유지 */
+  wrap.style.width          = (100 / scale) + '%';
+  wrap.style.transform      = 'scale(' + scale + ')';
+  wrap.style.transformOrigin = 'top left';
+}
+
+/* 로드 후 + 리사이즈 시 재계산 */
+window.addEventListener('load', function() {
+  fitCardToSchedule();
+});
+window.addEventListener('resize', function() {
+  fitCardToSchedule();
+});
+/* 폰트 로드 후 높이가 달라질 수 있으므로 약간 딜레이 후 한 번 더 */
+setTimeout(fitCardToSchedule, 400);
+</script>
+<section class="sec sysdet-sec">
+  <div class="sec-inner">
+    <span class="eyebrow">유연한 시스템</span>
+    <h2 class="sec-title">현실을 반영한 시스템입니다.</h2>
+    <p class="sec-sub">완벽하지 않아도 괜찮습니다. 중요한 건 멈추지 않는 것입니다.</p>
+    <div class="sysdet-grid">
+      <div class="sd-card">
+        <div class="sd-top">
+          <div class="sd-icon i1"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2A5C35" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></div>
+          <div class="sd-head"><h4>단계적 성장</h4><div class="theory">습관 형성 원리</div></div>
+        </div>
+        <div class="sd-body">처음부터 무리하면 반드시 무너집니다. 습관 형성에는 평균 66일이 걸립니다. 1주차 20분부터 시작해 35분, 50분을 거쳐 뇌가 부담을 느끼지 않는 속도로 4주차 1시간에 도달합니다.</div>
+        <span class="sd-tag">Phillippa Lally Research, 2010</span>
+      </div>
+      <div class="sd-card">
+        <div class="sd-top">
+          <div class="sd-icon i2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg></div>
+          <div class="sd-head"><h4>패스 제도</h4><div class="theory">직장인 현실 반영</div></div>
+        </div>
+        <div class="sd-body">갑작스러운 야근, 피치 못할 약속. 직장인의 현실을 반영했습니다. 주 1회 패스권을 사용할 수 있으며, 횟수는 가입 시 개인 협의로 결정됩니다.</div>
+        <span class="sd-tag">개인 협의 가능</span>
+      </div>
+      <div class="sd-card">
+        <div class="sd-top">
+          <div class="sd-icon i3"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4A8C5C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+          <div class="sd-head"><h4>벌금 시스템 (선택)</h4><div class="theory">손실 회피 심리 활용</div></div>
+        </div>
+        <div class="sd-body">사람은 얻는 기쁨보다 잃는 고통에 2배 민감합니다. 벌금을 설정하면 포기의 문턱이 높아집니다. 금액과 조건은 매니저와 협의해 직접 설정합니다.</div>
+        <span class="sd-tag gold">Kahneman & Tversky, Prospect Theory</span>
+      </div>
+      <div class="sd-card">
+        <div class="sd-top">
+          <div class="sd-icon i4"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2A5C35" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg></div>
+          <div class="sd-head"><h4>하루 500원 적립</h4><div class="theory">보상 도파민 회로</div></div>
+        </div>
+        <div class="sd-body">작은 보상이 뇌의 도파민 회로를 자극합니다. 4주 개근 시 최대 12,000원 → 현금 환급 또는 심화 프로그램 할인으로 사용 가능합니다.</div>
+        <span class="sd-tag">최대 12,000원 환급</span>
+      </div>
+
+      <div class="sd-card" style="grid-column: 1 / -1;">
+        <div class="sd-top">
+          <div class="sd-icon i1"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2A5C35" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+          <div class="sd-head"><h4>개인 맞춤 운영</h4><div class="theory">기상 시간 자유 설정</div></div>
+        </div>
+        <div class="sd-body" style="display:flex; gap:32px; flex-wrap:wrap; align-items:flex-start;">
+          <div style="flex:1; min-width:200px;">신청 후 매니저와 개별 상담을 통해 현재 생활 패턴을 파악하고 기상 시간을 정합니다.</div>
+          <div style="flex:1; min-width:200px; display:flex; gap:12px; flex-wrap:wrap;">
+            <div style="background:rgba(42,92,53,0.05); border:1px solid var(--border); border-radius:12px; padding:14px 18px; text-align:center; flex:1;">
+              <div style="font-family:'Noto Serif KR',serif; font-size:22px; font-weight:900; color:var(--green-deep);">5시</div>
+              <div style="font-size:11px; color:var(--text-light); margin-top:4px;">가장 이른 기상</div>
+            </div>
+            <div style="display:flex; align-items:center; color:var(--green-light); font-size:18px;">→</div>
+            <div style="background:var(--green-deep); border-radius:12px; padding:14px 18px; text-align:center; flex:1;">
+              <div style="font-family:'Noto Serif KR',serif; font-size:22px; font-weight:900; color:var(--gold);">8시</div>
+              <div style="font-size:11px; color:rgba(245,240,232,0.5); margin-top:4px;">가장 늦은 기상</div>
+            </div>
+          </div>
+        </div>
+        <span class="sd-tag" style="margin-top:16px;">온보딩 시 매니저와 개인 협의</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PERSONA ===== -->
+<section class="sec persona-sec">
+  <div class="sec-inner">
+    <h2 class="sec-title">이루다 미라클모닝,<br>이런 분들께 강력 추천합니다!</h2>
+
+    <!-- 추천 카드 3개 -->
+    <div class="persona-grid" style="margin-top:48px;">
+
+      <div class="persona-card">
+        <div class="pc-top">
+          <div class="pc-av a1">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4A8C5C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          </div>
+          <div>
+            <div class="pc-name">아침 시간을 활용하고 싶은 분</div>
+          </div>
+        </div>
+        <div class="pc-quote">퇴근 후엔 이미 지쳐서 아무것도 못 하는 분. 아침 시간만이 온전히 내 것이라는 걸 알지만, 혼자서는 일어나기가 너무 어려운 분.</div>
+        <div class="pc-missions">
+          <div class="pc-m">출근 전 1시간 자기계발 시간을 갖고 싶은 분</div>
+          <div class="pc-m">저녁엔 번아웃으로 자기계발이 안 되는 분</div>
+          <div class="pc-m">아침형 인간으로 바뀌고 싶은 분</div>
+        </div>
+      </div>
+
+      <div class="persona-card">
+        <div class="pc-top">
+          <div class="pc-av a2">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </div>
+          <div>
+            <div class="pc-name">체계적인 관리를 받고 싶은 분</div>
+          </div>
+        </div>
+        <div class="pc-quote">혼자 하면 흐지부지되지만, 누가 봐주면 하게 되는 분. PT를 받으면 운동이 되고, 스터디카페에 가면 공부가 되는 분.</div>
+        <div class="pc-missions">
+          <div class="pc-m">혼자서는 3일을 못 넘기는 분</div>
+          <div class="pc-m">누군가 체크해줄 때 더 잘하는 분</div>
+          <div class="pc-m">1:1 밀착 관리가 필요한 분</div>
+        </div>
+      </div>
+
+      <div class="persona-card">
+        <div class="pc-top">
+          <div class="pc-av a3">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2A5C35" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+          </div>
+          <div>
+            <div class="pc-name">꾸준한 자기계발을 원하는 분</div>
+          </div>
+        </div>
+        <div class="pc-quote">토익, 자격증, 사이드 프로젝트, 독서. 하고 싶은 건 많은데 매번 작심삼일로 끝나는 분. 이번엔 4주를 끝까지 해내고 싶은 분.</div>
+        <div class="pc-missions">
+          <div class="pc-m">자기계발 목표는 있지만 실행이 안 되는 분</div>
+          <div class="pc-m">꾸준함이 가장 어려운 분</div>
+          <div class="pc-m">습관을 만들고 싶은 분</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 비추천 -->
+    <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+
+      <div style="background:rgba(200,60,60,0.04); border:1px solid rgba(200,60,60,0.12); border-radius:4px; padding:28px 32px;">
+        <div style="font-size:12px; font-weight:700; color:rgba(180,60,60,0.7); letter-spacing:1px; margin-bottom:16px;">이런 분께는 맞지 않을 수 있어요</div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; align-items:flex-start; gap:10px;">
+            <span style="color:rgba(180,60,60,0.5); flex-shrink:0; margin-top:1px;">—</span>
+            <div>
+              <div style="font-size:13.5px; font-weight:600; color:var(--text-dark);">가볍게 시작하고 싶은 분</div>
+              <div style="font-size:12px; color:var(--text-light); margin-top:3px;">이루다는 매일 7단계를 함께하는 프로그램입니다. 부담 없이 해보려는 분보다 진지하게 변화를 원하는 분께 맞아요.</div>
+            </div>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:10px;">
+            <span style="color:rgba(180,60,60,0.5); flex-shrink:0; margin-top:1px;">—</span>
+            <div>
+              <div style="font-size:13.5px; font-weight:600; color:var(--text-dark);">인증이 불편한 분</div>
+              <div style="font-size:12px; color:var(--text-light); margin-top:3px;">매일 사진·영상 인증이 핵심 구조예요. 이 과정이 번거롭게 느껴지신다면 효과를 보기 어렵습니다.</div>
+            </div>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:10px;">
+            <span style="color:rgba(180,60,60,0.5); flex-shrink:0; margin-top:1px;">—</span>
+            <div>
+              <div style="font-size:13.5px; font-weight:600; color:var(--text-dark);">관리받는 게 불편한 분</div>
+              <div style="font-size:12px; color:var(--text-light); margin-top:3px;">매니저가 매일 확인하는 구조입니다. 누군가의 피드백이 불편하신 분은 진행하기 힘들 수 있습니다.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:rgba(42,92,53,0.05); border:1px solid rgba(42,92,53,0.12); border-radius:4px; padding:28px 32px;">
+        <div style="font-size:12px; font-weight:700; color:var(--green-mid); letter-spacing:1px; margin-bottom:16px;">이런 분께 딱 맞아요</div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; align-items:flex-start; gap:10px;">
+            <span style="color:var(--green-light); flex-shrink:0; margin-top:1px;">→</span>
+            <div style="font-size:13.5px; color:var(--text-mid); line-height:1.7;">"이번엔 진짜 해보자"는 마음이 있는 분</div>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:10px;">
+            <span style="color:var(--green-light); flex-shrink:0; margin-top:1px;">→</span>
+            <div style="font-size:13.5px; color:var(--text-mid); line-height:1.7;">혼자보다 함께일 때 더 잘되는 분</div>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:10px;">
+            <span style="color:var(--green-light); flex-shrink:0; margin-top:1px;">→</span>
+            <div style="font-size:13.5px; color:var(--text-mid); line-height:1.7;">아침 루틴을 4주 안에 만들고 싶은 분</div>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:10px;">
+            <span style="color:var(--green-light); flex-shrink:0; margin-top:1px;">→</span>
+            <div style="font-size:13.5px; color:var(--text-mid); line-height:1.7;">49,000원이 아깝지 않을 만큼 간절한 분</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- ===== REVIEWS ===== -->
+<section class="sec review-sec" id="reviews">
+  <div class="sec-inner">
+    <div class="review-top">
+      <div>
+        <div class="beta-badge" style="margin-bottom:16px;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          베타 테스트 결과
+        </div>
+        <span class="eyebrow">후기</span>
+        <h2 class="sec-title">베타 테스터 4명,<br>전원 4주 습관 형성 성공</h2>
+      </div>
+    </div>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="rc-top">
+          <div class="rc-av r1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4A8C5C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
+          <div><div class="rc-name">김민지 (30세)</div><div class="rc-job">마케팅팀 대리</div></div>
+        </div>
+        <div class="rc-stars">★★★★★</div>
+        <div style="font-size:13px; font-weight:700; color:var(--green-deep); margin-bottom:10px;">"의지박약 끝판왕도 눈이 번쩍 뜨이네요"</div>
+        <div class="rc-text">"사실 저는 제 의지를 아예 안 믿거든요. 근데 매니저님이 밤 11시만 되면 '이제 주무실 시간이에요!'라고 카톡 주시는 게 은근 압박이면서도 든든해요. 4주 차 되니까 몸이 먼저 반응하더라고요. 주말에도 7시에 눈 떠지는 거 보고 소름 돋았습니다."</div>
+        <div class="rc-ba">
+          <div class="rc-ba-item bef"><div class="rc-ba-label">Before</div><div class="rc-ba-text">새벽 1시 유튜브<br>알람 5개 겨우 출근</div></div>
+          <div class="rc-ba-item aft"><div class="rc-ba-label">After</div><div class="rc-ba-text">밤 11시 취침 정착<br>7시 기상 + 요가 + 업무 정리</div></div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="rc-top">
+          <div class="rc-av r2"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
+          <div><div class="rc-name">이정훈 (34세)</div><div class="rc-job">IT 엔지니어</div></div>
+        </div>
+        <div class="rc-stars">★★★★★</div>
+        <div style="font-size:13px; font-weight:700; color:var(--green-deep); margin-bottom:10px;">"퇴근 후 공부요? 아침이 정답이었습니다"</div>
+        <div class="rc-text">"맨날 퇴근하고 공부하겠다고 책 폈다가 졸기만 했어요. 매주 보내주시는 카드뉴스가 동기부여가 많이 됐고, 1주 체험해보고 안 맞으면 환불해 준다는 말에 가벼운 마음으로 시작했습니다. 지금은 아침 1시간 공부가 제 자존감 치트키예요."</div>
+        <div class="rc-ba">
+          <div class="rc-ba-item bef"><div class="rc-ba-label">Before</div><div class="rc-ba-text">번아웃으로 소파와 물아일체<br>자기계발 늘 작심삼일</div></div>
+          <div class="rc-ba-item aft"><div class="rc-ba-label">After</div><div class="rc-ba-text">출근 전 1시간 자격증 공부<br>한 달 만에 기출 1회독 완료</div></div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="rc-top">
+          <div class="rc-av r3"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2A5C35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
+          <div><div class="rc-name">최수아 (28세)</div><div class="rc-job">프리랜서 디자이너</div></div>
+        </div>
+        <div class="rc-stars">★★★★★</div>
+        <div style="font-size:13px; font-weight:700; color:var(--green-deep); margin-bottom:10px;">"무너진 생활 패턴, 49,000원으로 고쳤어요"</div>
+        <div class="rc-text">"프리랜서라 출퇴근이 없으니 생활 패턴이 엉망이었어요. 매니저님이 단순히 깨워주는 걸 넘어 기록 제출까지 체크해 주시니까 긴장감이 유지돼요. 4주 완주하고 무료 스터디 팀원들 만났는데 다들 열정이 넘치셔서 좋은 자극 받고 있습니다."</div>
+        <div class="rc-ba">
+          <div class="rc-ba-item bef"><div class="rc-ba-label">Before</div><div class="rc-ba-text">밤낮 바뀐 생활<br>오후 2시 기상 후 자책</div></div>
+          <div class="rc-ba-item aft"><div class="rc-ba-label">After</div><div class="rc-ba-text">오전 8시 기상 고정<br>오전 중 시안 1개 마무리</div></div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="rc-top">
+          <div class="rc-av r4"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
+          <div><div class="rc-name">박성호 (41세)</div><div class="rc-job">영업직 과장</div></div>
+        </div>
+        <div class="rc-stars">★★★★★</div>
+        <div style="font-size:13px; font-weight:700; color:var(--green-deep); margin-bottom:10px;">"아침이 두렵지 않은 건 처음이에요"</div>
+        <div class="rc-text">"1주 차에 딱 20분만 일찍 일어나보라는 단계적 제안이 저한테 잘 맞았습니다. 무리하지 않으니까 안 지치더라고요. 요즘은 아침에 차 한잔하면서 책 읽는 시간이 제 하루 중 가장 행복한 시간입니다."</div>
+        <div class="rc-ba">
+          <div class="rc-ba-item bef"><div class="rc-ba-label">Before</div><div class="rc-ba-text">만성 피로 + 숙취<br>허겁지겁 출근 준비</div></div>
+          <div class="rc-ba-item aft"><div class="rc-ba-label">After</div><div class="rc-ba-text">술자리 줄이고 6:30 기상<br>독서 30분 후 여유 출근</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STUDY ===== -->
+<section class="sec study-sec">
+  <div class="sec-inner">
+    <div class="study-layout">
+      <div>
+        <div class="study-card">
+          <div class="sc-label">후속 케어</div>
+          <div class="sc-title">4주 완수자<br>기상 스터디</div>
+          <div class="sc-sub">검증된 사람들만 모입니다</div>
+          <div class="study-members">
+            <div class="sm-row">
+              <div class="sm-av"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(245,240,232,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
+              <div class="sm-info"><div class="sm-name">김지연</div><div class="sm-status">4주 완주 · 토익</div></div>
+              <div class="sm-badge">완주</div>
+            </div>
+            <div class="sm-row">
+              <div class="sm-av"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(245,240,232,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
+              <div class="sm-info"><div class="sm-name">박성훈</div><div class="sm-status">4주 완주 · 개발</div></div>
+              <div class="sm-badge">완주</div>
+            </div>
+            <div class="sm-row">
+              <div class="sm-av"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(245,240,232,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
+              <div class="sm-info"><div class="sm-name">이수아</div><div class="sm-status">4주 완주 · 영어</div></div>
+              <div class="sm-badge">완주</div>
+            </div>
+            <div class="sm-row empty">
+              <div class="sm-av" style="background:rgba(255,255,255,0.06);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg></div>
+              <div class="sm-info"><div class="sm-name" style="color:rgba(245,240,232,0.3);">당신의 자리</div><div class="sm-status">4주 완주 후 합류</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow" style="color:var(--green-mid);">후속 케어</span>
+        <h2 class="sec-title">4주 완수하면,<br>검증된 사람들과<br>연결됩니다.</h2>
+        <p class="sec-sub">아무나 들어오는 스터디가 아닙니다.<br>같은 4주를 버텨낸 사람들끼리만 만납니다.</p>
+        <div class="study-pts">
+          <div class="spt">
+            <div class="spt-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2A5C35" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div class="spt-body"><h5>습관이 이미 증명된 사람들</h5><p>4주를 완주한 사람들이라 서로 믿을 수 있습니다. 함께하면 유지는 더 이상 어렵지 않습니다.</p></div>
+          </div>
+          <div class="spt">
+            <div class="spt-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2A5C35" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div>
+            <div class="spt-body"><h5>단톡방 무료 제공</h5><p>4주 완주자들끼리 기상 스터디 단톡방에 연결해드립니다. 추가 비용은 없습니다.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section class="sec pricing-sec" id="pricing">
+  <div class="sec-inner">
+    <span class="eyebrow">요금</span>
+    <h2 class="sec-title">하루 커피 한 잔 값으로,<br>아침 1시간을 만듭니다.</h2>
+    <div class="price-layout">
+      <div class="price-main-card">
+        <div class="pmc-inner">
+          <div class="pmc-label">월 요금</div>
+          <div class="pmc-amount">49,000<span>원</span></div>
+          <div class="pmc-day">하루 환산 약 1,600원</div>
+          <div class="pmc-items">
+            <div class="pmc-item"><div class="pmc-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#8DBF9A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>1:1 매니저 밀착 관리</div>
+            <div class="pmc-item"><div class="pmc-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#8DBF9A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>7단계 하루 루프 전체 관리</div>
+            <div class="pmc-item"><div class="pmc-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#8DBF9A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>4주 자기계발 콘텐츠 제공</div>
+            <div class="pmc-item"><div class="pmc-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#8DBF9A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>4주 완주 시 스터디 무료 매칭</div>
+            <div class="pmc-item"><div class="pmc-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#8DBF9A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>패스 제도 + 벌금 협의 가능</div>
+          </div>
+        </div>
+      </div>
+      <div class="price-right">
+        <div class="prc">
+          <div class="prc-title">하루 500원 적립</div>
+          <div class="prc-num">12,000원</div>
+          <div class="prc-body">4주 개근 시 최대 적립. 현금 환급 또는 심화 프로그램 할인으로 사용 가능합니다.</div>
+        </div>
+        <div class="prc">
+          <div class="prc-title">실질 비용</div>
+          <div class="prc-num">37,000원</div>
+          <div class="prc-body">적립금 환급 후 실질 비용. 아침 루틴이 잡히면 의미 없는 술자리가 줄어 오히려 돈이 생깁니다.</div>
+        </div>
+      </div>
+    </div>
+    <div class="trial-wrap">
+      <div class="trial-left">
+        <h3>확신이 없다면 먼저 체험해보세요.</h3>
+        <p>1주 체험 예치금 10,000원으로 시작합니다.<br>체험 후 계속하면 49,000원 · 그만두면 전액 환불.</p>
+        <div class="trial-tags">
+          <span class="t-tag">1주 체험 가능</span>
+          <span class="t-tag">예치금 10,000원</span>
+          <span class="t-tag">안 하면 전액 환불</span>
+          <span class="t-tag">월~토 08:00~23:00</span>
+        </div>
+      </div>
+      <a href="https://open.kakao.com/o/sA498fli" class="btn-kakao" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#191919" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        카카오톡으로 신청하기
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="final-sec" id="apply">
+  <div class="fi">
+    <div class="final-badge"><span class="dot-red"></span>이루다 미라클모닝 1기 모집 중</div>
+    <h2 class="final-h2">혼자 결심하지 마세요.<br>선착순 <em>50명</em> 모집</h2>
+    <p class="final-p">1:1 관리 특성상 인원이 제한됩니다.<br>지금 이 글을 읽고 있다면, 이미 바꾸고 싶다는 마음이 있는 겁니다.<br>결심이 식기 전에 시작하세요.</p>
+    <div class="final-deposit">1주 체험 예치금 10,000원 · 계속하면 49,000원 · 안 하면 전액 환불</div>
+    <br><br>
+    <a href="https://open.kakao.com/o/sA498fli" class="btn-final" target="_blank">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#191919" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      카카오톡으로 신청하기
+    </a>
+    <div class="final-note">운영 시간: 월~토 · 08:00 ~ 23:00</div>
+  </div>
+</section>
+
+<footer>
+  <div style="max-width:1200px; margin:0 auto; width:100%;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:32px; padding-bottom:28px; border-bottom:1px solid var(--border); margin-bottom:24px;">
+      <!-- 브랜드 -->
+      <div>
+        <div class="fl" style="margin-bottom:8px;">이루다<em>®</em></div>
+        <div style="font-size:13px; color:var(--text-mid); font-weight:400; line-height:1.7;">기상을 도와드립니다.<br>1:1 미라클모닝 프로그램</div>
+      </div>
+      <!-- 문의 -->
+      <div>
+        <div style="font-size:11px; font-weight:700; letter-spacing:1.5px; color:var(--text-light); text-transform:uppercase; margin-bottom:10px;">문의</div>
+        <div style="font-size:13px; color:var(--text-mid); line-height:1.9;">
+          <div>📞 010-2615-6993</div>
+          <div style="margin-top:4px;">
+            <a href="https://open.kakao.com/o/sA498fli" target="_blank" style="color:var(--green-mid); text-decoration:none; font-weight:500;">💬 카카오톡 문의하기</a>
+          </div>
+        </div>
+      </div>
+      <!-- 서비스 안내 -->
+      <div>
+        <div style="font-size:11px; font-weight:700; letter-spacing:1.5px; color:var(--text-light); text-transform:uppercase; margin-bottom:10px;">서비스 안내</div>
+        <div style="font-size:13px; color:var(--text-mid); line-height:1.9;">
+          <div>운영 시간: 월~토 08:00 ~ 23:00</div>
+          <div>1주 체험: 예치금 10,000원</div>
+          <div>월 정가: 49,000원</div>
+        </div>
+      </div>
+      <!-- 유의사항 -->
+      <div style="max-width:240px;">
+        <div style="font-size:11px; font-weight:700; letter-spacing:1.5px; color:var(--text-light); text-transform:uppercase; margin-bottom:10px;">유의사항</div>
+        <div style="font-size:12px; color:var(--text-light); line-height:1.8;">
+          본 서비스는 개인이 운영하는 1:1 코칭 프로그램입니다. 환불 정책은 1주 체험 기간 내 전액 환불을 원칙으로 합니다.
+        </div>
+      </div>
+    </div>
+    <!-- 하단 카피라이트 -->
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+      <div class="fc">© 2026 이루다 · 1:1 미라클모닝 프로그램 · 대표 운영자 010-2615-6993</div>
+      <div style="font-size:11px; color:var(--text-light);">베타 테스터 4명 전원 4주 습관 형성 성공</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('nav');
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+
+function initScrollStep() {
+  const outer = document.getElementById('tlOuter');
+  const inner = document.getElementById('tlInner');
+  const panels = document.querySelectorAll('.tl-step-sticky');
+  const dots   = document.querySelectorAll('.tl-ind-dot');
+  if (!outer || !panels.length) return;
+
+  const STEP_COUNT = panels.length;
+  // 각 스텝당 스크롤 거리: 화면 높이 * 1.8 → 충분히 읽을 수 있는 시간
+  const SCROLL_PER_STEP = window.innerHeight * 0.4;
+  const TOTAL_SCROLL = SCROLL_PER_STEP * STEP_COUNT;
+
+  // outer 높이 = sticky inner 높이 + 전체 스크롤 거리
+  outer.style.height = (window.innerHeight + TOTAL_SCROLL) + 'px';
+
+  let currentIdx = -1;
+
+  function goTo(idx) {
+    if (idx === currentIdx) return;
+    currentIdx = idx;
+    panels.forEach((p, i) => p.classList.toggle('active', i === idx));
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+  }
+
+  function onScroll() {
+    const outerTop = outer.getBoundingClientRect().top + window.scrollY;
+    const scrolled = window.scrollY - outerTop;
+
+    if (scrolled < 0) { goTo(0); return; }
+    if (scrolled > TOTAL_SCROLL) { goTo(STEP_COUNT - 1); return; }
+
+    const idx = Math.min(Math.floor(scrolled / SCROLL_PER_STEP), STEP_COUNT - 1);
+    goTo(idx);
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', () => {
+    outer.style.height = (window.innerHeight + SCROLL_PER_STEP * STEP_COUNT) + 'px';
+  });
+
+  // 인디케이터 클릭 시 해당 스텝 위치로 스크롤
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      const outerTop = outer.getBoundingClientRect().top + window.scrollY;
+      const targetY = outerTop + SCROLL_PER_STEP * i + 10;
+      window.scrollTo({ top: targetY, behavior: 'smooth' });
+    });
+  });
+
+  // gold 인디케이터 표시
+  [2, 5].forEach(i => {
+    if (dots[i]) dots[i].classList.add('gold-dot');
+  });
+
+  goTo(0);
+
+  // 안전장치: DOM 이후 한 번 더
+  setTimeout(() => goTo(0), 100);
+}
+</script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js" onload="initScrollStep();"></script>
+<script>
+window.addEventListener('load', () => {
+  initScrollStep();
+  if (typeof AOS === 'undefined') {
+    document.querySelectorAll('[data-aos]').forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+  }
+  initParallax();
+  initCountUp();
+  initScrollReveal();
+});
+
+/* ===== 커서 패럴랙스 (히어로) ===== */
+function initParallax() {
+  const hero = document.querySelector('.hero');
+  const heroCard = document.querySelector('.hero-card');
+  const heroText = document.querySelector('.hero-text');
+  const eyebrow = document.querySelector('.hero-eyebrow');
+  if (!hero) return;
+
+  let mouseX = 0, mouseY = 0;
+  let curX = 0, curY = 0;
+
+  hero.addEventListener('mousemove', (e) => {
+    const rect = hero.getBoundingClientRect();
+    mouseX = (e.clientX - rect.left - rect.width / 2) / rect.width;
+    mouseY = (e.clientY - rect.top - rect.height / 2) / rect.height;
+  });
+
+  hero.addEventListener('mouseleave', () => {
+    mouseX = 0;
+    mouseY = 0;
+  });
+
+  function animateParallax() {
+    curX += (mouseX - curX) * 0.06;
+    curY += (mouseY - curY) * 0.06;
+
+    if (heroCard) {
+      heroCard.style.transform = `translate(${curX * 18}px, ${curY * 12}px) rotateY(${curX * 4}deg) rotateX(${-curY * 3}deg)`;
+    }
+    if (heroText) {
+      heroText.style.transform = `translate(${curX * -6}px, ${curY * -4}px)`;
+    }
+    if (eyebrow) {
+      eyebrow.style.transform = `translate(${curX * -8}px, ${curY * -5}px)`;
+    }
+
+    requestAnimationFrame(animateParallax);
+  }
+  animateParallax();
+
+  /* 히어로 카드 perspective */
+  if (heroCard) {
+    heroCard.style.transition = 'box-shadow 0.3s';
+    heroCard.style.willChange = 'transform';
+    hero.style.perspective = '1000px';
+  }
+}
+
+/* ===== 숫자 카운트업 (스탯 밴드) ===== */
+function initCountUp() {
+  const statNums = document.querySelectorAll('.stat-num');
+  if (!statNums.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseFloat(el.getAttribute('data-target') || el.textContent.replace(/[^0-9.]/g, ''));
+      const suffix = el.textContent.replace(/[0-9.]/g, '');
+      const duration = 1800;
+      const start = performance.now();
+      const isDecimal = String(target).includes('.');
+
+      function tick(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        const value = target * ease;
+        el.textContent = (isDecimal ? value.toFixed(1) : Math.floor(value)) + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      observer.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+
+  statNums.forEach(el => {
+    el.setAttribute('data-target', el.textContent.replace(/[^0-9.]/g, ''));
+    el.textContent = '0' + el.textContent.replace(/[0-9.]/g, '');
+    observer.observe(el);
+  });
+}
+
+/* ===== 스크롤 리빌 (카드 등장) ===== */
+function initScrollReveal() {
+  /* 리빌 대상 셀렉터 */
+  const selectors = [
+    '.eyebrow', '.sec-title', '.sec-sub',
+    '.why-card', '.persona-card', '.sd-card', '.review-card',
+    '.wc-icon', '.wc-title', '.wc-desc',
+    '.tn-node', '.tri-pt',
+    '.stat-item',
+    '.weeks-grid', '.wk-week',
+    '.study-card', '.sc-label', '.sc-title',
+    '.price-card', '.pc-row',
+    '.loop-item',
+    '.rc-ba', '.rc-text',
+    '.tl-header-inner',
+    '.hero-eyebrow', '.hero-headline', '.hero-sub', '.hero-cta',
+    '.cta-title', '.cta-sub',
+
+  ].join(', ');
+
+  const els = document.querySelectorAll(selectors);
+
+  /* 초기 상태 — 즉시 보이면 안 되는 것만 숨김 */
+  els.forEach((el, i) => {
+    /* 히어로는 animation fadeUp으로 처리 중이므로 건너뜀 */
+    if (el.closest('.hero')) return;
+    /* 이미 animation 있는 것 건너뜀 */
+    const style = window.getComputedStyle(el);
+    if (style.animationName && style.animationName !== 'none') return;
+
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(28px)';
+    el.style.transition = 'opacity 0.6s cubic-bezier(0.4,0,0.2,1), transform 0.6s cubic-bezier(0.4,0,0.2,1)';
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      /* 딜레이: 같은 부모 내 형제 순서에 따라 */
+      const siblings = el.parentElement ? [...el.parentElement.children].filter(c => c.style.opacity === '0') : [];
+      const idx = siblings.indexOf(el);
+      const delay = Math.max(0, idx * 70);
+
+      setTimeout(() => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      }, delay);
+      observer.unobserve(el);
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  els.forEach(el => {
+    if (el.closest('.hero')) return;
+    if (el.style.opacity === '0') observer.observe(el);
+  });
+}
+</script>
+</body>
+</html>
