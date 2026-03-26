@@ -617,12 +617,13 @@ footer {
   .phil-body { font-size: 14px; }
 
   /* 프로그램 */
-  .programs { padding: 72px 0 72px 24px; }
-  .programs-header { padding: 0 24px 0 0; flex-direction: column; align-items: flex-start; gap: 12px; }
-  .program-card { flex: 0 0 320px; }
-  .pc-body { padding: 32px 28px; }
-  .pc-title { font-size: 28px; }
-  .pc-desc { font-size: 13px; }
+  .programs { padding: 72px 0 72px 0; }
+  .programs-header { padding: 0 20px; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .carousel-track { padding: 20px 20px; gap: 16px; }
+  .program-card { flex: 0 0 calc(85vw); max-width: 360px; }
+  .pc-body { padding: 32px 24px; }
+  .pc-title { font-size: 26px; }
+  .pc-desc { font-size: 13px; margin-bottom: 24px; }
 
   /* 푸터 */
   footer { padding: 56px 24px 32px; }
@@ -931,7 +932,15 @@ footer {
 
   const origCards = Array.from(track.querySelectorAll('.program-card'));
   const total = origCards.length;
-  const CARD_W = 400 + 24; // width + gap
+
+  // 모바일/PC에 따라 실제 카드 너비 동적 계산
+  function getCardW() {
+    const card = track.querySelector('.program-card');
+    if (!card) return 424;
+    return card.offsetWidth + 24; // 카드 너비 + gap
+  }
+
+  let CARD_W = getCardW();
   let current = 0;
 
   // 앞뒤로 클론 추가 (무한 루프용)
@@ -945,6 +954,7 @@ footer {
 
   function goTo(idx, animate) {
     current = idx;
+    CARD_W = getCardW(); // 항상 최신 너비 반영
     if (!animate) track.style.transition = 'none';
     else track.style.transition = 'transform 0.5s cubic-bezier(0.4,0,0.2,1)';
     track.style.transform = `translateX(-${(offset + idx) * CARD_W}px)`;
@@ -980,6 +990,12 @@ footer {
   track.addEventListener('touchend', e => {
     const dx = e.changedTouches[0].clientX - tx;
     if (Math.abs(dx) > 40) window.carousel(dx < 0 ? 1 : -1);
+  });
+
+  // 화면 크기 변경 시 카드 너비 재계산 후 위치 보정
+  window.addEventListener('resize', () => {
+    CARD_W = getCardW();
+    goTo(current, false);
   });
 })();
 
