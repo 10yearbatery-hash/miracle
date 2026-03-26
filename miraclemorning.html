@@ -513,7 +513,8 @@ footer { background: var(--white); border-top: 1px solid var(--border); padding:
 
   /* 히어로 */
   .hero { grid-template-columns: 1fr; padding: 80px 20px 48px; gap: 28px; }
-  .hero-right { display: none; }
+  .hero-right { display: block; }
+  .hero-card { box-shadow: 0 2px 12px rgba(30,61,36,0.1); }
   .hero-eyebrow { font-size: 13px; padding: 9px 18px; }
   .hero h1 { font-size: clamp(26px, 7vw, 40px); letter-spacing: -1px; }
   .hero-sub { font-size: 14px; }
@@ -715,7 +716,7 @@ footer { background: var(--white); border-top: 1px solid var(--border); padding:
 
   /* ── 모바일 스크롤바 숨김 ── */
   ::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }
-  * { scrollbar-width: none !important; -ms-overflow-style: none !important; overflow: hidden; }
+  * { scrollbar-width: none !important; -ms-overflow-style: none !important; }
   /* 페이지 전체 스크롤은 유지 */
   html, body { overflow-x: hidden !important; overflow-y: auto !important; }
 
@@ -750,6 +751,16 @@ footer { background: var(--white); border-top: 1px solid var(--border); padding:
   .weeks-grid { grid-template-columns: 1fr !important; border-radius: 4px !important; }
   .wk { padding: 24px 20px !important; }
   .wk-time { font-size: 40px !important; }
+
+  /* ── 주간 운영방식 박스: 요일 원 아래에 텍스트 배치 ── */
+  .sched-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    padding: 16px !important;
+  }
+  .sched-info { width: 100% !important; }
+  .sched-badge { align-self: flex-end !important; }
 }
 
 @media(max-width: 480px) {
@@ -930,7 +941,7 @@ footer { background: var(--white); border-top: 1px solid var(--border); padding:
         <div class="wc-icon o">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
         </div>
-        <div class="wc-title">알람을 10개 맞춰도,<br>결국 다 끈다</div>
+        <div class="wc-title">알람을 맞춰도 결국<br>끄고 다시 잔다</div>
         <div class="wc-body">알람을 맞추고 눈은 떴는데 아무도 보는 사람이 없으니 그냥 끄고 다시 눕게 되지는 않으셨나요?</div>
         
       </div>
@@ -1949,26 +1960,26 @@ function accToggle(n){
 
       <!-- 콘텐츠 우: 주간 운영 방식 -->
       <div id="scheduleCol" style="margin-top:0;display:flex;flex-direction:column;gap:12px;">
-        <div style="display:flex;align-items:center;gap:16px;padding:22px 20px;border-radius:4px;background:rgba(42,92,53,.05);border:1px solid rgba(42,92,53,.1);">
-          <div style="display:flex;gap:5px;flex-shrink:0;">
+        <div class="sched-row" style="display:flex;align-items:center;gap:16px;padding:22px 20px;border-radius:4px;background:rgba(42,92,53,.05);border:1px solid rgba(42,92,53,.1);">
+          <div class="sched-days" style="display:flex;gap:5px;flex-shrink:0;">
             <span style="width:30px;height:30px;border-radius:50%;background:var(--green-deep);color:var(--cream);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;">월</span>
             <span style="width:30px;height:30px;border-radius:50%;background:var(--green-deep);color:var(--cream);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;">화</span>
             <span style="width:30px;height:30px;border-radius:50%;background:var(--green-deep);color:var(--cream);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;">수</span>
             <span style="width:30px;height:30px;border-radius:50%;background:var(--green-deep);color:var(--cream);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;">목</span>
             <span style="width:30px;height:30px;border-radius:50%;background:var(--green-deep);color:var(--cream);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;">금</span>
           </div>
-          <div style="flex:1;"><div style="font-size:14px;font-weight:600;color:var(--text-dark);margin-bottom:4px;">하루 루틴 전체</div><div style="font-size:12.5px;color:var(--text-light);">7단계 인증 + 매니저 확인</div></div>
-          <span style="font-size:10px;font-weight:700;letter-spacing:1px;padding:5px 12px;border-radius:2px;background:rgba(42,92,53,.1);color:var(--green-deep);flex-shrink:0;">Full</span>
+          <div class="sched-info" style="flex:1;"><div style="font-size:14px;font-weight:600;color:var(--text-dark);margin-bottom:4px;">하루 루틴 전체</div><div style="font-size:12.5px;color:var(--text-light);">7단계 인증 + 매니저 확인</div></div>
+          <span class="sched-badge" style="font-size:10px;font-weight:700;letter-spacing:1px;padding:5px 12px;border-radius:2px;background:rgba(42,92,53,.1);color:var(--green-deep);flex-shrink:0;">Full</span>
         </div>
-        <div style="display:flex;align-items:center;gap:16px;padding:22px 20px;border-radius:4px;background:rgba(74,140,92,.05);border:1px solid rgba(74,140,92,.12);">
-          <div style="display:flex;gap:5px;flex-shrink:0;"><span style="width:30px;height:30px;border-radius:50%;background:var(--green-mid);color:var(--cream);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;">토</span></div>
-          <div style="flex:1;"><div style="font-size:14px;font-weight:600;color:var(--text-dark);margin-bottom:4px;">가볍게</div><div style="font-size:12.5px;color:var(--text-light);">기상 인증만</div></div>
-          <span style="font-size:10px;font-weight:700;letter-spacing:1px;padding:5px 12px;border-radius:2px;background:rgba(74,140,92,.1);color:var(--green-mid);flex-shrink:0;">Light</span>
+        <div class="sched-row" style="display:flex;align-items:center;gap:16px;padding:22px 20px;border-radius:4px;background:rgba(74,140,92,.05);border:1px solid rgba(74,140,92,.12);">
+          <div class="sched-days" style="display:flex;gap:5px;flex-shrink:0;"><span style="width:30px;height:30px;border-radius:50%;background:var(--green-mid);color:var(--cream);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;">토</span></div>
+          <div class="sched-info" style="flex:1;"><div style="font-size:14px;font-weight:600;color:var(--text-dark);margin-bottom:4px;">가볍게</div><div style="font-size:12.5px;color:var(--text-light);">기상 인증만</div></div>
+          <span class="sched-badge" style="font-size:10px;font-weight:700;letter-spacing:1px;padding:5px 12px;border-radius:2px;background:rgba(74,140,92,.1);color:var(--green-mid);flex-shrink:0;">Light</span>
         </div>
-        <div style="display:flex;align-items:center;gap:16px;padding:22px 20px;border-radius:4px;background:rgba(42,92,53,.02);border:1px solid var(--border);">
-          <div style="display:flex;gap:5px;flex-shrink:0;"><span style="width:30px;height:30px;border-radius:50%;background:rgba(42,92,53,.15);color:var(--text-mid);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;">일</span></div>
-          <div style="flex:1;"><div style="font-size:14px;font-weight:600;color:var(--text-dark);margin-bottom:4px;">휴식</div><div style="font-size:12.5px;color:var(--text-light);">자유 · 매니저 월요일 확인</div></div>
-          <span style="font-size:10px;font-weight:700;letter-spacing:1px;padding:5px 12px;border-radius:2px;background:rgba(42,92,53,.05);color:var(--text-light);flex-shrink:0;">Rest</span>
+        <div class="sched-row" style="display:flex;align-items:center;gap:16px;padding:22px 20px;border-radius:4px;background:rgba(42,92,53,.02);border:1px solid var(--border);">
+          <div class="sched-days" style="display:flex;gap:5px;flex-shrink:0;"><span style="width:30px;height:30px;border-radius:50%;background:rgba(42,92,53,.15);color:var(--text-mid);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;">일</span></div>
+          <div class="sched-info" style="flex:1;"><div style="font-size:14px;font-weight:600;color:var(--text-dark);margin-bottom:4px;">휴식</div><div style="font-size:12.5px;color:var(--text-light);">자유 · 매니저 월요일 확인</div></div>
+          <span class="sched-badge" style="font-size:10px;font-weight:700;letter-spacing:1px;padding:5px 12px;border-radius:2px;background:rgba(42,92,53,.05);color:var(--text-light);flex-shrink:0;">Rest</span>
         </div>
         <div style="padding:24px;background:var(--cream);border-radius:4px;border:1px solid var(--border);">
           <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green-mid);margin-bottom:10px;">기상 시간</div>
@@ -2590,7 +2601,7 @@ function initScrollStep() {
 
   const STEP_COUNT = panels.length;
   // 각 스텝당 스크롤 거리: 화면 높이 * 1.8 → 충분히 읽을 수 있는 시간
-  const SCROLL_PER_STEP = window.innerHeight * 0.4;
+  const SCROLL_PER_STEP = window.innerHeight * 0.5;
   const TOTAL_SCROLL = SCROLL_PER_STEP * STEP_COUNT;
 
   // outer 높이 = sticky inner 높이 + 전체 스크롤 거리
