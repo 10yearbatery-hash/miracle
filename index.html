@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이루다 — 성장할 수 있는 환경을 만듭니다</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&family=Noto+Serif+KR:wght@600;700;900&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --green-deep: #1e3d24;
+  --green-mid: #3a6644;
+  --green-light: #7aad85;
+  --cream: #F7F3EC;
+  --cream-dark: #EDE6D6;
+  --gold: #B8904A;
+  --gold-light: #d4aa72;
+  --white: #ffffff;
+  --text-dark: #1a2e1a;
+  --text-mid: #4a5e4a;
+  --text-light: #8a9e8a;
+  --border: rgba(30,61,36,0.1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  color: var(--text-dark);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NOISE TEXTURE ── */
+.noise {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 999;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--green-light); border-radius: 3px; }
+
+/* ── SELECTION ── */
+::selection { background: var(--green-deep); color: var(--gold-light); }
+
+/* ════════════════════════════
+   NAVIGATION
+════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 72px; padding: 0 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(247, 243, 236, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(30,61,36,0.08);
+  transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: 0 2px 24px rgba(30,61,36,0.07); }
+
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+.nav-logo-mark {
+  width: 32px; height: 32px;
+  color: var(--green-deep);
+  transition: color 0.3s;
+}
+.nav-logo:hover .nav-logo-mark { color: var(--gold); }
+.nav-logo-text {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 18px; font-weight: 700;
+  color: var(--green-deep);
+  letter-spacing: -0.3px;
+}
+.nav-logo-text sup {
+  font-size: 9px; color: var(--gold);
+  vertical-align: super; font-weight: 400;
+}
+
+.nav-links {
+  display: flex; align-items: center; gap: 40px;
+}
+.nav-links a {
+  font-size: 13px; font-weight: 400;
+  color: var(--text-mid); text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--green-deep); }
+.nav-cta {
+  background: var(--green-deep) !important;
+  color: var(--cream) !important;
+  padding: 10px 24px !important;
+  border-radius: 2px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.03em;
+  transition: background 0.2s, box-shadow 0.2s !important;
+}
+.nav-cta:hover {
+  background: var(--green-mid) !important;
+  box-shadow: 0 6px 20px rgba(30,61,36,0.2) !important;
+}
+
+/* ════════════════════════════
+   HERO
+════════════════════════════ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+}
+.hero-bg img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center 40%;
+}
+/* 두 겹 그라디언트 — 레퍼런스 방식 */
+.hero-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(247,243,236,0.88) 0%, rgba(247,243,236,0.3) 60%, transparent 100%),
+    linear-gradient(to right, rgba(247,243,236,0.95) 0%, rgba(247,243,236,0.55) 50%, transparent 100%);
+}
+
+.hero-content {
+  position: relative; z-index: 1;
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 48px;
+  padding-top: 72px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 60px;
+}
+.hero-text {}
+.hero-img-wrap {
+  opacity: 0; animation: fadeUp 0.9s 0.4s ease both;
+  display: flex; justify-content: flex-end; align-items: center;
+}
+.hero-img-frame {
+  width: 100%; max-width: 400px;
+  aspect-ratio: 3/4;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(30,61,36,0.2), 0 8px 24px rgba(30,61,36,0.12);
+  position: relative;
+}
+.hero-img-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
+}
+.hero-img-frame::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(30,61,36,0.15) 0%, transparent 50%);
+}
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-bottom: 32px;
+  opacity: 0; animation: fadeUp 0.7s 0.2s ease both;
+}
+.hero-eyebrow-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--gold);
+  animation: pulse 2.5s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.hero-eyebrow span {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--text-mid);
+}
+
+.hero-headline {
+  font-family: 'Playfair Display', 'Noto Serif KR', serif;
+  font-size: clamp(72px, 10vw, 130px);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -3px;
+  color: var(--green-deep);
+  margin-bottom: 28px;
+  opacity: 0; animation: fadeUp 0.7s 0.35s ease both;
+}
+.hero-headline em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--green-mid);
+}
+
+.hero-sub {
+  font-size: 17px; font-weight: 300;
+  color: var(--text-mid);
+  line-height: 1.8;
+  max-width: 400px;
+  margin-bottom: 44px;
+  opacity: 0; animation: fadeUp 0.7s 0.5s ease both;
+}
+
+.hero-cta {
+  opacity: 0; animation: fadeUp 0.7s 0.65s ease both;
+  display: flex; align-items: center; gap: 16px;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--green-deep);
+  color: var(--cream);
+  padding: 14px 32px;
+  border-radius: 2px;
+  font-size: 14px; font-weight: 500;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.btn-primary:hover {
+  background: var(--green-mid);
+  box-shadow: 0 10px 32px rgba(30,61,36,0.22);
+  transform: translateY(-1px);
+}
+.btn-primary svg {
+  transition: transform 0.2s;
+}
+.btn-primary:hover svg { transform: translateX(3px); }
+
+/* Hero bottom strip */
+.hero-strip {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 1;
+  background: rgba(255,255,255,0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(30,61,36,0.06);
+  padding: 20px 48px;
+  opacity: 0; animation: fadeUp 0.7s 0.8s ease both;
+}
+.hero-strip-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; gap: 48px; align-items: center;
+}
+.hs-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11.5px; font-weight: 400;
+  color: var(--text-mid);
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+.hs-item svg { color: var(--gold); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ════════════════════════════
+   PHILOSOPHY
+════════════════════════════ */
+.philosophy {
+  background: var(--white);
+  padding: 140px 48px;
+}
+.philosophy-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 100px; align-items: center;
+}
+
+.phil-img {
+  position: relative;
+}
+.phil-img-main {
+  width: 100%; aspect-ratio: 4/5;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
+}
+/* 작은 오버랩 이미지 */
+.phil-img-accent {
+  position: absolute;
+  bottom: -40px; right: -40px;
+  width: 48%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 6px solid var(--white);
+  box-shadow: 0 20px 60px rgba(30,61,36,0.15);
+}
+
+.phil-text {}
+.phil-eyebrow {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px; display: block;
+}
+.phil-title {
+  font-family: 'Playfair Display', 'Noto Serif KR', serif;
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -1px;
+  color: var(--green-deep);
+  margin-bottom: 28px;
+}
+.phil-title em {
+  font-style: italic; font-weight: 400;
+  color: var(--green-mid);
+}
+.phil-body {
+  font-size: 16px; font-weight: 300;
+  color: var(--text-mid);
+  line-height: 1.95;
+  margin-bottom: 48px;
+}
+.phil-quote {
+  padding: 28px 32px;
+  border-left: 2px solid var(--gold);
+  background: var(--cream);
+  border-radius: 0 4px 4px 0;
+}
+.phil-quote p {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px; font-weight: 400;
+  font-style: italic;
+  color: var(--green-deep);
+  line-height: 1.7;
+}
+.phil-quote cite {
+  display: block;
+  margin-top: 10px;
+  font-size: 11.5px; font-weight: 400;
+  font-style: normal;
+  color: var(--text-light);
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+
+/* ════════════════════════════
+   PROGRAMS
+════════════════════════════ */
+.programs {
+  background: var(--cream);
+  padding: 140px 0 140px 0;
+  overflow: hidden;
+}
+.programs-header {
+  max-width: 1200px;
+  padding: 0 48px;
+  margin: 0 auto 56px;
+  display: flex; justify-content: space-between; align-items: flex-end;
+}
+.programs-eyebrow {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px; display: block;
+}
+.programs-title {
+  font-family: 'Playfair Display', 'Noto Serif KR', serif;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 600; letter-spacing: -0.8px;
+  color: var(--green-deep);
+  line-height: 1.2;
+}
+.programs-nav {
+  display: flex; gap: 8px; align-items: center;
+}
+.pnav-btn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(30,61,36,0.2);
+  background: transparent;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: var(--green-deep);
+  transition: all 0.2s;
+}
+.pnav-btn:hover {
+  background: var(--green-deep);
+  color: var(--cream);
+  border-color: var(--green-deep);
+}
+
+/* 캐러셀 */
+.carousel-wrap {
+  position: relative;
+  overflow: hidden;
+}
+.carousel-track {
+  display: flex;
+  gap: 24px;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  padding: 20px 48px 20px;
+}
+
+/* Program Card */
+.program-card {
+  flex: 0 0 400px;
+  background: var(--white);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(30,61,36,0.06), 0 20px 60px rgba(30,61,36,0.09);
+  transition: transform 0.3s, box-shadow 0.3s, opacity 0.4s;
+  display: flex; flex-direction: column;
+  opacity: 0.5;
+  transform: scale(0.97);
+}
+.program-card.active {
+  opacity: 1;
+  transform: scale(1);
+  box-shadow: 0 8px 32px rgba(30,61,36,0.12), 0 32px 80px rgba(30,61,36,0.16);
+}
+
+/* 카드 상단 컬러 바 */
+.pc-bar {
+  height: 4px;
+  background: linear-gradient(90deg, var(--green-deep), var(--green-light));
+}
+.pc-bar.soon {
+  background: linear-gradient(90deg, rgba(30,61,36,0.12), rgba(30,61,36,0.04));
+}
+
+.pc-body {
+  padding: 44px 40px 48px;
+  display: flex; flex-direction: column;
+  flex: 1;
+}
+.pc-label {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.pc-label.muted { color: var(--text-light); }
+.pc-title {
+  font-family: 'Playfair Display', 'Noto Serif KR', serif;
+  font-size: 34px; font-weight: 700;
+  letter-spacing: -1px;
+  color: var(--green-deep);
+  margin-bottom: 16px;
+  line-height: 1.15;
+}
+.pc-title em { font-style: italic; font-weight: 400; }
+.pc-title.muted { color: rgba(30,61,36,0.25); }
+.pc-desc {
+  font-size: 14.5px; font-weight: 300;
+  color: var(--text-mid);
+  line-height: 1.85;
+  margin-bottom: 36px;
+  flex: 1;
+}
+.pc-desc.muted { color: var(--text-light); }
+.pc-tags {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-bottom: 36px;
+}
+.pc-tag {
+  font-size: 11.5px; font-weight: 400;
+  color: var(--green-mid);
+  background: rgba(58,102,68,0.07);
+  padding: 5px 14px; border-radius: 2px;
+  letter-spacing: 0.03em;
+}
+.btn-card {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--green-deep);
+  font-size: 13.5px; font-weight: 500;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid rgba(30,61,36,0.25);
+  padding-bottom: 3px;
+  transition: border-color 0.2s, color 0.2s;
+  align-self: flex-start;
+}
+.btn-card:hover { color: var(--gold); border-color: var(--gold); }
+.btn-card svg { transition: transform 0.2s; }
+.btn-card:hover svg { transform: translateX(4px); }
+.pc-soon-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(30,61,36,0.04);
+  border: 1px solid rgba(30,61,36,0.08);
+  color: var(--text-light);
+  padding: 8px 18px; border-radius: 2px;
+  font-size: 12px; font-weight: 400;
+  letter-spacing: 0.05em;
+  align-self: flex-start;
+}
+
+/* 카운터 */
+.carousel-counter {
+  text-align: center;
+  margin-top: 32px;
+  font-size: 12px; font-weight: 400;
+  color: var(--text-light);
+  letter-spacing: 0.1em;
+}
+
+/* ════════════════════════════
+   FOOTER
+════════════════════════════ */
+footer {
+  background: var(--green-deep);
+  padding: 72px 48px 40px;
+}
+.footer-inner {
+  max-width: 1200px; margin: 0 auto;
+}
+.footer-top {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(247,243,236,0.1);
+  margin-bottom: 32px;
+}
+.footer-brand {}
+.footer-logo {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 20px; font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 12px;
+}
+.footer-logo sup { font-size: 9px; color: var(--gold); vertical-align: super; font-weight: 400; }
+.footer-tagline {
+  font-size: 13px; font-weight: 300;
+  color: rgba(247,243,236,0.45);
+  line-height: 1.8;
+}
+
+.footer-col-title {
+  font-size: 10.5px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(247,243,236,0.35);
+  margin-bottom: 20px;
+}
+.footer-col a, .footer-col p {
+  display: block;
+  font-size: 13px; font-weight: 300;
+  color: rgba(247,243,236,0.6);
+  text-decoration: none;
+  line-height: 1; margin-bottom: 12px;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--cream); }
+
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-copy {
+  font-size: 12px; font-weight: 300;
+  color: rgba(247,243,236,0.25);
+}
+.footer-biz {
+  font-size: 11.5px; font-weight: 300;
+  color: rgba(247,243,236,0.2);
+  text-align: right; line-height: 1.7;
+}
+
+/* ════════════════════════════
+   SCROLL REVEAL
+════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.75s cubic-bezier(0.4,0,0.2,1), transform 0.75s cubic-bezier(0.4,0,0.2,1);
+}
+.reveal.visible {
+  opacity: 1; transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ════════════════════════════
+   RESPONSIVE
+════════════════════════════ */
+@media (max-width: 1024px) {
+  .philosophy-inner { grid-template-columns: 1fr; gap: 60px; }
+  .phil-img-accent { display: none; }
+  .program-card { grid-template-columns: 1fr; }
+  .pc-img { height: 280px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+}
+@media (max-width: 768px) {
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .hero-content { padding: 0 24px; padding-top: 72px; grid-template-columns: 1fr; }
+  .hero-img-wrap { display: none; }
+  .hero-strip { padding: 16px 24px; }
+  .philosophy, .programs { padding: 80px 24px; }
+  .programs-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .programs-sub { text-align: left; }
+  .pc-body { padding: 36px 32px; }
+  footer { padding: 56px 24px 32px; }
+  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  .footer-biz { text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- Noise Texture -->
+<div class="noise"></div>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <svg class="nav-logo-mark" viewBox="0 0 40 48" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 46C20 46 36 34 36 18C36 9 29 2 20 2C11 2 4 9 4 18C4 34 20 46 20 46Z"/>
+      <line x1="20" y1="2" x2="20" y2="46"/>
+      <path d="M20 10L11 17"/><path d="M20 20L7 27"/><path d="M20 30L13 35"/>
+      <path d="M20 10L29 17"/><path d="M20 20L33 27"/><path d="M20 30L27 35"/>
+    </svg>
+    <span class="nav-logo-text">이루다<sup>®</sup></span>
+  </a>
+  <div class="nav-links">
+    <a href="#programs">프로그램</a>
+    <a href="https://instagram.com" target="_blank">인스타그램</a>
+    <a href="#programs" class="nav-cta">프로그램 보기</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-bg">
+    <img
+      src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=1800&q=85&auto=format&fit=crop"
+      alt="햇살이 비추는 숲"
+    >
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-text">
+      <h1 class="hero-headline">
+        이루다<em>.</em>
+      </h1>
+
+      <p class="hero-sub">
+        목표를 이루는 여정,<br>함께합니다.
+      </p>
+
+      <div class="hero-cta">
+        <a href="#programs" class="btn-primary">
+          프로그램 보기
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-img-wrap">
+      <div class="hero-img-frame">
+        <img
+          src="https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800&q=90&auto=format&fit=crop&crop=center"
+          alt="손 위에서 자라는 새싹"
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-strip">
+    <div class="hero-strip-inner">
+      <div class="hs-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2a10 10 0 1 0 10 10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+        4주 프로그램
+      </div>
+      <div class="hs-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        1:1 밀착 관리
+      </div>
+      <div class="hs-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        베타 테스터 전원 성공
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PHILOSOPHY ═══ -->
+<section class="philosophy" id="about">
+  <div class="philosophy-inner">
+
+    <!-- 이미지 -->
+    <div class="phil-img reveal">
+      <img
+        class="phil-img-main"
+        src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=900&q=85&auto=format&fit=crop"
+        alt="정원의 새싹"
+      >
+      <img
+        class="phil-img-accent"
+        src="https://images.unsplash.com/photo-1533038590840-1cde6e668a91?w=500&q=85&auto=format&fit=crop&crop=center"
+        alt="아침 햇살"
+      >
+    </div>
+
+    <!-- 텍스트 -->
+    <div class="phil-text">
+      <span class="phil-eyebrow reveal">브랜드 철학</span>
+      <h2 class="phil-title reveal reveal-delay-1">
+        성장할 수 있는<br><em>환경을 만듭니다.</em>
+      </h2>
+      <p class="phil-body reveal reveal-delay-2">
+        당신이 성장할 수 있도록.<br><br>
+        성장하고 싶은 모든 순간, 이루다가 함께합니다.<br>
+        무엇을 이루고 싶든, 이루다와 함께.
+      </p>
+      <div class="phil-quote reveal reveal-delay-3">
+        <p>"좋은 환경에서 피어나지 못할 씨앗은 없습니다."</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ PROGRAMS ═══ -->
+<section class="programs" id="programs">
+
+  <div class="programs-header reveal">
+    <div>
+      <span class="programs-eyebrow">프로그램</span>
+      <h2 class="programs-title">이루다가 만드는 것들</h2>
+    </div>
+    <div class="programs-nav">
+      <button class="pnav-btn" id="prevBtn" onclick="carousel(-1)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 5 5 12 12 19"/>
+        </svg>
+      </button>
+      <button class="pnav-btn" id="nextBtn" onclick="carousel(1)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 19 19 12 12 5"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="carousel-wrap">
+    <div class="carousel-track" id="carouselTrack">
+
+      <!-- 카드 1: 미라클모닝 -->
+      <div class="program-card active">
+        <div class="pc-bar"></div>
+        <div class="pc-body">
+          <span class="pc-label">첫 번째 프로그램 · Miracle Morning</span>
+          <h3 class="pc-title">미라클<em>모닝</em></h3>
+          <p class="pc-desc">4주 1:1 아침 루틴 프로그램. 취침부터 기상까지, 매니저가 함께합니다. 일어날 수밖에 없는 시스템을 함께 만듭니다.</p>
+          <div class="pc-tags">
+            <span class="pc-tag">4주 과정</span>
+            <span class="pc-tag">1:1 매니저</span>
+            <span class="pc-tag">카카오톡 진행</span>
+            <span class="pc-tag">49,000원 / 월</span>
+          </div>
+          <a href="miraclemorning.html" class="btn-card">
+            자세히 보기
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- 카드 2: 준비중 -->
+      <div class="program-card">
+        <div class="pc-bar soon"></div>
+        <div class="pc-body">
+          <span class="pc-label muted">다음 프로그램</span>
+          <h3 class="pc-title muted">준비<em>중.</em></h3>
+          <p class="pc-desc muted">이루다의 다음 여정이 준비되고 있습니다. 무엇을 이루고 싶든, 이루다와 함께.</p>
+          <div class="pc-soon-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Coming Soon
+          </div>
+        </div>
+      </div>
+
+      <!-- 카드 3: 준비중 -->
+      <div class="program-card">
+        <div class="pc-bar soon"></div>
+        <div class="pc-body">
+          <span class="pc-label muted">다음 프로그램</span>
+          <h3 class="pc-title muted">준비<em>중.</em></h3>
+          <p class="pc-desc muted">이루다의 다음 여정이 준비되고 있습니다. 무엇을 이루고 싶든, 이루다와 함께.</p>
+          <div class="pc-soon-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Coming Soon
+          </div>
+        </div>
+      </div>
+
+      <!-- 카드 4: 준비중 -->
+      <div class="program-card">
+        <div class="pc-bar soon"></div>
+        <div class="pc-body">
+          <span class="pc-label muted">다음 프로그램</span>
+          <h3 class="pc-title muted">준비<em>중.</em></h3>
+          <p class="pc-desc muted">이루다의 다음 여정이 준비되고 있습니다. 무엇을 이루고 싶든, 이루다와 함께.</p>
+          <div class="pc-soon-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Coming Soon
+          </div>
+        </div>
+      </div>
+
+      <!-- 카드 5: 준비중 -->
+      <div class="program-card">
+        <div class="pc-bar soon"></div>
+        <div class="pc-body">
+          <span class="pc-label muted">다음 프로그램</span>
+          <h3 class="pc-title muted">준비<em>중.</em></h3>
+          <p class="pc-desc muted">이루다의 다음 여정이 준비되고 있습니다. 무엇을 이루고 싶든, 이루다와 함께.</p>
+          <div class="pc-soon-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Coming Soon
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="carousel-counter" id="carouselCounter">1 / 5</div>
+
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+
+      <div class="footer-brand">
+        <div class="footer-logo">이루다<sup>®</sup></div>
+        <p class="footer-tagline">
+          성장할 수 있는 환경을 만듭니다.<br>
+          1:1 성장 환경 설계 브랜드.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-title">프로그램</div>
+        <a href="#">미라클모닝</a>
+        <a href="#" style="color: rgba(247,243,236,0.25); cursor: default;">Coming Soon</a>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-title">문의</div>
+        <p>010-2615-6993</p>
+        <a href="https://open.kakao.com/o/sA498fli" target="_blank">카카오톡 문의</a>
+        <a href="https://instagram.com" target="_blank">인스타그램</a>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-title">서비스</div>
+        <p>운영 시간</p>
+        <p style="margin-top: -6px; font-size: 12px; color: rgba(247,243,236,0.35);">월~토 08:00 – 23:00</p>
+        <p style="margin-top: 8px;">1주 체험 가능</p>
+        <p style="margin-top: -6px; font-size: 12px; color: rgba(247,243,236,0.35);">예치금 10,000원</p>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 이루다. All rights reserved.</p>
+      <p class="footer-biz">
+        본 서비스는 개인이 운영하는 1:1 코칭 프로그램입니다.<br>
+        대표 운영자 · 010-2615-6993
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Infinite Carousel
+(function() {
+  const track = document.getElementById('carouselTrack');
+  const counter = document.getElementById('carouselCounter');
+  if (!track) return;
+
+  const origCards = Array.from(track.querySelectorAll('.program-card'));
+  const total = origCards.length;
+  const CARD_W = 400 + 24; // width + gap
+  let current = 0;
+
+  // 앞뒤로 클론 추가 (무한 루프용)
+  const clonesBefore = origCards.map(c => { const cl = c.cloneNode(true); cl.classList.remove('active'); return cl; });
+  const clonesAfter  = origCards.map(c => { const cl = c.cloneNode(true); cl.classList.remove('active'); return cl; });
+  clonesBefore.reverse().forEach(c => track.prepend(c));
+  clonesAfter.forEach(c => track.append(c));
+
+  const allCards = Array.from(track.querySelectorAll('.program-card'));
+  const offset = total; // 클론 앞에 total개 추가됨
+
+  function goTo(idx, animate) {
+    current = idx;
+    if (!animate) track.style.transition = 'none';
+    else track.style.transition = 'transform 0.5s cubic-bezier(0.4,0,0.2,1)';
+    track.style.transform = `translateX(-${(offset + idx) * CARD_W}px)`;
+
+    allCards.forEach((c, i) => {
+      c.classList.toggle('active', i === offset + idx);
+    });
+
+    const display = ((idx % total) + total) % total;
+    if (counter) counter.textContent = `${display + 1} / ${total}`;
+  }
+
+  // 초기 위치 (애니없이)
+  goTo(0, false);
+  setTimeout(() => { track.style.transition = 'transform 0.5s cubic-bezier(0.4,0,0.2,1)'; }, 50);
+
+  // 무한 루프: 끝에 닿으면 순간이동
+  track.addEventListener('transitionend', () => {
+    if (current >= total) {
+      goTo(current - total, false);
+    } else if (current < 0) {
+      goTo(current + total, false);
+    }
+  });
+
+  window.carousel = function(dir) {
+    goTo(current + dir, true);
+  };
+
+  // 터치 스와이프
+  let tx = 0;
+  track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 40) window.carousel(dx < 0 ? 1 : -1);
+  });
+})();
+
+
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
