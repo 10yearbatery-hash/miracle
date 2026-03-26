@@ -952,12 +952,23 @@ footer {
   const allCards = Array.from(track.querySelectorAll('.program-card'));
   const offset = total; // 클론 앞에 total개 추가됨
 
+  // 모바일에서 카드 정중앙 보정값 계산
+  function getCenterOffset() {
+    if (window.innerWidth > 768) return 0;
+    const card = track.querySelector('.program-card');
+    if (!card) return 0;
+    const cardW = card.offsetWidth;
+    const screenW = window.innerWidth;
+    return (screenW - cardW) / 2;
+  }
+
   function goTo(idx, animate) {
     current = idx;
     CARD_W = getCardW(); // 항상 최신 너비 반영
+    const centerOffset = getCenterOffset();
     if (!animate) track.style.transition = 'none';
     else track.style.transition = 'transform 0.5s cubic-bezier(0.4,0,0.2,1)';
-    track.style.transform = `translateX(-${(offset + idx) * CARD_W}px)`;
+    track.style.transform = `translateX(calc(-${(offset + idx) * CARD_W}px + ${centerOffset}px))`;
 
     allCards.forEach((c, i) => {
       c.classList.toggle('active', i === offset + idx);
@@ -967,9 +978,10 @@ footer {
     if (counter) counter.textContent = `${display + 1} / ${total}`;
   }
 
-  // 초기 위치 (애니없이)
+  // 초기 위치: DOM 완전 렌더링 후 정확한 너비로 계산
   goTo(0, false);
-  setTimeout(() => { track.style.transition = 'transform 0.5s cubic-bezier(0.4,0,0.2,1)'; }, 50);
+  window.addEventListener('load', () => { goTo(0, false); });
+  setTimeout(() => { goTo(0, false); track.style.transition = 'transform 0.5s cubic-bezier(0.4,0,0.2,1)'; }, 100);
 
   // 무한 루프: 끝에 닿으면 순간이동
   track.addEventListener('transitionend', () => {

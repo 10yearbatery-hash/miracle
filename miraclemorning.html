@@ -641,8 +641,16 @@ footer { background: var(--white); border-top: 1px solid var(--border); padding:
   .tls-desc { font-size: 14px !important; line-height: 1.8 !important; }
   .tl-sci { font-size: 10px !important; padding: 5px 12px !important; }
 
-  /* 폰 목업 모바일에서 숨김 */
-  .tls-right { display: none !important; }
+  /* 폰 목업 모바일에서 텍스트 아래 표시 */
+  .tls-right {
+    display: flex !important;
+    justify-content: center !important;
+    margin-top: 8px !important;
+  }
+  .big-phone {
+    max-width: 200px !important;
+    transform: none !important;
+  }
 
   /* ── kn2 카드뉴스: JS scale 무력화 후 자연 크기 표시 ── */
   #kn2Wrap {
@@ -656,6 +664,14 @@ footer { background: var(--white); border-top: 1px solid var(--border); padding:
   .kn2-card {
     aspect-ratio: 3 / 4 !important;
     width: 12.5% !important;
+  }
+
+  /* ── 지식아티클 + 주간운영방식: 2열 → 1열 ── */
+  .knowledge-sec { padding: 60px 20px !important; }
+  .knowledge-grid {
+    grid-template-columns: 1fr !important;
+    column-gap: 0 !important;
+    row-gap: 40px !important;
   }
 
   /* ── 지식아티클 + 주간운영방식 컬럼 레이아웃 ── */
@@ -1652,11 +1668,11 @@ function accToggle(n){
 
 
 <!-- ===== 지식 아티클 + 주간 운영 방식 (2단, 높이 맞춤) ===== -->
-<section class="sec" style="background:var(--white);padding:120px 60px;">
+<section class="sec knowledge-sec" style="background:var(--white);padding:120px 60px;">
   <div class="sec-inner">
 
     <!-- 2x2 그리드: 헤더행 / 콘텐츠행 분리 → 카드와 스케줄 상하단 정렬 -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;column-gap:80px;row-gap:12px;">
+    <div class="knowledge-grid" style="display:grid;grid-template-columns:1fr 1fr;column-gap:80px;row-gap:12px;">
 
       <!-- 헤더 좌 -->
       <div>
@@ -2062,16 +2078,31 @@ function accToggle(n){
    - 카드 하단 = 기상시간 박스 하단
    - 내부 비율 유지: kn2-outer의 자연 높이 기준으로 scale 계산 */
 function fitCardToSchedule() {
-  /* 모바일에서는 scale 계산 비활성화 */
+  var wrap  = document.getElementById('kn2Wrap');
+  var outer = document.getElementById('kn2Outer');
+  if (!wrap || !outer) return;
+
+  /* 모바일: 컨테이너 너비 기준으로 scale 계산 */
   if (window.innerWidth <= 768) {
-    var wrap = document.getElementById('kn2Wrap');
-    if (wrap) { wrap.style.transform = 'none'; wrap.style.width = '100%'; }
+    wrap.style.transform = 'none';
+    wrap.style.width = '100%';
+    wrap.style.transformOrigin = 'top left';
+
+    var naturalW = outer.scrollWidth;   /* 카드 자연 너비 */
+    var containerW = wrap.parentElement.offsetWidth; /* 실제 컨테이너 너비 */
+    if (!naturalW || !containerW) return;
+
+    var scale = containerW / naturalW;
+    wrap.style.width     = (100 / scale) + '%';
+    wrap.style.transform = 'scale(' + scale + ')';
+    /* 카드 높이도 scale만큼 줄어들게 공간 확보 */
+    outer.parentElement.style.height = (outer.offsetHeight * scale) + 'px';
     return;
   }
-  var wrap     = document.getElementById('kn2Wrap');
-  var outer    = document.getElementById('kn2Outer');
+
+  /* PC: 기존 로직 — scheduleCol 높이 기준 */
   var schedCol = document.getElementById('scheduleCol');
-  if (!wrap || !outer || !schedCol) return;
+  if (!schedCol) return;
 
   /* scale 제거 후 자연 높이 측정 */
   wrap.style.transform = 'none';
